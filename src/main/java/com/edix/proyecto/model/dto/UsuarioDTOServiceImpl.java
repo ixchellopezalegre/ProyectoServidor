@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edix.proyecto.beans.Direccion;
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.repository.UsuarioRepository;
 
@@ -31,6 +32,21 @@ public class UsuarioDTOServiceImpl implements UsuarioDTOService {
     	UsuarioDTO udto = new UsuarioDTO();
     	udto.setIdUsuario(usuario.getIdUsuario());
     	udto.setNombreCompleto(usuario.getNombre() + " " + usuario.getApellidos());
+    	List<DireccionDTO> provincias = new ArrayList<>();
+        List<Direccion> direcciones = usuario.getDirecciones();
+        
+        for (Direccion direccion : direcciones){
+            provincias.add(convertirDireccionDTO(direccion));
+        }
+        
+    	udto.setProvincias(provincias);
         return udto;
+    }
+    
+    private DireccionDTO convertirDireccionDTO(Direccion direccion){
+
+    	DireccionDTO ddto = new DireccionDTO();
+    	ddto.setLocalidad(direccion.getLocalidad());
+        return ddto;
     }
 }

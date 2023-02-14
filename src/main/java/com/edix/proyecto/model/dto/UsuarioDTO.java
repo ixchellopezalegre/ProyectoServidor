@@ -1,6 +1,7 @@
 package com.edix.proyecto.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class UsuarioDTO implements Serializable{
@@ -12,7 +13,7 @@ public class UsuarioDTO implements Serializable{
 	    private static final long serialVersionUID = 1L;
 	    private int idUsuario;
 	    private String nombreCompleto;
-	    //private String provincia;
+	    private List<DireccionDTO> provincias;
 
 	    public UsuarioDTO() {
 	    }
@@ -37,17 +38,19 @@ public class UsuarioDTO implements Serializable{
 		public void setNombreCompleto(String nombreCompleto) {
 			this.nombreCompleto = nombreCompleto;
 		}
+		
 
-		/*
-		 * 
-		public String getProvincia() {
-			return provincia;
+		public List<DireccionDTO> getProvincias() {
+			return provincias;
 		}
 
-		public void setProvincia(String provincia) {
-			this.provincia = provincia;
+
+
+		public void setProvincias(List<DireccionDTO> provincias) {
+			this.provincias = provincias;
 		}
-		*/
+
+
 
 		@Override
 		public int hashCode() {
@@ -67,7 +70,7 @@ public class UsuarioDTO implements Serializable{
 		@Override
 		public String toString() {
 			return "UsuarioDTO [idUsuario=" + idUsuario + ", nombreCompleto=" + nombreCompleto 
-					//+ ", provincia=" + provincia 
+					+ ", provincias=" + provincias
 					+ "]";
 		}
 
