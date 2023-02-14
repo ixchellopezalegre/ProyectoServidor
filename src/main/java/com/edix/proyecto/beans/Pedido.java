@@ -72,12 +72,12 @@ public class Pedido implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public Direccion getDireccione() {
+	public Direccion getDireccion() {
 		return this.direccion;
 	}
 
-	public void setDireccione(Direccion direccione) {
-		this.direccion = direccione;
+	public void setDireccione(Direccion direccion) {
+		this.direccion = direccion;
 	}
 
 	public Tarjeta getTarjeta() {
