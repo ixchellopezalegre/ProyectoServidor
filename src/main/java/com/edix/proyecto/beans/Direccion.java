@@ -1,0 +1,94 @@
+package com.edix.proyecto.beans;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the direcciones database table.
+ * 
+ */
+@Entity
+@Table(name="direcciones")
+@NamedQuery(name="Direccion.findAll", query="SELECT d FROM Direccion d")
+public class Direccion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_DIRECCION")
+	private int idDireccion;
+
+	private String calle;
+
+	@Column(name="CODIGO_POSTAL")
+	private String codigoPostal;
+
+	private String localidad;
+
+	private int numero;
+
+	private int piso;
+
+	private String puerta;
+
+	public Direccion() {
+	}
+
+	public int getIdDireccion() {
+		return this.idDireccion;
+	}
+
+	public void setIdDireccion(int idDireccion) {
+		this.idDireccion = idDireccion;
+	}
+
+	public String getCalle() {
+		return this.calle;
+	}
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public String getCodigoPostal() {
+		return this.codigoPostal;
+	}
+
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public String getLocalidad() {
+		return this.localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public int getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public int getPiso() {
+		return this.piso;
+	}
+
+	public void setPiso(int piso) {
+		this.piso = piso;
+	}
+
+	public String getPuerta() {
+		return this.puerta;
+	}
+
+	public void setPuerta(String puerta) {
+		this.puerta = puerta;
+	}
+
+}
