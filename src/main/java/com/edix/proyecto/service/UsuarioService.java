@@ -5,6 +5,7 @@ import java.util.List;
 import com.edix.proyecto.beans.Usuario;
 
 public interface UsuarioService {
-	public List<Usuario> buscarTodos();
-
+	
+	List<Usuario> buscarTodos();
+	Usuario buscarUno(int idUsuario);
 }

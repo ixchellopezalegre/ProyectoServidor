@@ -19,6 +19,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
 		return urepo.findAll();
 	}
+	
+	@Override
+	public Usuario buscarUno(int idUsuario) {
+		return urepo.findById(idUsuario).orElse(null);
+	}
 
 	
 }

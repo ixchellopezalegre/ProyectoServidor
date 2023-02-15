@@ -8,15 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Datos Producto </h1>
+<h1>Datos Usuario </h1>
 
-<p>${producto.codigo }</p>
-<p>${producto.descripcion }</p>
-<p>${producto.marca }</p>
-<p>${producto.color }</p>
-<p>${producto.precioUnitario *2}</p>
-<p>${producto.familia.descripcion }</p>
-
+<p>${usuario.nombre }</p>
+<p>${usuario.apellido }</p>
 
 </body>
 </html>

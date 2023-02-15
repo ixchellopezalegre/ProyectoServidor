@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -21,9 +22,16 @@ public class UsuarioREST {
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
 		
-		model.addAttribute("usuario", user.buscarTodos());
+		model.addAttribute("usuarios", user.buscarTodos());
 		
 		return "usuarios";
-		
+	}
+	
+	@GetMapping("/ver/{id}")
+	public String buscarUno(Model model, @PathVariable int id){
+			
+			model.addAttribute("usuario", user.buscarUno(id));
+			
+			return "verUno";
 	}
 }
