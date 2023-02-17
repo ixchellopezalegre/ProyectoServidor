@@ -48,10 +48,12 @@ public class UsuarioREST {
 	    usuario.setPassword(password);
 	    
 	    if(user.registrarUsuario(usuario)) {
+	    	usuario.setIdUsuario(usuario.getIdUsuario());
 	        model.addAttribute("mensaje", "Usuario dado de alta");
-	        return "redirect:/";
+	        return "redirect:/login";
 	    } else {
 	        model.addAttribute("mensaje", "Ha ocurrido un error");
+	        System.out.println(usuario.getIdUsuario());
 	        return "registro";
 	    }
 	}

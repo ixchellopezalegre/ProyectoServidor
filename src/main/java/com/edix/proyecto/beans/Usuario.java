@@ -19,14 +19,14 @@ import java.util.List;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_USUARIO")
-	private Integer idUsuario;
+	private int idUsuario;
 
 	private String apellidos;
 	
-	@Id
+	@Column(unique=true)
 	private String email;
 
 	@Column(name="FECHA_NACIMIENTO")

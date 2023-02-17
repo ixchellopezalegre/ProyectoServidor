@@ -21,14 +21,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
-	public Usuario buscarUsuario(String email) {
-			return urepo.findById(email).orElse(null);
+	public Usuario buscarUsuario(int idUsuario) {
+			return urepo.findById(idUsuario).orElse(null);
 	}
 
 	@Override
 	public boolean registrarUsuario(Usuario usuario) {
 		
-	    Optional<Usuario> usuarioExistente = urepo.findById(usuario.getEmail());
+	    Optional<Usuario> usuarioExistente = urepo.findById(usuario.getIdUsuario());
 	    
 	    if (!usuarioExistente.isPresent()) {
 	        urepo.save(usuario);

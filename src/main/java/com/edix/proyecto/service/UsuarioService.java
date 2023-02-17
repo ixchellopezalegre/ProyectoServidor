@@ -7,6 +7,6 @@ import com.edix.proyecto.beans.Usuario;
 
 public interface UsuarioService {
 	List<Usuario> buscarTodos();
-	Usuario buscarUsuario(String username);
+	Usuario buscarUsuario(int idUsuario);
 	boolean registrarUsuario(Usuario usuario);
 }
