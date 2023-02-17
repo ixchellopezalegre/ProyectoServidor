@@ -3,6 +3,8 @@ package com.edix.proyecto.rest;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.edix.proyecto.beans.Rol;
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.RolServiceImpl;
 import com.edix.proyecto.service.UsuarioServiceImpl;
 
 @Controller
@@ -20,6 +24,8 @@ import com.edix.proyecto.service.UsuarioServiceImpl;
 public class UsuarioREST {
 
 	@Autowired UsuarioServiceImpl user;
+	
+	@Autowired RolServiceImpl rolSer;
 	
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
@@ -44,12 +50,15 @@ public class UsuarioREST {
 	    usuario.setNombre(nombre);
 	    usuario.setApellidos(apellidos);
 	    usuario.setEmail(email);
-	    usuario.setFechaNacimiento(new Timestamp(fechaNacimiento.getTime())); // conversión a Timestamp
+	    usuario.setFechaNacimiento(new Timestamp(fechaNacimiento.getTime())); /*Convertir fecha a TIMESTAMP*/
 	    usuario.setPassword(password);
 	    
+	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
+    	usuario.addRol(rolSer.buscarRol(1));
+	   
 	    if(user.registrarUsuario(usuario)) {
-	    	usuario.setIdUsuario(usuario.getIdUsuario());
-	        model.addAttribute("mensaje", "Usuario dado de alta");
+	    	
+	    		usuario.setIdUsuario(usuario.getIdUsuario());
 	        return "redirect:/login";
 	    } else {
 	        model.addAttribute("mensaje", "Ha ocurrido un error");
@@ -57,9 +66,4 @@ public class UsuarioREST {
 	        return "registro";
 	    }
 	}
-
-
-
-
-
 }

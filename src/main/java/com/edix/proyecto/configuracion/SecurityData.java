@@ -1,5 +1,8 @@
 package com.edix.proyecto.configuracion;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,10 +14,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityData extends WebSecurityConfigurerAdapter {
 	
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	/*Configuración de la base de datos*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+		
 		super.configure(auth);
+		
+		/**
+		auth
+			.jdbcAuthentication().dataSource(dataSource)
+			.usersByUsernameQuery("SELECT id_usuario, password, 'true' as enabled FROM Usuarios WHERE id_usuario=?")
+			.authoritiesByUsernameQuery("SELECT u.id_usuario, r.nombre_rol from USUARIOS_CON_ROLES ur INNER JOIN Usuarios u ON u.id_usuario = ur.id_usuario INNER JOIN Roles r ON r.id_rol = ur.id_rol where u.id_usuario =?");
+		
+		*/
 	}
 	
 	/*Configuración de las URLS*/
