@@ -9,9 +9,11 @@
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
 
-	<h3>Página de inicio, "COMUN para admin y cliente".</h3>
+	<h3>Página de inicio, "COMUN para todo el mundo".</h3>
 	
 	<p>Mostraremos los productos que tenemos en nuestro ecomerce sin necesidad de estar logueado<p>
 
+
+	<h3>${ mensaje }</h3>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,12 @@
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+
+<!-- Nos dice quien ha entrado a la página -->
+<sec:authentication property="name"/>
+<sec:authorize access="hasAuthority('ROLE_ADMIN')">Eres Administrador</sec:authorize>
+<sec:authorize access="hasAuthority('ROLE_CLIENTE')">Eres un cliente</sec:authorize>
+
 	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
     		<a class="navbar-brand" href="/">Silicon Solutions</a>
@@ -23,8 +30,11 @@
       				 <li class="nav-item">
       				    <a class="nav-link" href="#">Productos</a>
         			</li>
+        			
+        			<!-- Solo mostramos estas secciones si tienes rol de Administrador -->
+        			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
         			<li class="nav-item">
-      				    <a class="nav-link" href="#">Clientes</a>
+      				    <a class="nav-link" href="/user/todos">Usuarios</a>
         			</li>
         			<li class="nav-item">
       				    <a class="nav-link" href="#">Pedidos</a>
@@ -32,15 +42,20 @@
         			<li class="nav-item">
       				    <a class="nav-link" href="#">Gestión</a>
         			</li>
+        			</sec:authorize>
+        			
+        			<!-- Si ha iniciadp sesión, mostraremos los datos personales del usuario, sus pedidos y la posibilidad de cerrar sesión -->
+        			<sec:authorize access ="isAuthenticated()">
       			  	<li class="nav-item dropdown">
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
           				<ul class="dropdown-menu">
           					<li><a class="dropdown-item" href="#">Mis datos</a></li>
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
             				<li><hr class="dropdown-divider"></li>
-            				<li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           				</ul>
         			</li>
+        			</sec:authorize>
       			</ul>
       	<form class="d-flex" role="search">
         	<input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Search">
@@ -48,9 +63,16 @@
       	</form>
       	<div>
       	<ul class="navbar-nav me-right mb-2 mb-lg-0">
+      	
+      	<!-- Si no ha iniciado sesión todavía, mostramos la opcion de registro de usuario -->
+      	<sec:authorize access ="!isAuthenticated()">
       		<li class="nav-item">
-      			<a class="btn btn-primary" href="/user/registro" role="button">Registrate</a>
+      			<a class="btn btn-primary m-2" href="/user/registro" role="button">Registrate</a>
         	</li>
+        	<li class="nav-item">
+      			<a class="btn btn-info m-2" href="/login" role="button">Iniciar sesión</a>
+        	</li>
+        </sec:authorize>
     	</ul>
     	</div>
     	</div>
