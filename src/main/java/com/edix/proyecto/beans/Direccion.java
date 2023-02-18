@@ -32,10 +32,6 @@ public class Direccion implements Serializable {
 
 	private Integer numero;
 
-<<<<<<< HEAD
-	@JsonIgnoreProperties
-=======
->>>>>>> main
 	private Integer piso;
 
 	private String puerta;
