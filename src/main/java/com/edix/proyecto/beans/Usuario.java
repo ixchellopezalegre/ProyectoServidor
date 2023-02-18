@@ -1,11 +1,14 @@
 package com.edix.proyecto.beans;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 
 /**
  * The persistent class for the usuarios database table.
@@ -23,12 +26,12 @@ public class Usuario implements Serializable {
 	private int idUsuario;
 
 	private String apellidos;
-
+	
+	@Column(unique=true)
 	private String email;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_NACIMIENTO")
-	private Date fechaNacimiento;
+	private Timestamp fechaNacimiento;
 
 	private String nombre;
 
@@ -105,7 +108,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+		this.fechaNacimiento =  (Timestamp) fechaNacimiento;
 	}
 
 	public String getNombre() {
@@ -138,6 +141,12 @@ public class Usuario implements Serializable {
 
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
+	}
+	
+	public void addRol(Rol rol) {
+		if(roles == null)
+			roles = new ArrayList<>();
+		roles.add(rol);
 	}
 
 	public List<Tarjeta> getTarjetas() {

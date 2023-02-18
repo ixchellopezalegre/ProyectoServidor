@@ -21,7 +21,7 @@ public class Direccion implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_DIRECCION")
-	private int idDireccion;
+	private Integer idDireccion;
 
 	private String calle;
 
@@ -32,7 +32,10 @@ public class Direccion implements Serializable {
 
 	private Integer numero;
 
+<<<<<<< HEAD
 	@JsonIgnoreProperties
+=======
+>>>>>>> main
 	private Integer piso;
 
 	private String puerta;
