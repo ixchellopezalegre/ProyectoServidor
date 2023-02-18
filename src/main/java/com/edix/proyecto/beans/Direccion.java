@@ -1,7 +1,7 @@
 package com.edix.proyecto.beans;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -35,6 +35,10 @@ public class Direccion implements Serializable {
 	private Integer piso;
 
 	private String puerta;
+
+	@ManyToMany(mappedBy = "direcciones")
+	private List<Usuario> usuarios = new ArrayList<>();
+
 
 	public Direccion() {
 	}
@@ -95,6 +99,12 @@ public class Direccion implements Serializable {
 		this.puerta = puerta;
 	}
 
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(idDireccion);
@@ -112,10 +122,14 @@ public class Direccion implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Direccion [idDireccion=" + idDireccion + ", calle=" + calle + ", codigoPostal=" + codigoPostal
-				+ ", localidad=" + localidad + ", numero=" + numero + ", piso=" + piso + ", puerta=" + puerta + "]";
+		return "Direccion{" +
+				"idDireccion=" + idDireccion +
+				", calle='" + calle + '\'' +
+				", codigoPostal='" + codigoPostal + '\'' +
+				", localidad='" + localidad + '\'' +
+				", numero=" + numero +
+				", piso=" + piso +
+				", puerta='" + puerta + '\'' +
+				'}';
 	}
-	
-	
-
 }
