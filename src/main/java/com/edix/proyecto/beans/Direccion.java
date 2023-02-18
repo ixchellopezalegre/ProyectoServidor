@@ -1,7 +1,11 @@
 package com.edix.proyecto.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -71,7 +75,7 @@ public class Direccion implements Serializable {
 		return this.numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -79,7 +83,7 @@ public class Direccion implements Serializable {
 		return this.piso;
 	}
 
-	public void setPiso(int piso) {
+	public void setPiso(Integer piso) {
 		this.piso = piso;
 	}
 
@@ -90,5 +94,28 @@ public class Direccion implements Serializable {
 	public void setPuerta(String puerta) {
 		this.puerta = puerta;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idDireccion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Direccion))
+			return false;
+		Direccion other = (Direccion) obj;
+		return idDireccion == other.idDireccion;
+	}
+
+	@Override
+	public String toString() {
+		return "Direccion [idDireccion=" + idDireccion + ", calle=" + calle + ", codigoPostal=" + codigoPostal
+				+ ", localidad=" + localidad + ", numero=" + numero + ", piso=" + piso + ", puerta=" + puerta + "]";
+	}
+	
+	
 
 }

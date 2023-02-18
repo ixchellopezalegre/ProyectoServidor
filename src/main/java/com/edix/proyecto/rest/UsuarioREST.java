@@ -29,7 +29,7 @@ public class UsuarioREST {
 	
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
-		
+
 		model.addAttribute("usuario", user.buscarTodos());
 		return "listaUsuarios";	
 	}

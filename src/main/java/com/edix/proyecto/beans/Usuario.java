@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The persistent class for the usuarios database table.
@@ -154,6 +155,28 @@ public class Usuario implements Serializable {
 
 	public void setTarjetas(List<Tarjeta> tarjetas) {
 		this.tarjetas = tarjetas;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idUsuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Usuario))
+			return false;
+		Usuario other = (Usuario) obj;
+		return idUsuario == other.idUsuario;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", apellidos=" + apellidos + ", email=" + email
+				+ ", fechaNacimiento=" + fechaNacimiento + ", nombre=" + nombre + ", password=" + password
+				+ ", direcciones=" + direcciones + ", roles=" + roles + ", tarjetas=" + tarjetas + "]";
 	}
 
 }
