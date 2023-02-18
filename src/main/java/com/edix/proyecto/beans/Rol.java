@@ -1,6 +1,8 @@
 package com.edix.proyecto.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.*;
 
 
@@ -12,6 +14,7 @@ import javax.persistence.*;
 @Table(name="roles")
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
 public class Rol implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,6 +42,22 @@ public class Rol implements Serializable {
 
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(idRol);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rol other = (Rol) obj;
+		return idRol == other.idRol;
 	}
 
 }
