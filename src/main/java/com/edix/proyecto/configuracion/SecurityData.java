@@ -40,7 +40,7 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 			.csrf().disable() /*Deshabilitar token de nuestros formularios*/
 			.authorizeRequests() /*Autorizar las peticiones que definimos a continuación */
 			.antMatchers().permitAll() /*Solo si en resource -> statics tenemos contenido*/
-			.antMatchers("/","/login","/logout","/user/registro","search").permitAll() /*URLS que permitimos de acceso público. los ** son comodines para informar que puede haber mas información a partir de esa URL*/
+			.antMatchers("/","/login","/logout","/user/registro","/producto/buscar","/producto/todos","/producto/verUno/{idProducto}").permitAll() /*URLS que permitimos de acceso público. los ** son comodines para informar que puede haber mas información a partir de esa URL*/
 			
 			/*AUTENTICACION SOBRE ROLES*/
 			/*.antMatchers("URL").hasAnyAuthority("ROL QUE PERMITIMOS A ESA URL")*/
