@@ -12,10 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@EnableWebSecurity
-@Configuration
+//@EnableWebSecurity
+//@Configuration
 public class DataUserConfiguration extends WebSecurityConfigurerAdapter{
-	
+	/**
 	@Autowired
 	private DataSource dataSource;
 	
@@ -64,5 +64,5 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter{
 	}
 	
 	
-
+*/
 }
