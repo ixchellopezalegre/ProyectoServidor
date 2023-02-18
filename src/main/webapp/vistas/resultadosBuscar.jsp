@@ -15,24 +15,24 @@
 	
 	<div class="container">
 	<h1 class="text-primary">Resultado de la búsqueda</h1>
-	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 	<a href="/producto/alta" class="btn btn-primary btn-sm" >Nuevo Producto</a></td>
 	</sec:authorize>
 	<table class="table table-striped table-sm" >
-	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 	<th>Id</th>
 	</sec:authorize>
 	<th>Nombre</th><th>Descripcion</th><th>Opciones</th>
 	
 	<c:forEach var="ele" items="${resultados }" >
 		<tr>
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+			<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 			<td>${ele.idProducto }</td>
 			</sec:authorize>
 			<td>${ele.nombre }</td>
 			<td>${ele.descripcion }</td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
-			 <sec:authorize access="hasAnyAuthority('ROLE_CLIENTE','ROLE_ADMIN')">
+			 <sec:authorize access="hasAnyAuthority('ROL_CLIENTE','ROL_ADMIN')">
 			<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
 			 <a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a></td>
 			  </sec:authorize>

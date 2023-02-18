@@ -29,6 +29,7 @@ public class ProductoREST {
 
     @GetMapping("/buscar")
     public String buscar(Model model, @RequestParam("busqueda") String busqueda) {
+
         List<Producto> resultados = pServ.buscarPorNombreODescripcion(busqueda);
         model.addAttribute("resultados", resultados);
         return "resultadosBuscar";
