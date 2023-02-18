@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -98,4 +99,27 @@ public class Producto implements Serializable {
 		return productosEnPedido;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Producto producto = (Producto) o;
+		return idProducto == producto.idProducto;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idProducto);
+	}
+
+	@Override
+	public String toString() {
+		return "Producto{" +
+				"idProducto=" + idProducto +
+				", descripcion='" + descripcion + '\'' +
+				", nombre='" + nombre + '\'' +
+				", precio=" + precio +
+				", stock=" + stock +
+				'}';
+	}
 }
