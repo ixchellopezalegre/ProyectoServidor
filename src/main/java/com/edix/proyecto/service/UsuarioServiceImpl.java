@@ -25,6 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 			return urepo.findById(idUsuario).orElse(null);
 	}
 
+	public Usuario buscarPorEmail(String email) {
+		return urepo.findByEmail(email);
+	}
 	@Override
 	public boolean registrarUsuario(Usuario usuario) {
 		
@@ -36,5 +39,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 	    }
 	    return false;
 	}
+
 
 }

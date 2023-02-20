@@ -13,23 +13,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityData extends WebSecurityConfigurerAdapter {
 	
-	
 	@Autowired
 	private DataSource dataSource;
 	
 	/*Configuración de la base de datos*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		
-		super.configure(auth);
-		
-		/**
+
 		auth
 			.jdbcAuthentication().dataSource(dataSource)
-			.usersByUsernameQuery("SELECT id_usuario, password, 'true' as enabled FROM Usuarios WHERE id_usuario=?")
-			.authoritiesByUsernameQuery("SELECT u.id_usuario, r.nombre_rol from USUARIOS_CON_ROLES ur INNER JOIN Usuarios u ON u.id_usuario = ur.id_usuario INNER JOIN Roles r ON r.id_rol = ur.id_rol where u.id_usuario =?");
-		
-		*/
+			.usersByUsernameQuery("SELECT email, password, 'true' as enabled FROM Usuarios " +
+					"WHERE email=?")
+			//Como el email es unico, podemos encontrar el usuario
+				// por el email, haciendo un INNER JOIN de dicho usuario a través
+					// del id_usuario de la tabla USUARIOS_CON_ROLES
+			.authoritiesByUsernameQuery("SELECT u.id_usuario," +
+					" r.nombre_rol " +
+					"from USUARIOS_CON_ROLES ur" +
+					" INNER JOIN Usuarios u " +
+					"ON u.id_usuario = ur.id_usuario " +
+					"INNER JOIN Roles r " +
+					"ON r.id_rol = ur.id_rol " +
+					"where u.email =?");
 	}
 	
 	/*Configuración de las URLS*/
@@ -39,18 +44,25 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable() /*Deshabilitar token de nuestros formularios*/
 			.authorizeRequests() /*Autorizar las peticiones que definimos a continuación */
-			.antMatchers().permitAll() /*Solo si en resource -> statics tenemos contenido*/
-			.antMatchers("/","/login","/logout","/user/registro","search").permitAll() /*URLS que permitimos de acceso público. los ** son comodines para informar que puede haber mas información a partir de esa URL*/
-			
+				.antMatchers("/login").permitAll() /*Solo si en resource -> statics tenemos contenido*/
+				.antMatchers("/"
+						,"/login"
+						,"/logout"
+						,"/user/registro"
+						,"/producto/**").permitAll()
+				//URLS que permitimos de acceso público. los ** son comodines para informar 
+				//que puede haber mas información a partir de esa URL
+				.anyRequest().authenticated() /*Cualquier otra petición necesita registro*/
+				.and()
+				.formLogin()
+						.defaultSuccessUrl("/inicio", true)
+						//Si el Login es Correcto, nos lleva a /inicio que procesa el login manualmente
+				.permitAll();
 			/*AUTENTICACION SOBRE ROLES*/
 			/*.antMatchers("URL").hasAnyAuthority("ROL QUE PERMITIMOS A ESA URL")*/
 			/*Esto se combina con los JSP con las directivas <c:>*/
 			
-			.anyRequest().authenticated() /*Cualquier otra petición necesita registro*/
-			.and().formLogin().permitAll(); /*El formulario de Login si lo permitimos*/
-			
-			
-		
+
 		
 	}
 
