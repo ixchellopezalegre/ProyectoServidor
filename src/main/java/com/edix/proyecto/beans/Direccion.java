@@ -21,7 +21,7 @@ public class Direccion implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_DIRECCION")
-	private Integer idDireccion;
+	private int idDireccion;
 
 	private String calle;
 
@@ -75,7 +75,7 @@ public class Direccion implements Serializable {
 		this.localidad = localidad;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return this.numero;
 	}
 
@@ -83,7 +83,7 @@ public class Direccion implements Serializable {
 		this.numero = numero;
 	}
 
-	public int getPiso() {
+	public Integer getPiso() {
 		return this.piso;
 	}
 

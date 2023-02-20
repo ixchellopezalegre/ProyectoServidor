@@ -20,7 +20,7 @@
 <sec:authorize access="isAuthenticated()">
 	<h4>Bienvenido ${sesion.nombre}
 	Tu rol es <sec:authorize access="hasAuthority('ROL_ADMIN')">Administrador</sec:authorize>
-	<sec:authorize access="hasAuthority('ROL_CLIENTE')">CLIENTE</sec:authorize>
+	<sec:authorize access="hasAuthority('ROL_CLIENTE')">Cliente</sec:authorize>
 </h4>
 </sec:authorize>
 
@@ -58,6 +58,7 @@
       			  	<li class="nav-item dropdown">
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
           				<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="/direccion/todas">Mis direcciones</a></li>
           					<li><a class="dropdown-item" href="#">Mis datos</a></li>
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
             				<li><hr class="dropdown-divider"></li>

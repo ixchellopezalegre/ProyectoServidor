@@ -22,7 +22,7 @@
 				<th>Provincia</th>
 				<th>Calle</th>
 				<th>CP</th>
-				<th>Opciones</yh>
+				<th>Opciones</th>
 			</tr>
 		<c:forEach var="user" items="${ usuario }">
 			<tr>

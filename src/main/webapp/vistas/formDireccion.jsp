@@ -9,14 +9,14 @@
 </head>
 <body>
 	<h1>Formulario de Alta de Direccion</h1>
-	<p>${usuario.nombre}, añade una dirección:</p>
-	<form action="/prueba/alta" method="post">
+	<p>${sesion.nombre}, añade una dirección:</p>
+	<form action="/direccion/nueva" method="post">
 		<p>Calle: <input type="text" name="calle"></p>
 		<p>Numero: <input type="text" name="numero"></p>
+		<p>Piso: <input type="text" name="piso"></p>
 		<p>Puerta: <input type="text" name="puerta"></p>
 		<p>Localidad: <input type="text" name="localidad"></p>
 		<p>Codigo Postal: <input type="text" name="codigoPostal"></p>
-		<input type="hidden" name="idUsuario" value="idUsuario">
 		<p><input type="submit" value="Enviar"></p>
 
 	</form>
