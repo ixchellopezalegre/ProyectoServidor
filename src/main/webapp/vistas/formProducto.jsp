@@ -5,17 +5,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Nuevo Producto</title>
 </head>
 <body>
-	<h1>FORMULARIO DE AlTA DE PRODUCTO</h1>
-	<form action="/app/producto/alta" method="post">
-	
+	<h1>Formulario de Alta de Producto</h1>
+	<form action="/producto/alta" method="post">
+
+
+		<p><input type="text" name="nombre">Nombre</p>
 		<p><input type="text" name="descripcion" >Descripcion</p>
-		<p><input type="text" name="precioUnitario" >Precio Unidad</p>
-		<p><input type="text" name="marca">Marca</p>
-		<p><input type="text" name="color">Color</p>
-		<p><input type="text" name="familia.codigo">Familia</p>
+		<p><input type="number" step="0.01" name="precio" >Precio Unidad</p>
+		<p><input type="number" name="stock">Stock</p>
 		
 		
 		<p><input type="submit" value="Enviar"></p>

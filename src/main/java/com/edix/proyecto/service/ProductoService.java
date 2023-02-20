@@ -1,0 +1,17 @@
+package com.edix.proyecto.service;
+
+import java.util.List;
+
+import com.edix.proyecto.beans.Producto;
+
+public interface ProductoService {
+
+	List<Producto>buscarTodos();
+	Producto buscarUno(int idProducto);
+	Producto buscarPorNombre(String nombre);
+	List<Producto> buscarPorNombreODescripcion(String nombre);
+	boolean registrarProducto(Producto producto);
+	boolean borrarProducto(int idProducto);
+	boolean modificarProducto(Producto producto);
+	
+}

@@ -8,15 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hola</h1>
-	<h1>${mensaje }</h1>
-	<form action="/registro" method="post">
-		<input type="text" name="username" placeholder="Username"> <input
-			type="text" name="password" placeholder="Contraseña"> <input
-			type="text" name="nombre" placeholder="Nombre"> <input
-			type="text" name="apellidos" placeholder="Apellidos"> <input
-			type="text" name="direccion" placeholder="Direccion"> <input
-			type="submit" value="Registrar">
-	</form>
+	<h1>Direcciones</h1>
+	<h1>Direcciones de ${usuario.nombre }</h1>
+	<c:forEach items="${direcciones}" var="direccion">
+		<p>Calle: ${direccion.calle }</p>
+		<p>Numero: ${direccion.numero }</p>
+		<p>Piso: ${direccion.piso }</p>
+		<p>Puerta: ${direccion.puerta }</p>
+		<p>Localidad:${direccion.localidad }</p>
+		<p>Código Postal: ${direccion.codigoPostal }</p>
+	</c:forEach>
 </body>
 </html>

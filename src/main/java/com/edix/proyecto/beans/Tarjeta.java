@@ -3,6 +3,9 @@ package com.edix.proyecto.beans;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -31,6 +34,9 @@ public class Tarjeta implements Serializable {
 	private String numeroTarjeta;
 
 	private String titular;
+
+	@ManyToMany(mappedBy = "tarjetas")
+	private Set<Usuario> usuarios = new LinkedHashSet<>();
 
 	public Tarjeta() {
 	}
@@ -75,4 +81,35 @@ public class Tarjeta implements Serializable {
 		this.titular = titular;
 	}
 
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Tarjeta tarjeta = (Tarjeta) o;
+		return idTarjeta == tarjeta.idTarjeta;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idTarjeta);
+	}
+
+	@Override
+	public String toString() {
+		return "Tarjeta{" +
+				"idTarjeta=" + idTarjeta +
+				", ccv=" + ccv +
+				", fechaCaducidad=" + fechaCaducidad +
+				", numeroTarjeta='" + numeroTarjeta + '\'' +
+				", titular='" + titular + '\'' +
+				'}';
+	}
 }
