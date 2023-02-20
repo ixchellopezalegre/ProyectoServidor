@@ -9,5 +9,6 @@ public interface UsuarioService {
 
 	List<Usuario> buscarTodos();
 	Usuario buscarUsuario(int idUsuario);
+	Usuario buscarPorEmail(String email);
 	boolean registrarUsuario(Usuario usuario);
 }

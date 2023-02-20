@@ -11,10 +11,19 @@
 </head>
 <body>
 
+
+
+<sec:authorize access="!isAuthenticated()">
+<h4>Bienvenido a Silicon Solutions. No está registrado</h4>
+</sec:authorize>
 <!-- Nos dice quien ha entrado a la página -->
-<h4>Bienvenido <sec:authentication property="name"/>. Tu rol es:
-	<sec:authorize access="hasAuthority('ROLE_ADMIN')">Administrador</sec:authorize>
-	<sec:authorize access="hasAuthority('ROLE_CLIENTE')">Cliente</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+	<h4>Bienvenido ${sesion.nombre}
+	Tu rol es <sec:authorize access="hasAuthority('ROL_ADMIN')">Administrador</sec:authorize>
+	<sec:authorize access="hasAuthority('ROL_CLIENTE')">CLIENTE</sec:authorize>
+</h4>
+</sec:authorize>
+
 </h4>
 	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
@@ -32,7 +41,7 @@
         			</li>
         			
         			<!-- Solo mostramos estas secciones si tienes rol de Administrador -->
-        			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+        			<sec:authorize access="hasAuthority('ROL_ADMIN')">
         			<li class="nav-item">
       				    <a class="nav-link" href="/user/todos">Usuarios</a>
         			</li>
