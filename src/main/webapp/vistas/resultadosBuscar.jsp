@@ -22,7 +22,7 @@
 	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 	<th>Id</th>
 	</sec:authorize>
-	<th>Nombre</th><th>Descripcion</th><th>Opciones</th>
+	<th>Nombre</th><th>Descripcion</th><th>Opcion<sec:authorize access="hasAuthority('ROL_ADMIN')">es</sec:authorize></th>
 	
 	<c:forEach var="ele" items="${resultados }" >
 		<tr>
@@ -32,7 +32,7 @@
 			<td>${ele.nombre }</td>
 			<td>${ele.descripcion }</td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
-			 <sec:authorize access="hasAnyAuthority('ROL_CLIENTE','ROL_ADMIN')">
+			 <sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 			<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
 			 <a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a></td>
 			  </sec:authorize>
