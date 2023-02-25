@@ -3,6 +3,7 @@ package com.edix.proyecto.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.edix.proyecto.beans.Direccion;
 import com.edix.proyecto.beans.Usuario;
 
 public interface UsuarioService {
@@ -11,4 +12,6 @@ public interface UsuarioService {
 	Usuario buscarUsuario(int idUsuario);
 	Usuario buscarPorEmail(String email);
 	boolean registrarUsuario(Usuario usuario);
+	boolean actualizarUsuario(Usuario usuario);
+	boolean anadirDireccion(Usuario usuario, Direccion direccion);
 }
