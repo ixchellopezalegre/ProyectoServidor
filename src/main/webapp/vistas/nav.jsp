@@ -64,7 +64,7 @@
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
           				<ul class="dropdown-menu">
           			
-          					<li><a class="dropdown-item" href="#">Mis datos</a></li>
+          					<li><a class="dropdown-item" href="/user/datos">Mis datos</a></li>
             				<sec:authorize access="hasAuthority('ROL_CLIENTE')">
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
             				</sec:authorize>

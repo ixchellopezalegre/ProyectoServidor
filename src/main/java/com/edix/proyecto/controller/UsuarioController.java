@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,11 @@ public class UsuarioController {
 	    }
 	}
 	
-	
+	@GetMapping("/datos")
+	public String datosUsuario(Model model, Authentication auth) {
+
+		model.addAttribute("usuario", user.buscarPorEmail(auth.getName()));
+		return "datosUsuario";
+	}
 	
 }
