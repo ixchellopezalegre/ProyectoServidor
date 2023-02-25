@@ -5,8 +5,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 /**
  * The persistent class for the direcciones database table.

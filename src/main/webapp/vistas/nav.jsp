@@ -14,16 +14,16 @@
 
 
 <sec:authorize access="!isAuthenticated()">
-<h4>Bienvenido a Silicon Solutions. No está registrado</h4>
+	<h4>Bienvenido a Silicon Solutions. No está registrado</h4>
 </sec:authorize>
+
 <!-- Nos dice quien ha entrado a la página -->
 <sec:authorize access="isAuthenticated()">
 	<h4>Bienvenido ${sesion.nombre}
 	Tu rol es <sec:authorize access="hasAuthority('ROL_ADMIN')">Administrador</sec:authorize>
-	<sec:authorize access="hasAuthority('ROL_CLIENTE')">Cliente</sec:authorize>
+	<sec:authorize access="hasAuthority('ROL_CLIENTE')">CLIENTE</sec:authorize>
 </h4>
 </sec:authorize>
-
 </h4>
 	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
@@ -34,7 +34,7 @@
    			 <div class="collapse navbar-collapse" id="navbarSupportedContent">
      			 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
        				 <li class="nav-item">
-         				 <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+         				 <a class="nav-link active" aria-current="page" href="/">Inicio</a>
        				 </li>
       				 <li class="nav-item">
       				    <a class="nav-link" href="/producto/todos">Productos</a>
@@ -45,22 +45,29 @@
         			<li class="nav-item">
       				    <a class="nav-link" href="/user/todos">Usuarios</a>
         			</li>
-        			<li class="nav-item">
-      				    <a class="nav-link" href="#">Pedidos</a>
+        			<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pedidos</a>
+        				<ul class="dropdown-menu">
+        				
+      				   		<li><a class="dropdown-item" href="/pedido">Todos los pedidos</a></li>
+      				   		<li><a class="dropdown-item" href="/buscarUno">Buscar pedido</a></li>
+      				    </ul>
         			</li>
-        			<li class="nav-item">
-      				    <a class="nav-link" href="#">Gestión</a>
+        			<li class=>
+      				    <a class="nav-link" href="/user/gestion">Gestión</a>
         			</li>
         			</sec:authorize>
         			
-        			<!-- Si ha iniciadp sesión, mostraremos los datos personales del usuario, sus pedidos y la posibilidad de cerrar sesión -->
+        			<!-- Si ha iniciado sesión, mostraremos los datos personales del usuario, sus pedidos y la posibilidad de cerrar sesión -->
         			<sec:authorize access ="isAuthenticated()">
       			  	<li class="nav-item dropdown">
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
           				<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="/direccion/todas">Mis direcciones</a></li>
+          			
           					<li><a class="dropdown-item" href="#">Mis datos</a></li>
+            				<sec:authorize access="hasAuthority('ROL_CLIENTE')">
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+            				</sec:authorize>
             				<li><hr class="dropdown-divider"></li>
             				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           				</ul>
@@ -72,18 +79,18 @@
         	<button class="btn btn-outline-success" type="submit">Buscar</button>
       	</form>
       	<div>
-      	<ul class="navbar-nav me-right mb-2 mb-lg-0">
-      	
-      	<!-- Si no ha iniciado sesión todavía, mostramos la opcion de registro de usuario -->
-      	<sec:authorize access ="!isAuthenticated()">
-      		<li class="nav-item">
-      			<a class="btn btn-primary m-2" href="/user/registro" role="button">Registrate</a>
-        	</li>
-        	<li class="nav-item">
-      			<a class="btn btn-info m-2" href="/login" role="button">Iniciar sesión</a>
-        	</li>
-        </sec:authorize>
-    	</ul>
+	      	<ul class="navbar-nav me-right mb-2 mb-lg-0">
+	      	
+	      	<!-- Si no ha iniciado sesión todavía, mostramos la opcion de registro de usuario -->
+	      	<sec:authorize access ="!isAuthenticated()">
+	      		<li class="nav-item">
+	      			<a class="btn btn-primary m-2" href="/registro" role="button">Registrate</a>
+	        	</li>
+	        	<li class="nav-item">
+	      			<a class="btn btn-info m-2" href="/login" role="button">Iniciar sesión</a>
+	        	</li>
+	        </sec:authorize>
+	    	</ul>
     	</div>
     	</div>
   		</div>

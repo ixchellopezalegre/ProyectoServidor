@@ -1,37 +1,46 @@
-package com.edix.proyecto.rest;
+package com.edix.proyecto.controller;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
-import javax.annotation.security.RolesAllowed;
-
+import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.RolServiceImpl;
+import com.edix.proyecto.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.edix.proyecto.beans.Rol;
-import com.edix.proyecto.beans.Usuario;
-import com.edix.proyecto.service.RolServiceImpl;
-import com.edix.proyecto.service.UsuarioServiceImpl;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/user")
-public class UsuarioREST {
-
-	@Autowired UsuarioServiceImpl user;
+public class HomeController {
+	
+	@Autowired UsuarioServiceImpl uRepo;
 	
 	@Autowired RolServiceImpl rolSer;
 	
-	@GetMapping("/todos")
-	public String buscarTodos(Model model){
+	@GetMapping("/")
+	public String mostarHome() {
+		return "index";
+	}
+	
+	@GetMapping("/inicio")
+	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
+		Usuario usuario = uRepo.buscarPorEmail(aut.getName());
 
-		model.addAttribute("usuario", user.buscarTodos());
-		return "listaUsuarios";	
+		if (misesion.getAttribute("sesion") == null)
+			misesion.setAttribute("sesion", usuario);
+
+		System.out.println("Nombre : " + aut.getName());
+		for (GrantedAuthority ele: aut.getAuthorities())
+			System.out.println("Roles : " + ele.getAuthority());
+
+		return "redirect:/";
 	}
 	
 	@GetMapping("/registro")
@@ -56,14 +65,14 @@ public class UsuarioREST {
 	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
     	usuario.addRol(rolSer.buscarRol(1));
 	   
-	    if(user.registrarUsuario(usuario)) {
+	    if(uRepo.registrarUsuario(usuario)) {
 	    	
 	    		usuario.setIdUsuario(usuario.getIdUsuario());
 	        return "redirect:/login";
 	    } else {
 	        model.addAttribute("mensaje", "Ha ocurrido un error");
-	        System.out.println(usuario.getIdUsuario());
 	        return "registro";
 	    }
 	}
+
 }

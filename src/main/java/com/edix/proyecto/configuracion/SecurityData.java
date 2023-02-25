@@ -48,7 +48,7 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 				.antMatchers("/"
 						,"/login"
 						,"/logout"
-						,"/user/registro"
+						,"/registro"
 						,"/producto/**").permitAll()
 				//URLS que permitimos de acceso público. los ** son comodines para informar 
 				//que puede haber mas información a partir de esa URL

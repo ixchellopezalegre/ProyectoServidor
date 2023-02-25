@@ -1,4 +1,4 @@
-package com.edix.proyecto.rest;
+package com.edix.proyecto.controller;
 
 import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.service.ProductoServiceImpl;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/producto")
-public class ProductoREST {
+public class ProductoController {
 
     @Autowired
     ProductoServiceImpl pServ;
