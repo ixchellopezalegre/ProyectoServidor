@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registro de usuario</title>
+<title>Silicon Solutions</title>
 </head>
 <body>
 	
 	<jsp:include page="nav.jsp"></jsp:include>
 	
-	<div class = "container w-25 p-3">
-	<h3> ¡ Forma parte de Silicon Solutions !</h3>
-		<form action ="/registro" method="post" >
+		<div class = "container w-25 p-3">
+	<h3> Alta de un nuevo administrador.</h3>
+	
+		<form action ="/user/gestion" method="post" >
 			<div class="input-group mb-2">
 			  <span class="input-group-text">Nombre</span>
 			  <input type="text" aria-label="Nombre" class="form-control" name="nombre">
@@ -28,21 +29,17 @@
 			<div class="mb-1">
 		    	<label for="email" class="form-label">Dirección de correo</label>
 		    	<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-		   		<div id="emailHelp" class="form-text">Nunca mostraremos tu email a nadie.</div>
+		   		<div id="emailHelp" class="form-text">Email de administrador</div>
 		  	</div>
 		  	<div class="mb-2">
 		    	<label for="password" class="form-label">Contraseña</label>
 		    	<input type="password" class="form-control" id="password" name ="password">
 		  </div>
-		  <div class="mb-3 form-check">
-		  	<input type="checkbox" class="form-check-input" id="terminosCondiciones" checked>
-		    <label class="form-check-label" for="exampleCheck1">Acepto términos y condiciones</label>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">Alta administrador</button>
 		</form>
 	</div>
 	
 	<h1>${mensaje }</h1>
-	
+
 </body>
 </html>

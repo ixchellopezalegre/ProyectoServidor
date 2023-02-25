@@ -22,7 +22,6 @@
 				<th>Provincia</th>
 				<th>Calle</th>
 				<th>CP</th>
-				<th>Opciones</yh>
 			</tr>
 		<c:forEach var="user" items="${ usuario }">
 			<tr>
@@ -33,16 +32,9 @@
 				<td>${ user.direcciones[0].getLocalidad() }</td>
 				<td>${ user.direcciones[0].getCalle() }</td>
 				<td>${ user.direcciones[0].getCodigoPostal() }</td>
-				
-				
-				<td><button type="button" class="btn btn-info m-1">Detalle</button></td>
-				<td><button type="button" class="btn btn-success m-1">Editar</button></td>
-				<td><button type="button" class="btn btn-danger m-1">Eliminar</button></td>
 			</tr>
 		</c:forEach>
 		</table>
 	</div>
-	
-	<h1>${user.direcciones[2].getLocalidad() }</h1>
 </body>
 </html>
