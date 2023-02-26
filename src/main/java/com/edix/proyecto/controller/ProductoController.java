@@ -52,6 +52,7 @@ public class ProductoController {
         model.addAttribute("producto", pServ.buscarUno(idProducto));
         return "formProductoEditar";
     }
+    
     @PostMapping("/editar")
     public String modificarProducto(Producto producto) {
         System.out.println(producto);

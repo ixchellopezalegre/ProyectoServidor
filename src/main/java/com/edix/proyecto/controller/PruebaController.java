@@ -1,4 +1,4 @@
-package com.edix.proyecto.rest;
+package com.edix.proyecto.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

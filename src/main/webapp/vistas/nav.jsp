@@ -58,19 +58,24 @@
         			</li>
         			</sec:authorize>
         			
-        			<!-- Si ha iniciado sesión, mostraremos los datos personales del usuario, sus pedidos y la posibilidad de cerrar sesión -->
+        			<!-- Si ha iniciado sesión, mostraremos los datos personales del usuario, sus pedidos, carrito y la posibilidad de cerrar sesión -->
         			<sec:authorize access ="isAuthenticated()">
       			  	<li class="nav-item dropdown">
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
+          				
           				<ul class="dropdown-menu">
           			
           					<li><a class="dropdown-item" href="/user/datos">Mis datos</a></li>
             				<sec:authorize access="hasAuthority('ROL_CLIENTE')">
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+            				
             				</sec:authorize>
             				<li><hr class="dropdown-divider"></li>
             				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           				</ul>
+        			</li>
+        			<li class=>
+      				    <a class="nav-link" href="/carrito">Carrito</a>
         			</li>
         			</sec:authorize>
       			</ul>
