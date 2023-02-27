@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.service.RolServiceImpl;
@@ -21,14 +18,15 @@ import com.edix.proyecto.service.UsuarioServiceImpl;
 @RequestMapping("/user")
 public class UsuarioController {
 
-	@Autowired UsuarioServiceImpl user;
+	@Autowired UsuarioServiceImpl uServ;
 	
-	@Autowired RolServiceImpl rolSer;
+	@Autowired RolServiceImpl rolServ;
+
 	
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
 
-		model.addAttribute("usuario", user.buscarTodos());
+		model.addAttribute("usuario", uServ.buscarTodos());
 		return "listaUsuarios";	
 	}
 	
@@ -53,9 +51,9 @@ public class UsuarioController {
 	    usuario.setPassword(password);
 	    
 	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
-    	usuario.addRol(rolSer.buscarRol(2));
+    	usuario.addRol(rolServ.buscarRol(2));
 	   
-	    if(user.registrarUsuario(usuario)) {
+	    if(uServ.registrarUsuario(usuario)) {
 	    		usuario.setIdUsuario(usuario.getIdUsuario());
 	        return "redirect:/";
 	    } else {
@@ -67,7 +65,7 @@ public class UsuarioController {
 	@GetMapping("/datos")
 	public String datosUsuario(Model model, Authentication auth) {
 
-		model.addAttribute("usuario", user.buscarPorEmail(auth.getName()));
+		model.addAttribute("usuario", uServ.buscarPorEmail(auth.getName()));
 		return "datosUsuario";
 	}
 	

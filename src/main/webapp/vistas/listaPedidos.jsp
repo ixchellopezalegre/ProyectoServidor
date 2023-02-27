@@ -13,7 +13,20 @@
 	
 	
 	<div class="container">
-		<h1 class="text-primary">Estado de pedidos</h1><hr>
+		<h1 class="text-primary">${pedidosDe}</h1>
+		<hr>
+		<div>
+			<a href="/pedido/todos" class="btn btn-primary">Todos los pedidos</a>
+			<a href="/pedido/completados" class="btn btn-primary">Pedidos completados</a>
+			<a href="/pedido/pendientes" class="btn btn-primary">Pedidos pendientes</a>
+			<a href="/pedido/hoy" class="btn btn-primary">Pedidos de hoy</a>
+			<form action="/pedido/buscar" class="d-flex" role="search">
+				<input name="idUsuario" class="form-control me-2" type="search" placeholder="Buscar pedidos de cliente (idCliente)" aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			</form>
+
+		</div>
+		<hr>
 		<table class="table table-striped table-sm" >
 			<tr class="table-info">
 				<th>ID Pedido</th>
@@ -24,7 +37,7 @@
 				<th>Codigo postal</th>
 				<th>Estado del pedido</th>
 			</tr>
-			<c:forEach var="pedido" items="${ listaPedido }" >
+			<c:forEach var="pedido" items="${ listaPedidos }" >
 			<tr>
 				<td>${pedido.idPedido }</td>
 				<td>${pedido.usuario.idUsuario }</td>
@@ -35,6 +48,11 @@
 				<td>${pedido.estado }</td>
 			</tr>
 			</c:forEach>
+			<c:if test="${listaPedidos.size() == 0}">
+				<tr>
+					<td colspan="7">No hay pedidos para mostrar</td>
+				</tr>
+			</c:if>
 		</table>
 	</div>
 	</body>

@@ -16,6 +16,7 @@
     <p>${mensaje}</p>
     <h3>Datos de ${sesion.nombre}</h3><hr>
     <h4><a href="/direccion/todas">Mis direcciones</a></h4>
+    <h4><a href="/tarjeta/todas">Mis tarjetas</a></h4>
 </div>
 </body>
 </html>

@@ -24,7 +24,6 @@
 	<sec:authorize access="hasAuthority('ROL_CLIENTE')">CLIENTE</sec:authorize>
 </h4>
 </sec:authorize>
-</h4>
 	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
     		<a class="navbar-brand" href="/">Silicon Solutions</a>
@@ -45,14 +44,9 @@
         			<li class="nav-item">
       				    <a class="nav-link" href="/user/todos">Usuarios</a>
         			</li>
-        			<li class="nav-item dropdown">
-        				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pedidos</a>
-        				<ul class="dropdown-menu">
-        				
-      				   		<li><a class="dropdown-item" href="/pedido">Todos los pedidos</a></li>
-      				   		<li><a class="dropdown-item" href="/buscarUno">Buscar pedido</a></li>
-      				    </ul>
-        			</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/pedido/todos">Pedidos</a>
+					</li>
         			<li class=>
       				    <a class="nav-link" href="/user/gestion">Gestión</a>
         			</li>

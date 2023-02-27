@@ -1,5 +1,6 @@
 package com.edix.proyecto.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,28 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public Pedido buscarPorCliente(int idUsuario) {
+	public List<Pedido> buscarPorCliente(int idUsuario) {
 		return pRepo.buscarPedidoPorCliente(idUsuario);
 	}
 
 	@Override
 	public Pedido buscarPorPedido(int idPedido) {
 		return pRepo.findById(idPedido).orElse(null);
+	}
+
+	@Override
+	public List<Pedido> buscarPendientes() {;
+		return pRepo.buscarPendientes();
+	}
+
+	@Override
+	public List<Pedido> buscarCompletados() {
+		return pRepo.buscarCompletados();
+	}
+
+	@Override
+	public List<Pedido> buscarHoy() {
+		return pRepo.buscarHoy();
 	}
 
 }
