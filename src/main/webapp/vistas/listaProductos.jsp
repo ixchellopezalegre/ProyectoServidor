@@ -32,7 +32,7 @@
 			<td>${ele.nombre }</td>
 			<td>${ele.descripcion }</td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
-			<td><a href="/carrito/añadirUno/${ele.idProducto}" class="btn btn-primary btn-sm">Añadir</a>
+			<td><a href="/carrito/añadirUno/${ele.idProducto}" class="btn btn-primary btn-sm">Añadir al carrito</a>
 			 <sec:authorize access="hasAuthority('ROL_ADMIN')">
 			<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
 			 <a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a></td>

@@ -27,7 +27,7 @@
 </h4>
 	<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
-    		<a class="navbar-brand" href="/">Silicon Solutions</a>
+    		<a class="navbar-brand" href="/"><img src="/Siliconsolutions.png" alt="logo" height="80"/></a>
   			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     		  <span class="navbar-toggler-icon"></span>
     		</button>
@@ -74,8 +74,8 @@
             				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           				</ul>
         			</li>
-        			<li class=>
-      				    <a class="nav-link" href="/carrito">Carrito</a>
+        			<li class="nav-item">
+      				    <a class="nav-link" href="/carrito"><img src="/carritoCompra.png" alt="img_carrito" height="30"/></a>
         			</li>
         			</sec:authorize>
       			</ul>
