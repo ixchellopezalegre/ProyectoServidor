@@ -1,0 +1,79 @@
+package com.edix.proyecto.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.edix.proyecto.beans.Producto;
+import com.edix.proyecto.service.CarritoService;
+
+
+
+@Controller
+@RequestMapping("/carrito")
+public class CarritoController {
+	
+	@Autowired 
+	CarritoService caService;
+		
+	/**
+	 * Comprobaremos si en la sesión hay un atributo Carrito y si lo hay devolveremos el mapa de productos y cantidades
+	 * @return
+	 */
+	@GetMapping("")
+	public String verProductosCarrito(Model model, HttpSession misesion) {
+		comprobaroCrearCarrito(misesion, model);
+		
+		return "Carrito";
+	}
+	
+	/**
+	 * Recupera el carrito en sesión y añade una unidad al producto pasado por parámetro
+	 * @return
+	 */
+	@GetMapping("/añadirUno/{idProducto}")
+	public String añadirUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
+				
+		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		caService.sumarProductoEnCarrito(carrito, idProducto);
+		
+		return "Carrito";
+	}
+	
+	/**
+	 * Recupera el carrito en sesión y elimina una unidad del producto pasado por parámetro
+	 * @return
+	 */
+	@GetMapping("/eliminarUno/{idProducto}")
+	public String eliminarUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
+		
+		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		caService.restarProductoEnCarrito(carrito, idProducto);
+		
+		return "Carrito";
+	}
+	
+	private Map<Producto, Integer> comprobaroCrearCarrito(HttpSession misesion, Model model) {
+		
+		Map<Producto, Integer> carrito = null;
+		if (misesion.getAttribute("carrito") == null) {		 
+			 carrito = new HashMap<Producto, Integer>();
+			misesion.setAttribute("carrito",carrito);
+		}else {
+			 carrito = (Map<Producto, Integer>) misesion.getAttribute("carrito");
+		}
+		
+		model.addAttribute("carrito", carrito);
+		
+		return carrito;
+	}
+	
+}
