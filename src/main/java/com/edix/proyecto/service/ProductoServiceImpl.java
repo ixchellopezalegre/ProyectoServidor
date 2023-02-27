@@ -73,5 +73,25 @@ public class ProductoServiceImpl implements ProductoService {
 		return resultado;
 	}
 
+	@Override
+	public List<Producto> ordenarAlfabeticamenteAsc() {
+		return pRepo.findAllByOrderByNombreAsc();
+	}
+
+	@Override
+	public List<Producto> ordenarAlfabeticamenteDesc() {
+		return pRepo.findAllByOrderByNombreDesc();
+	}
+
+	@Override
+	public List<Producto> ordenarPorPrecioAsc() {
+		return pRepo.findAllByOrderByPrecioAsc();
+	}
+
+	@Override
+	public List<Producto> ordenarPorPrecioDesc() {
+		return pRepo.findAllByOrderByPrecioDesc();
+	}
+
 }
 

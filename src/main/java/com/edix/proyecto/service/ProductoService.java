@@ -13,5 +13,11 @@ public interface ProductoService {
 	boolean registrarProducto(Producto producto);
 	boolean borrarProducto(int idProducto);
 	boolean modificarProducto(Producto producto);
-	
+	List<Producto> ordenarAlfabeticamenteAsc();
+
+	List<Producto> ordenarAlfabeticamenteDesc();
+	List<Producto> ordenarPorPrecioAsc();
+
+	List<Producto> ordenarPorPrecioDesc();
+
 }

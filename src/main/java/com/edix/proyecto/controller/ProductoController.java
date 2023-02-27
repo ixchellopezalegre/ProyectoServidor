@@ -69,4 +69,28 @@ public class ProductoController {
         return "forward:/producto/todos";
     }
 
+    @GetMapping("/orden/alfabetico/asc")
+    public String ordenarAlfaAsc(Model model) {
+    	model.addAttribute("listaProductos", pServ.ordenarAlfabeticamenteAsc());
+    	return "listaProductos";
+    }
+
+    @GetMapping("/orden/alfabetico/desc")
+    public String ordenarAlfaDesc(Model model) {
+    	model.addAttribute("listaProductos", pServ.ordenarAlfabeticamenteDesc());
+    	return "listaProductos";
+    }
+
+    @GetMapping("/orden/precio/asc")
+    public String ordenarPorPrecio(Model model) {
+        model.addAttribute("listaProductos", pServ.ordenarPorPrecioAsc());
+        return "listaProductos";
+    }
+
+    @GetMapping("/orden/precio/desc")
+    public String ordenarPorPrecioDesc(Model model) {
+        model.addAttribute("listaProductos", pServ.ordenarPorPrecioDesc());
+        return "listaProductos";
+    }
+
 }

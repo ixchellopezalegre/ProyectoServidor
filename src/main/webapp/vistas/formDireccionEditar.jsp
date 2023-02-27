@@ -5,20 +5,45 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Añadir Direccion Nueva</title>
+<title>Editar Tarjeta</title>
 </head>
 <body>
-	<h1>Formulario para modificar la direccion localizada en ${direccion.calle}</h1>
-	<p>${sesion.nombre}, añade una dirección:</p>
-	<form action="/direccion/editar/${direccion.idDireccion}" method="post">
-		<p>Calle: <input type="text" name="calle" value="${direccion.calle}"></p>
-		<p>Numero: <input type="text" name="numero" value="${direccion.numero}"></p>
-		<p>Piso: <input type="text" name="piso" value="${direccion.piso}"></p>
-		<p>Puerta: <input type="text" name="puerta" value="${direccion.puerta}"></p>
-		<p>Localidad: <input type="text" name="localidad" value="${direccion.localidad}"></p>
-		<p>Codigo Postal: <input type="text" name="codigoPostal" value="${direccion.codigoPostal}"></p>
-		<p><input type="submit" value="Enviar"></p>
+	<jsp:include page="nav.jsp"></jsp:include>
 
-	</form>
+	<h1>Formulario para modificar la direccion localizada en ${direccion.calle}</h1>
+	<div class = "container w-25 p-3">
+		<h3>${sesion.nombre}, añade una dirección:</h3>
+
+		<form action="/direccion/editar/${direccion.idDireccion}" method="post">
+			<div class="input-group mb-2">
+				<span class="input-group-text">Calle</span>
+				<input type="text" name="calle" value="${direccion.calle}">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Numero</span>
+				<input type="text" name="numero" value="${direccion.numero}">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Piso</span>
+				<input type="text" name="piso" value="${direccion.piso}">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Puerta</span>
+				<input type="text" name="puerta" value="${direccion.puerta}">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Localidad</span>
+				<input type="text" name="localidad" value="${direccion.localidad}">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Codigo postal</span>
+				<input type="text" name="codigoPostal" value="${direccion.codigoPostal}">
+			</div>
+
+			<p><input type="submit" class="btn btn-primary" value="Enviar"></p>
+
+		</form>
+	</div>
+
 </body>
 </html>

@@ -15,14 +15,24 @@
 	
 	<div class="container">
 	<h1 class="text-primary">Lista de productos</h1>
-	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
-	<a href="/producto/alta" class="btn btn-primary btn-sm" >Nuevo Producto</a>
-	</sec:authorize>
+
+	<hr>
+	<div>
+		<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+			<a href="/producto/alta" class="btn btn-primary btn-sm" >Nuevo Producto</a>
+		</sec:authorize>
+		<a href="/producto/orden/alfabetico/asc">Nombre A-Z</a>
+		<a href="/producto/orden/alfabetico/desc">Nombre Z-A</a>
+		<a href="/producto/orden/precio/asc">Precio más bajo</a>
+		<a href="/producto/orden/precio/desc">Precio más alto</a>
+	</div>
+
+	<hr>
 	<table class="table table-striped table-sm" >
 	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 	<th>Id</th>
 	</sec:authorize>
-	<th>Nombre</th><th>Descripcion</th><th>Opcion<sec:authorize access="hasAuthority('ROL_ADMIN')">es</sec:authorize></th>
+	<th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Opcion<sec:authorize access="hasAuthority('ROL_ADMIN')">es</sec:authorize></th>
 	
 	<c:forEach var="ele" items="${listaProductos }" >
 		<tr>
@@ -31,6 +41,7 @@
 			</sec:authorize>
 			<td>${ele.nombre }</td>
 			<td>${ele.descripcion }</td>
+			<td>${ele.precio }</td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
 			 <sec:authorize access="hasAuthority('ROL_ADMIN')">
 			<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>

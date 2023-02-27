@@ -8,17 +8,41 @@
 <title>Añadir Direccion Nueva</title>
 </head>
 <body>
-	<h1>Formulario de Alta de Direccion</h1>
-	<p>${sesion.nombre}, añade una dirección:</p>
-	<form action="/direccion/nueva" method="post">
-		<p>Calle: <input type="text" name="calle"></p>
-		<p>Numero: <input type="text" name="numero"></p>
-		<p>Piso: <input type="text" name="piso"></p>
-		<p>Puerta: <input type="text" name="puerta"></p>
-		<p>Localidad: <input type="text" name="localidad"></p>
-		<p>Codigo Postal: <input type="text" name="codigoPostal"></p>
-		<p><input type="submit" value="Enviar"></p>
 
-	</form>
+	<jsp:include page="nav.jsp"></jsp:include>
+
+	<h1>Formulario de Alta de Direccion</h1>
+	<div class = "container w-25 p-3">
+		<h3>${sesion.nombre}, añade una dirección:</h3>
+		<form action="/direccion/nueva" method="post">
+			<div class="input-group mb-2">
+				<span class="input-group-text">Calle</span>
+				<input type="text" name="calle">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Numero</span>
+				<input type="text" name="numero">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Piso</span>
+				<input type="text" name="piso">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Puerta</span>
+				<input type="text" name="puerta">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Localidad</span>
+				<input type="text" name="localidad">
+			</div>
+			<div class="input-group mb-2">
+				<span class="input-group-text">Codigo postal</span>
+				<input type="text" name="codigoPostal">
+			</div>
+
+			<p><input type="submit" class="btn btn-primary" value="Enviar"></p>
+
+		</form>
+	</div>
 </body>
 </html>

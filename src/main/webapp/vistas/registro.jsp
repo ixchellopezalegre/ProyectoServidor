@@ -9,10 +9,11 @@
 <body>
 	
 	<jsp:include page="nav.jsp"></jsp:include>
-	
+	<sec:csrfInput/>
 	<div class = "container w-25 p-3">
 	<h3> ¡ Forma parte de Silicon Solutions !</h3>
 		<form action ="/registro" method="post" >
+			<input type=hidden name="${csrf.parameterName}? value="${csrf.token}"/>
 			<div class="input-group mb-2">
 			  <span class="input-group-text">Nombre</span>
 			  <input type="text" aria-label="Nombre" class="form-control" name="nombre">
