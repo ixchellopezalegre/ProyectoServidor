@@ -1,12 +1,19 @@
 package com.edix.proyecto.service;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.beans.Producto;
+import com.edix.proyecto.beans.ProductosEnPedido;
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.repository.PedidoRepository;
+import com.edix.proyecto.repository.ProductoEnPedidoRepository;
 
 @Service
 public class CarritoServiceImpl implements CarritoService{
@@ -16,6 +23,12 @@ public class CarritoServiceImpl implements CarritoService{
 	
 	@Autowired
 	PedidoService pedServ;
+	
+	@Autowired
+	ProductoEnPedidoRepository pepRepo;
+	
+	@Autowired
+	PedidoRepository pedRepo;
 	
 
 	/**
@@ -57,8 +70,41 @@ public class CarritoServiceImpl implements CarritoService{
 
 	@Override
 	public void guardarCarrito(Map<Producto, Integer> carrito, Usuario usuario) {
-		
-		
+		if (carrito != null) {
+			Pedido pedido = new Pedido();
+			Date fechaActual = new Date();
+			String estadoCarrito = "CARRITO";
+			
+			//Guardamos en el objeto pedido los datos que necesitamos
+			
+			//FECHA
+			pedido.setFecha(fechaActual);
+			
+			//ID_USUARIO
+			pedido.setUsuario(usuario);
+			
+			//ESTADO
+			pedido.setEstado(estadoCarrito);
+			
+			//Guardamos el pedido en BBDD y guardamos el objeto Pedido que devuelve
+			Pedido pedidoGuardado = pedRepo.save(pedido);
+			
+			//Guardamos en el objeto productosEnPedido los datos que necesitamos
+			for (Map.Entry<Producto, Integer> entry : carrito.entrySet()) {
+				ProductosEnPedido productosEnPedido = new ProductosEnPedido();
+				BigDecimal cantidad = new BigDecimal(entry.getValue());
+				BigDecimal precio = entry.getKey().getPrecio();
+				BigDecimal precioTotal = cantidad.multiply(precio);
+				
+				productosEnPedido.setPedido(pedidoGuardado);
+				productosEnPedido.setProducto(entry.getKey());
+				productosEnPedido.setCantidad((int)entry.getValue());
+				productosEnPedido.setPrecioTotal(precioTotal);
+				
+				pepRepo.save(productosEnPedido);
+			}
+			
+		}
 	}
 	
 	

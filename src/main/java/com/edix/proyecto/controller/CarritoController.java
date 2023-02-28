@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edix.proyecto.beans.Producto;
+import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.service.CarritoService;
 
 
@@ -61,6 +62,21 @@ public class CarritoController {
 		return "Carrito";
 	}
 	
+	@GetMapping("/guardar")
+	public String guardarCarrito(Model model, HttpSession misesion) {
+		
+		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		
+		Usuario user = (Usuario) misesion.getAttribute("sesion");
+		
+		caService.guardarCarrito(carrito, user);
+		
+		misesion.removeAttribute("carrito");
+		
+		return "redirect:/";
+	}
+	
+	
 	private Map<Producto, Integer> comprobaroCrearCarrito(HttpSession misesion, Model model) {
 		
 		Map<Producto, Integer> carrito = null;
@@ -75,5 +91,7 @@ public class CarritoController {
 		
 		return carrito;
 	}
+	
+	
 	
 }

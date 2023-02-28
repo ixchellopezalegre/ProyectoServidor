@@ -20,6 +20,12 @@
 	<div class="container">
 	<h1 class="text-primary">Productos del carrito</h1>
 	
+	</br>
+	
+	<a href="/carrito/guardar" class="btn btn-danger btn-sm">Guardar Carrito</a>
+	
+	</br></br>
+	
     <table class="table table-striped table-sm">
       <tr>
         <th>Id</th>

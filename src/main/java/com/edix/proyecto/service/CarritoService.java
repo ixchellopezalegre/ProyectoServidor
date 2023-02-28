@@ -10,4 +10,5 @@ public interface CarritoService {
 	void sumarProductoEnCarrito(Map<Producto,Integer> carrito, Integer idProducto);
 	void restarProductoEnCarrito(Map<Producto,Integer> carrito, Integer idProducto);
 	void guardarCarrito(Map<Producto,Integer> carrito, Usuario usuario);
+	
 }
