@@ -19,7 +19,7 @@
         <div class="row pt-5">
           <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
             <div class="text-center">
-              <p class="fw-bold text-success mb-2">#1 En todo el mundo</p>
+              <h4 class="fw-bold text-success mb-2">#1 En todo el mundo</h4>
               <h1 class="fw-bold">La mejor solución para nuestros clientes</h1>
             </div>
           </div>
@@ -83,7 +83,7 @@
       <div class="container bg-primary-gradient py-5">
         <div class="row">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Nuestros servicios</p>
+            <h4 class="fw-bold text-success mb-2">Nuestros servicios</h4>
             <h3 class="fw-bold">Qué podemos hacer por ti.</h3>
           </div>
         </div>
@@ -233,7 +233,7 @@
       <div class="container py-5">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Testimonios</p>
+            <h4 class="fw-bold text-success mb-2">Testimonios</h4>
             <h2 class="fw-bold">Qué dice la gente sobre nosotros</h2>
             <p class="text-muted">
               "No importa que componente estás buscando, ellos lo tienen"&nbsp;
@@ -324,14 +324,14 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-6 col-xl-4">
             <div>
-              <form class="p-3 p-xl-4" method="post">
+              <form class="p-3 p-xl-4" method="/">
                 <div class="mb-3">
                   <input
                     class="form-control"
                     type="text"
                     id="name-1"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Nombre"
                   />
                 </div>
                 <div class="mb-3">
@@ -349,7 +349,7 @@
                     id="message-1"
                     name="message"
                     rows="6"
-                    placeholder="Message"
+                    placeholder="Mensaje"
                   ></textarea>
                 </div>
                 <div>

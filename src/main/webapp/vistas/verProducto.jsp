@@ -11,23 +11,31 @@
 </head>
     <body>
     <jsp:include page="nav.jsp"></jsp:include>
-        <div class="container">
+        <div class="container mb-5">
             <h1 class="text-primary">Detalles de ${producto.nombre}</h1>
-            <table class="table table-striped table-sm" >
-                <sec:authorize access="hasAnyAuthority('ROL_ADMIN')"><th>ID</th></sec:authorize>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <sec:authorize access="hasAnyAuthority('ROL_ADMIN')"><th>Stock</th></sec:authorize>
-            <tr>
-                <sec:authorize access="hasAnyAuthority('ROL_ADMIN')"><td>${producto.idProducto }</td>
-                </sec:authorize>
-                <td>${producto.nombre }</td>
-                <td>${producto.descripcion }</td>
-                <td>${producto.precio }</td>
-                <sec:authorize access="hasAnyAuthority('ROL_ADMIN')"><td><td>${producto.stock }</td>
-                </sec:authorize>
-            </tr>
+            <table class="table table-striped table-hover">
+            	<tr class ="table-info">
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+               		<th>ID</th>
+               		</sec:authorize>
+                	<th>Nombre</th>
+                	<th>Descripción</th>
+                	<th>Precio</th>
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<th>Stock</th>
+                	</sec:authorize>
+                </tr>
+            	<tr>
+               		<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<td>${producto.idProducto }</td>
+                	</sec:authorize>
+                	<td>${producto.nombre }</td>
+                	<td>${producto.descripcion }</td>
+                	<td>${producto.precio }</td>
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<td>${producto.stock }</td>
+                	</sec:authorize>
+            	</tr>
             </table>
         </div>
     </body>

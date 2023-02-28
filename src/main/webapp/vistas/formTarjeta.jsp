@@ -10,9 +10,9 @@
 <body>
 
 	<jsp:include page="nav.jsp"></jsp:include>
-	<h1>Formulario de Alta de Tarjeta</h1>
+	
 	<div class = "container w-25 p-3">
-		<p>${sesion.nombre}, añade una tarjeta:</p>
+		<h2 class ="text-primary">${sesion.nombre}, añade una tarjeta:</h2>
 			<form action="/tarjeta/nueva" method="post">
 				<div class="input-group mb-2">
 					<span class="input-group-text">Titular</span>
@@ -30,7 +30,7 @@
 					<span class="input-group-text">CVV</span>
 					<input type="text" class="form-control" name="ccv">
 				</div>
-				<p><input type="submit" class="btn btn-primary" value="Enviar"></p>
+				<p><input type="submit" class="btn btn-primary" value="Dar alta"></p>
 			</form>
 	</div>
 </body>

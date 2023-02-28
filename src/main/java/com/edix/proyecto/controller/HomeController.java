@@ -28,6 +28,7 @@ public class HomeController {
 	public HomeController(PasswordEncoder pwcript) {
 		this.pwcript = pwcript;
 	}
+	
 
 	@GetMapping("/")
 	public String mostarHome() {

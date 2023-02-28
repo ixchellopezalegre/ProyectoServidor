@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,16 +9,36 @@
 <title>Editar producto ${producto.idProducto}</title>
 </head>
 <body>
-	<h1>Formulario para modificar el producto ${producto.idProducto}</h1>
+	
+	<jsp:include page="nav.jsp"></jsp:include>
+	
+	<div class ="container">
+	<h3 class="text-primary m-3">Actualizacion de ${producto.nombre}</h3>
+	
 	<form action="/producto/editar" method="post">
-		<p><input type="text" name="idProducto" value="${producto.idProducto }"> ID Producto</p>
-		<p><input type="text" name="nombre" value="${producto.nombre }"> Nombre</p>
-		<p><input type="text" name="descripcion" value="${producto.descripcion }"> Descripcion</p>
-		<p><input type="number" name="precio" step="0.01" value="${producto.precio }"> Precio Unidad</p>
-		<p><input type="number" name="stock" value="${producto.stock }"> Stock</p>
-
-		<p><input type="submit" value="Guardar"></p>
+		<div class="input-group mt-2">
+			<span class="input-group-text">ID Producto</span>
+			<input class="form-control" type="text" name="idProducto" value="${producto.idProducto }">
+		</div>
+			<div class="input-group mt-2">
+			<span class="input-group-text">Nombre</span>
+			<input class="form-control" type="text" name="nombre" value="${producto.nombre }">
+		</div>
+		<div class="input-group mt-2">
+			<span class="input-group-text">Descripcion</span>
+			<input class="form-control" type="text" name="descripcion" value="${producto.descripcion }">
+		</div>
+		<div class="input-group mt-2">
+			<span class="input-group-text">Precio</span>
+			<input class="form-control" type="number" name="precio" step="0.01" value="${producto.precio }">
+		</div>
+		<div class="input-group mt-2">
+			<span class="input-group-text">Stock</span>
+			<input class="form-control" type="number" name="stock" value="${producto.stock }">
+		</div>
+		 <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
 	
 	</form>
+	</div>
 </body>
 </html>

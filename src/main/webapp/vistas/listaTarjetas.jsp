@@ -13,10 +13,11 @@
 	
 	<div class ="container mt-5 " >
 
-		<p>${mensaje}</p>
-	<h3>Listado de tarjetas de ${sesion.nombre}</h3><hr>
+	<p>${mensaje}</p>
+	<h3 class ="text-primary">Listado de tarjetas de ${sesion.nombre}</h3><hr>
+	
 		<table class ="table table-striped table-hover">
-		<a href="/tarjeta/nueva">Nueva Tarjeta</a>
+		<a href="/tarjeta/nueva" class="btn btn-success mb-2">Nueva Tarjeta</a>
 			<tr class="table-info">
 				<th>Titular</th>
 				<th>Numero de la tarjeta</th>
@@ -31,8 +32,8 @@
 				<td>${ ele.fechaCaducidad }</td>
 				<td>${ ele.ccv }</td>
 				<td>
-					<a href="/tarjeta/editar/${ele.idTarjeta}">Editar</a>
-					<a href="/tarjeta/eliminar/${ele.idTarjeta}">Eliminar</a></td>
+					<a href="/tarjeta/editar/${ele.idTarjeta}" class="btn btn-info">Editar</a>
+					<a href="/tarjeta/eliminar/${ele.idTarjeta}" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</c:forEach>
 		</table>

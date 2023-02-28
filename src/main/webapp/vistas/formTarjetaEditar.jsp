@@ -9,9 +9,9 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
-	<h1>Formulario para modificar la tarjeta con numero ${tarjeta.numeroTarjeta}</h1>
+	
 	<div class = "container w-25 p-3">
-		<p>${sesion.nombre}, añade una tarjeta:</p>
+		<h3 class ="text-primary mb-3">Modificación de la tarjeta de ${tarjeta.titular}</h3>
 			<form action="/tarjeta/editar/${tarjeta.idTarjeta}" method="post">
 				<div class="input-group mb-2">
 					<span class="input-group-text">Titular</span>
@@ -30,8 +30,7 @@
 					<input type="text" class="form-control" name="ccv" value="${tarjeta.ccv}">
 				</div>
 
-				<p><input type="submit" class="btn btn-primary" value="Enviar"></p>
-
+				<p><input type="submit" class="btn btn-primary" value="Actualizar"></p>
 			</form>
 	</div>
 </body>
