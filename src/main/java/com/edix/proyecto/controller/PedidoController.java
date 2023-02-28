@@ -13,7 +13,7 @@ import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.service.PedidoServiceImpl;
 import com.edix.proyecto.service.ProductoEnPedidoImpl;
 
-import java.sql.Date;
+
 import java.util.List;
 
 @Controller

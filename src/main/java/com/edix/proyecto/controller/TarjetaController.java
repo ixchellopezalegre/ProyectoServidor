@@ -1,6 +1,6 @@
 package com.edix.proyecto.controller;
 
-import com.edix.proyecto.beans.Direccion;
+
 import com.edix.proyecto.beans.Tarjeta;
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.service.TarjetaServiceImpl;
