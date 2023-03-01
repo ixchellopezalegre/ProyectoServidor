@@ -1,8 +1,14 @@
 package com.edix.proyecto.controller;
 
+import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.CarritoService;
+import com.edix.proyecto.service.RolService;
 import com.edix.proyecto.service.RolServiceImpl;
+import com.edix.proyecto.service.UsuarioService;
 import com.edix.proyecto.service.UsuarioServiceImpl;
+import com.edix.proyecto.utils.CarritoUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,15 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
 	
-	@Autowired UsuarioServiceImpl uRepo;
+	@Autowired UsuarioService uRepo;
 	
-	@Autowired RolServiceImpl rolSer;
+	@Autowired RolService rolSer;
+	
+	@Autowired CarritoService caService;
+	
+	@Autowired CarritoUtils caUtil;
+	
 	
 	@GetMapping("/")
 	public String mostarHome() {
@@ -39,6 +52,15 @@ public class HomeController {
 		System.out.println("Nombre : " + aut.getName());
 		for (GrantedAuthority ele: aut.getAuthorities())
 			System.out.println("Roles : " + ele.getAuthority());
+		
+		//Cargar carrito
+		caUtil.comprobaroCrearCarrito(misesion, model);
+		Map<Producto, Integer> carrito = new HashMap<>();
+		carrito = caService.recuperarCarrito(usuario.getIdUsuario());
+		
+		misesion.setAttribute("carrito",carrito);
+		model.addAttribute("carrito", carrito);
+		
 
 		return "redirect:/";
 	}

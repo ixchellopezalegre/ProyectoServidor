@@ -1,6 +1,5 @@
 package com.edix.proyecto.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.service.CarritoService;
-
+import com.edix.proyecto.utils.CarritoUtils;
 
 
 @Controller
@@ -24,6 +23,9 @@ public class CarritoController {
 	
 	@Autowired 
 	CarritoService caService;
+	
+	@Autowired
+	CarritoUtils caUtil;
 		
 	/**
 	 * Comprobaremos si en la sesión hay un atributo Carrito y si lo hay devolveremos el mapa de productos y cantidades
@@ -31,7 +33,7 @@ public class CarritoController {
 	 */
 	@GetMapping("")
 	public String verProductosCarrito(Model model, HttpSession misesion) {
-		comprobaroCrearCarrito(misesion, model);
+		caUtil.comprobaroCrearCarrito(misesion, model);
 		
 		return "Carrito";
 	}
@@ -43,7 +45,7 @@ public class CarritoController {
 	@GetMapping("/añadirUno/{idProducto}")
 	public String añadirUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
 				
-		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		caService.sumarProductoEnCarrito(carrito, idProducto);
 		
 		return "Carrito";
@@ -56,7 +58,7 @@ public class CarritoController {
 	@GetMapping("/eliminarUno/{idProducto}")
 	public String eliminarUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
 		
-		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		caService.restarProductoEnCarrito(carrito, idProducto);
 		
 		return "Carrito";
@@ -65,7 +67,7 @@ public class CarritoController {
 	@GetMapping("/guardar")
 	public String guardarCarrito(Model model, HttpSession misesion) {
 		
-		Map<Producto, Integer> carrito = comprobaroCrearCarrito(misesion, model);
+		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
 		
@@ -73,24 +75,10 @@ public class CarritoController {
 		
 		misesion.removeAttribute("carrito");
 		
-		return "redirect:/";
+		return "redirect:/carrito";
 	}
+
 	
-	
-	private Map<Producto, Integer> comprobaroCrearCarrito(HttpSession misesion, Model model) {
-		
-		Map<Producto, Integer> carrito = null;
-		if (misesion.getAttribute("carrito") == null) {		 
-			 carrito = new HashMap<Producto, Integer>();
-			misesion.setAttribute("carrito",carrito);
-		}else {
-			 carrito = (Map<Producto, Integer>) misesion.getAttribute("carrito");
-		}
-		
-		model.addAttribute("carrito", carrito);
-		
-		return carrito;
-	}
 	
 	
 	

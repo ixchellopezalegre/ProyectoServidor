@@ -3,6 +3,7 @@ package com.edix.proyecto.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,23 @@ public class CarritoServiceImpl implements CarritoService{
 			
 		}
 	}
+	
+	@Override
+	public Map<Producto, Integer> recuperarCarrito(Integer idUsuario) {
+		Map<Producto, Integer> carrito = new HashMap<>();
+		List<ProductosEnPedido> productosEnPedidoLista = pepRepo.ProductosEnPedidoPorUsuario(idUsuario);
+		
+		for (ProductosEnPedido pep : productosEnPedidoLista) {
+			Producto producto = pep.getProducto();
+			Integer cantidad = pep.getCantidad();
+	
+			carrito.put(producto, cantidad);
+		}
+		
+		return carrito;
+		
+	}
+	
 	
 	
 	
