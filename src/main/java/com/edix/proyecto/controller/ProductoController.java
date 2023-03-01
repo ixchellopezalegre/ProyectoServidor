@@ -48,7 +48,7 @@ public class ProductoController {
     }
 
     @GetMapping("/editar/{idProducto}")
-    public String mostrarModificar(Model model, @PathVariable int idProducto) {
+    public String mostrarModificar(Model model, @PathVariable("idProducto") int idProducto) {
         model.addAttribute("producto", pServ.buscarUno(idProducto));
         return "formProductoEditar";
     }

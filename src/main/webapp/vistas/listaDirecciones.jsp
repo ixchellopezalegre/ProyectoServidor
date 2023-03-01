@@ -13,10 +13,11 @@
 	
 	<div class ="container mt-5 " >
 
-		<p>${mensaje}</p>
-	<h3>Listado de direcciones de ${sesion.nombre}</h3><hr>
+	<p>${mensaje}</p>
+	
+	<h3 class="text-primary">Listado de direcciones de ${sesion.nombre}</h3><hr>
 		<table class ="table table-striped table-hover">
-		<a href="/direccion/nueva">Nueva Dirección</a>
+		<a href="/direccion/nueva" class ="btn btn-success btn-sm mb-2">Nueva Dirección</a>
 			<tr class="table-info">
 				<th>Calle</th>
 				<th>Numero</th>
@@ -35,8 +36,8 @@
 				<td>${ ele.codigoPostal }</td>
 				<td>${ ele.localidad }</td>
 				<td>
-					<a href="/direccion/editar/${ele.idDireccion}">Editar</a>
-					<a href="/direccion/eliminar/${ele.idDireccion}">Eliminar</a></td>
+					<a href="/direccion/editar/${ele.idDireccion}" class ="btn btn-info btn-sm mb-2">Editar</a>
+					<a href="/direccion/eliminar/${ele.idDireccion}" class ="btn btn-danger btn-sm mb-2">Eliminar</a></td>
 			</tr>
 		</c:forEach>
 		</table>

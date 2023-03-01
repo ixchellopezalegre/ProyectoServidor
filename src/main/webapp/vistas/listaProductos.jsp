@@ -21,20 +21,24 @@
 		<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 			<a href="/producto/alta" class="btn btn-primary btn-sm" >Nuevo Producto</a>
 		</sec:authorize>
-		<a href="/producto/orden/alfabetico/asc">Nombre A-Z</a>
-		<a href="/producto/orden/alfabetico/desc">Nombre Z-A</a>
-		<a href="/producto/orden/precio/asc">Precio más bajo</a>
-		<a href="/producto/orden/precio/desc">Precio más alto</a>
+		<a href="/producto/orden/alfabetico/asc" class="btn btn-info btn-sm">Nombre A-Z</a>
+		<a href="/producto/orden/alfabetico/desc" class="btn btn-info btn-sm">Nombre Z-A</a>
+		<a href="/producto/orden/precio/asc" class="btn btn-info btn-sm">Precio más bajo</a>
+		<a href="/producto/orden/precio/desc" class="btn btn-info btn-sm">Precio más alto</a>
 	</div>
 
 	<hr>
-	<table class="table table-striped table-sm" >
-	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
-	<th>Id</th>
-	</sec:authorize>
-	<th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Opcion<sec:authorize access="hasAuthority('ROL_ADMIN')">es</sec:authorize></th>
-	
-	<c:forEach var="ele" items="${listaProductos }" >
+	<table class ="table table-striped table-hover" >
+		<tr class ="table-info">
+			<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+			<th>Id</th>
+			</sec:authorize>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+			<th>Precio</th>
+			<th>Opciones<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
+		</tr>
+		<c:forEach var="ele" items="${listaProductos }" >
 		<tr>
 			<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 			<td>${ele.idProducto }</td>
@@ -43,10 +47,12 @@
 			<td>${ele.descripcion }</td>
 			<td>${ele.precio }</td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
-			 <sec:authorize access="hasAuthority('ROL_ADMIN')">
-			<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
-			 <a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a></td>
-			  </sec:authorize>
+			<sec:authorize access="hasAuthority('ROL_ADMIN')">
+				<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
+			</sec:authorize>
+			<sec:authorize access="hasAuthority('ROL_ADMIN')">
+				<a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a>
+			</sec:authorize>
 		</tr>
 	</c:forEach>
 	</table>

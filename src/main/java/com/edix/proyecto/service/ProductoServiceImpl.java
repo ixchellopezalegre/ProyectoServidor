@@ -60,6 +60,7 @@ public class ProductoServiceImpl implements ProductoService {
 		boolean resultado = false;
 		Producto p1 = buscarUno(producto.getIdProducto());
 		try{
+			
 			p1.setNombre(producto.getNombre());
 			p1.setPrecio(producto.getPrecio());
 			p1.setStock(producto.getStock());

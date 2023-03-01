@@ -1,4 +1,4 @@
-package com.edix.proyecto.rest;
+package com.edix.proyecto.controller;
 
 import com.edix.proyecto.beans.Direccion;
 import com.edix.proyecto.beans.Usuario;

@@ -20,14 +20,13 @@
 			<a href="/pedido/completados" class="btn btn-primary">Pedidos completados</a>
 			<a href="/pedido/pendientes" class="btn btn-primary">Pedidos pendientes</a>
 			<a href="/pedido/hoy" class="btn btn-primary">Pedidos de hoy</a>
-			<form action="/pedido/buscar" class="d-flex" role="search">
+			<form action="/pedido/buscar" class="d-flex mt-3" role="search">
 				<input name="idUsuario" class="form-control me-2" type="search" placeholder="Buscar pedidos de cliente (idCliente)" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Buscar</button>
 			</form>
-
 		</div>
 		<hr>
-		<table class="table table-striped table-sm" >
+		<table class ="table table-striped table-hover" >
 			<tr class="table-info">
 				<th>ID Pedido</th>
 				<th>ID Usuario</th>
