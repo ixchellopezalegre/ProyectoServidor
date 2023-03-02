@@ -111,5 +111,18 @@ public class HomeController {
 		newPassw = "El texto es: " + pwcript.encode(pass);
 		return newPassw;
 	}
+	
+	@GetMapping("/user/logout")
+	public String logout(Model model, HttpSession misesion) {
+		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
+		Usuario user = (Usuario) misesion.getAttribute("sesion");
+		
+		caService.guardarCarrito(carrito, user);
+		misesion.removeAttribute("sesion");
+		
+		return "redirect:/logout";
+		
+	}
+	
 
 }

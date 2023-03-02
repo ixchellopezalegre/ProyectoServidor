@@ -71,7 +71,6 @@ public class CarritoController {
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
 		
 		caService.guardarCarrito(carrito, user);
-		misesion.removeAttribute("carrito");
 		
 		return "redirect:/carrito";
 	}
