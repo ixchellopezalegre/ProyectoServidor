@@ -2,8 +2,10 @@ package com.edix.proyecto.restcontroller;
 
 import java.util.List;
 
+import com.edix.proyecto.model.dto.DireccionDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +19,8 @@ public class UsuarioRestController {
 	@Autowired
 	UsuarioDTOService uServ;
 
-	
-    @GetMapping("/todos")
-    public List<UsuarioDTO> verTodos() {
-        return uServ.buscarTodos();
+    @GetMapping("/provincia/{provincia}")
+    public List<UsuarioDTO> buscarPorProvincia(@PathVariable String provincia) {
+        return uServ.buscarPorProvincia(provincia);
     }
 }

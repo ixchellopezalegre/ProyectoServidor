@@ -16,23 +16,13 @@ import com.edix.proyecto.model.dto.DireccionDTOService;
 @RestController
 @RequestMapping("/rest/provincias")
 public class DireccionRestController {
-	
-	@Autowired
-	DireccionDTOService dServ;
 
     @Autowired
-    UsuarioDTOService uServ;
-	
+    DireccionDTOService dServ;
+
     @GetMapping("/todas")
     public List<DireccionDTO> verTodas() {
         return dServ.buscarTodas();
     }
 
-    @GetMapping("/buscar/{provincia}")
-    public String buscarPorProvincia(@PathVariable String provincia) {
-        return "Tenemos " + dServ.contarClientesPorLocalidad(provincia) + " clientes en " + provincia + ".";
-    }
-
-    @GetMapping("/prueba/{provincia}")
-     public List<UsuarioDTO>  pruebaPorProvincia(@PathVariable String provincia) {
-        return uServ.buscarPorProvincia(provincia);
+}

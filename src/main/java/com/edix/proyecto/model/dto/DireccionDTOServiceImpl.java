@@ -3,6 +3,7 @@ package com.edix.proyecto.model.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.edix.proyecto.beans.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,30 +14,18 @@ public class DireccionDTOServiceImpl implements DireccionDTOService {
 
 	@Autowired
 	DireccionRepository dRepo;
-	
+	@Autowired
+	UsuarioDTOService uServ;
+
 	@Override
 	public List<DireccionDTO> buscarTodas() {
 		List<Direccion> dirs = dRepo.findAll();
-        List<DireccionDTO> dirsDTO = new ArrayList<>();
-        for (Direccion direccion : dirs){
-        	dirsDTO.add(convertirDireccionDTO(direccion));
-        }
-        System.out.println("Usuarios: " + dirsDTO);
-        return dirsDTO;
-	}
-
-	@Override
-	public int contarClientesPorLocalidad(String localidad) {
-	int contador = 0;
-		List<Direccion> direcciones = dRepo.findAll();
-		for (Direccion direccion : direcciones){
-			if (direccion.getLocalidad().equalsIgnoreCase(localidad)){
-				contador++;
-			}
+		List<DireccionDTO> dirsDTO = new ArrayList<>();
+		for (Direccion direccion : dirs) {
+			dirsDTO.add(convertirDireccionDTO(direccion));
 		}
-		return contador;
+		return dirsDTO;
 	}
-
 
     private DireccionDTO convertirDireccionDTO(Direccion direccion){
 
