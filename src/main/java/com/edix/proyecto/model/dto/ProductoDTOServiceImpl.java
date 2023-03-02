@@ -2,6 +2,9 @@ package com.edix.proyecto.model.dto;
 
 import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.repository.ProductoRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,13 @@ public class ProductoDTOServiceImpl implements ProductoDTOService{
         Producto producto = pRepo.findById(idProducto).get();
         return convertirProductoDTO(producto);
     }
-
+    
+    
+    @Override
+	public List<Producto> bucarTipo(String nombre) {
+		return pRepo.buscarPorTipo(nombre);
+	}
+    
     private ProductoDTO convertirProductoDTO(Producto producto){
         ProductoDTO pdto = new ProductoDTO();
         pdto.setIdProducto(producto.getIdProducto());
@@ -24,4 +33,7 @@ public class ProductoDTOServiceImpl implements ProductoDTOService{
         pdto.setPrecio(producto.getPrecio());
         return pdto;
     }
+
+
+
 }

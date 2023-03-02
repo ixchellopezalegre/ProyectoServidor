@@ -7,7 +7,7 @@ public class ProductoDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int idProducto;
+    private Integer idProducto;
     private String nombre;
 
     private BigDecimal precio;
@@ -16,7 +16,7 @@ public class ProductoDTO implements Serializable {
         super();
     }
 
-    public ProductoDTO(int idProducto, String nombre, BigDecimal precio) {
+    public ProductoDTO(Integer idProducto, String nombre, BigDecimal precio) {
         super();
         this.idProducto = idProducto;
         this.nombre = nombre;
@@ -27,7 +27,7 @@ public class ProductoDTO implements Serializable {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
 

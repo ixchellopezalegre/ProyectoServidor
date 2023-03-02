@@ -21,4 +21,7 @@ public class UsuarioRestController {
     public List<UsuarioDTO> verTodos() {
         return uServ.buscarTodos();
     }
+    
+    
+    
 }

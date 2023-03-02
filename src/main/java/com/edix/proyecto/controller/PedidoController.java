@@ -44,10 +44,13 @@ public class PedidoController {
 
 	@GetMapping("/{idUsuario}")
 	public String buscarPedidosPorCliente(Model model, @PathVariable int idUsuario) {
+		
 		List<Pedido> listaPedidos = pSer.buscarPorCliente(idUsuario);
 		Usuario user = uSer.buscarUsuario(idUsuario);
+		
 		model.addAttribute("pedidosDe","Pedidos del usuario " + user.getNombre());
-		model.addAttribute("listaPedidos",listaPedidos);;
+		model.addAttribute("listaPedidos",listaPedidos);
+		
 		if(listaPedidos.size() != 0) {
 			System.out.println("Este cliente tiene pedidos");
 		}else

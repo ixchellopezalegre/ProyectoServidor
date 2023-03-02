@@ -2,6 +2,9 @@ package com.edix.proyecto.beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -28,9 +31,11 @@ public class Producto implements Serializable {
 
 	private BigDecimal precio;
 
+	@JsonIgnore
 	private int stock;
 
 	//bi-directional many-to-one association to ProductosEnPedido
+	@JsonIgnore
 	@OneToMany(mappedBy="producto")
 	private List<ProductosEnPedido> productosEnPedidos;
 
