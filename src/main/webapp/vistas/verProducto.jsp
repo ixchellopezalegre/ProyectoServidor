@@ -1,20 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Detalles Producto ${producto.idProducto}</title>
+    <meta charset="ISO-8859-1">
+    <title>Todos nuestros productos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
-<h1>Detalles de ${producto.nombre}</h1>
-
-<p>${producto.idProducto }</p>
-<p>${producto.nombre }</p>
-<p>${producto.descripcion }</p>
-<p>${producto.precio }</p>
-<p>${producto.stock }</p>
-
-</body>
+    <body>
+    <jsp:include page="nav.jsp"></jsp:include>
+        <div class="container mb-5">
+            <h1 class="text-primary">Detalles de ${producto.nombre}</h1>
+            <table class="table table-striped table-hover">
+            	<tr class ="table-info">
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+               		<th>ID</th>
+               		</sec:authorize>
+                	<th>Nombre</th>
+                	<th>Descripción</th>
+                	<th>Precio</th>
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<th>Stock</th>
+                	</sec:authorize>
+                </tr>
+            	<tr>
+               		<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<td>${producto.idProducto }</td>
+                	</sec:authorize>
+                	<td>${producto.nombre }</td>
+                	<td>${producto.descripcion }</td>
+                	<td>${producto.precio }</td>
+                	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
+                	<td>${producto.stock }</td>
+                	</sec:authorize>
+            	</tr>
+            </table>
+        </div>
+    </body>
 </html>

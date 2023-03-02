@@ -10,10 +10,10 @@
 	
 	<jsp:include page="nav.jsp"></jsp:include>
 	
-		<div class = "container w-25 p-3">
-	<h3> Alta de un nuevo administrador.</h3>
+		<div class= "container w-25 p-3">
+		<h3> Alta de un nuevo administrador.</h3>
 	
-		<form action ="/user/gestion" method="post" >
+		<form class ="mt-3" action ="/user/gestion" method="post" >
 			<div class="input-group mb-2">
 			  <span class="input-group-text">Nombre</span>
 			  <input type="text" aria-label="Nombre" class="form-control" name="nombre">

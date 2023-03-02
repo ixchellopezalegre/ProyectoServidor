@@ -12,7 +12,7 @@
 	<jsp:include page="nav.jsp"></jsp:include>
 	
 	<div class ="container mt-5 " >
-	<h3>Listado de usuarios registrados</h3><hr>
+	<h3 class ="text-primary">Listado de usuarios registrados</h3><hr>
 		<table class ="table table-striped table-hover">
 			<tr class="table-info">
 				<th>ID</th>
@@ -35,9 +35,7 @@
 				<td>${ user.direcciones[0].getCodigoPostal() }</td>
 				
 				
-				<td><button type="button" class="btn btn-info m-1">Detalle</button></td>
-				<td><button type="button" class="btn btn-success m-1">Editar</button></td>
-				<td><button type="button" class="btn btn-danger m-1">Eliminar</button></td>
+				<td><a href="/pedido/${user.idUsuario}" class="btn btn-info m-1">Pedidos</a></td>
 			</tr>
 		</c:forEach>
 		</table>

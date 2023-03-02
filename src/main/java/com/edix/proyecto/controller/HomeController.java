@@ -12,11 +12,10 @@ import com.edix.proyecto.utils.CarritoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -36,7 +35,14 @@ public class HomeController {
 	
 	@Autowired CarritoUtils caUtil;
 	
+
+	private	PasswordEncoder pwcript;
+
+	public HomeController(PasswordEncoder pwcript) {
+		this.pwcript = pwcript;
+	}
 	
+
 	@GetMapping("/")
 	public String mostarHome() {
 		return "index";
@@ -82,7 +88,8 @@ public class HomeController {
 	    usuario.setApellidos(apellidos);
 	    usuario.setEmail(email);
 	    usuario.setFechaNacimiento(new Timestamp(fechaNacimiento.getTime())); /*Convertir fecha a TIMESTAMP*/
-	    usuario.setPassword(password);
+	   	// Encriptamos la contraseña
+	    usuario.setPassword(pwcript.encode(password));
 	    
 	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
     	usuario.addRol(rolSer.buscarRol(1));
@@ -95,6 +102,14 @@ public class HomeController {
 	        model.addAttribute("mensaje", "Ha ocurrido un error");
 	        return "registro";
 	    }
+	}
+
+	@GetMapping("/encriptar/{pass}")
+	@ResponseBody
+	public String encriptar(@PathVariable("pass") String pass) {
+		String newPassw= null;
+		newPassw = "El texto es: " + pwcript.encode(pass);
+		return newPassw;
 	}
 
 }

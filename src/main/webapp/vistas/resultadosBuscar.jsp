@@ -16,9 +16,9 @@
 	<div class="container">
 	<h1 class="text-primary">Resultado de la búsqueda</h1>
 	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
-	<a href="/producto/alta" class="btn btn-primary btn-sm" >Nuevo Producto</a></td>
+	<a href="/producto/alta" class="btn btn-primary btn-sm mt-2" >Nuevo Producto</a></td>
 	</sec:authorize>
-	<table class="table table-striped table-sm" >
+	<table class="table table-striped table-sm mt-2" >
 	<sec:authorize access="hasAnyAuthority('ROL_ADMIN')">
 	<th>Id</th>
 	</sec:authorize>

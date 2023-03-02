@@ -10,7 +10,11 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 
     Producto findByNombre(String nombre);
-
     @Query("SELECT p FROM Producto p WHERE p.nombre LIKE %?1% OR p.descripcion LIKE %?1%")
     List<Producto> findByNombreOrDescripcionContainsIgnoreCase(String nombre);
+    List<Producto> findAllByOrderByNombreAsc();
+    List<Producto> findAllByOrderByNombreDesc();
+
+    List<Producto> findAllByOrderByPrecioAsc();
+    List<Producto> findAllByOrderByPrecioDesc();
 }

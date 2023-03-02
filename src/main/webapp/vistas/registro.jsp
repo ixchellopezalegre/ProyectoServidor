@@ -5,14 +5,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Registro de usuario</title>
+
 </head>
 <body>
 	
 	<jsp:include page="nav.jsp"></jsp:include>
-	
-	<div class = "container w-25 p-3">
-	<h3> ¡ Forma parte de Silicon Solutions !</h3>
+	<sec:csrfInput/>
+	<div class = "container w-25 p-3 mt-3 mb-3">
+	<h3 class ="mb-5"> ¡ Forma parte de Silicon Solutions !</h3>
 		<form action ="/registro" method="post" >
+			<input type=hidden name="${csrf.parameterName}? value="${csrf.token}"/>
 			<div class="input-group mb-2">
 			  <span class="input-group-text">Nombre</span>
 			  <input type="text" aria-label="Nombre" class="form-control" name="nombre">

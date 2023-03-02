@@ -3,11 +3,14 @@ package com.edix.proyecto.configuracion;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
@@ -40,19 +43,26 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 	/*Configuración de las URLS*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		
+
 		http
 			.csrf().disable() /*Deshabilitar token de nuestros formularios*/
 			.authorizeRequests() /*Autorizar las peticiones que definimos a continuación */
-				.antMatchers("/login").permitAll() /*Solo si en resource -> statics tenemos contenido*/
+				.antMatchers().permitAll() /*Solo si en resource -> statics tenemos contenido*/
 				.antMatchers("/"
-						,"/login"
 						,"/logout"
 						,"/registro"
 						,"/images/**"
-						,"/producto/**").permitAll()
+						,"/producto/todos"
+						,"/producto/verUno/{idProducto}"
+						,"/producto/orden/alfabetico/asc"
+						,"/producto/orden/alfabetico/desc"
+						,"/producto/orden/precio/asc"
+						,"/producto/orden/precio/desc"
+						,"/producto/buscar").permitAll()
 				//URLS que permitimos de acceso público. los ** son comodines para informar 
 				//que puede haber mas información a partir de esa URL
+				
+				.antMatchers("/encriptar/**").permitAll()
 				.anyRequest().authenticated() /*Cualquier otra petición necesita registro*/
 				.and()
 				.formLogin()
@@ -62,9 +72,15 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 			/*AUTENTICACION SOBRE ROLES*/
 			/*.antMatchers("URL").hasAnyAuthority("ROL QUE PERMITIMOS A ESA URL")*/
 			/*Esto se combina con los JSP con las directivas <c:>*/
-			
-
-		
 	}
 
+	/*
+	Para encriptar la contraseña antes de guardarla en la base de datos
+	y para poder comparar con la que nos pasen
+	 */
+	@Bean
+	public PasswordEncoder passwordEncorder (){
+
+		return new BCryptPasswordEncoder();
+	}
 }

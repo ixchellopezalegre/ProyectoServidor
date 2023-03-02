@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.edix.proyecto.beans.Direccion;
+import com.edix.proyecto.beans.Pedido;
+import com.edix.proyecto.beans.Tarjeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +16,31 @@ import com.edix.proyecto.repository.UsuarioRepository;
 public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
-	UsuarioRepository urepo;
+	UsuarioRepository uRepo;
+
+	@Autowired
+	PedidoServiceImpl pServ;
 	
 	@Override
 	public List<Usuario> buscarTodos() {
-		return urepo.findAll();
+		return uRepo.findAll();
 	}
 	
 	@Override
 	public Usuario buscarUsuario(int idUsuario) {
-			return urepo.findById(idUsuario).orElse(null);
+			return uRepo.findById(idUsuario).orElse(null);
 	}
 
 	public Usuario buscarPorEmail(String email) {
-		return urepo.findByEmail(email);
+		return uRepo.findByEmail(email);
 	}
 	@Override
 	public boolean registrarUsuario(Usuario usuario) {
 		
-	    Optional<Usuario> usuarioExistente = urepo.findById(usuario.getIdUsuario());
+	    Optional<Usuario> usuarioExistente = uRepo.findById(usuario.getIdUsuario());
 	    
 	    if (!usuarioExistente.isPresent()) {
-	        urepo.save(usuario);
+	        uRepo.save(usuario);
 	        return true;
 	    }
 	    return false;
@@ -43,9 +48,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public boolean actualizarUsuario(Usuario usuario) {
-		Optional<Usuario> usuarioExistente = urepo.findById(usuario.getIdUsuario());
+		Optional<Usuario> usuarioExistente = uRepo.findById(usuario.getIdUsuario());
 		if (usuarioExistente.isPresent()) {
-			urepo.save(usuario);
+			uRepo.save(usuario);
 			return true;
 		}
 		return false;
@@ -53,10 +58,21 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public boolean anadirDireccion(Usuario usuario, Direccion direccion) {
-		Optional<Usuario> usuarioExistente = urepo.findById(usuario.getIdUsuario());
+		Optional<Usuario> usuarioExistente = uRepo.findById(usuario.getIdUsuario());
 		if (usuarioExistente.isPresent()) {
 			usuario.getDirecciones().add(direccion);
-			urepo.save(usuario);
+			uRepo.save(usuario);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean anadirTarjeta(Usuario usuario, Tarjeta tarjeta) {
+		Optional<Usuario> usuarioExistente = uRepo.findById(usuario.getIdUsuario());
+		if (usuarioExistente.isPresent()) {
+			usuario.getTarjetas().add(tarjeta);
+			uRepo.save(usuario);
 			return true;
 		}
 		return false;

@@ -8,19 +8,30 @@
 <title>Nuevo Producto</title>
 </head>
 <body>
-	<h1>Formulario de Alta de Producto</h1>
-	<form action="/producto/alta" method="post">
-
-
-		<p><input type="text" name="nombre">Nombre</p>
-		<p><input type="text" name="descripcion" >Descripcion</p>
-		<p><input type="number" step="0.01" name="precio" >Precio Unidad</p>
-		<p><input type="number" name="stock">Stock</p>
-		
-		
-		<p><input type="submit" value="Enviar"></p>
-		
+	<jsp:include page="nav.jsp"></jsp:include>
 	
-	</form>
+	<div class ="container">
+		<h3 class ="text-primary">Formulario de Alta de Producto</h1>
+		
+			<form action="/producto/alta" method="post">
+				<div class="input-group mt-2">
+					<span class="input-group-text">Nombre</span>
+					<input class="form-control" type="text" name="nombre">
+				</div>
+				<div class="input-group mt-2">
+					<span class="input-group-text">Descripción</span>
+					<input class="form-control" type="text" name="descripcion">
+				</div>
+				<div class="input-group mt-2">
+					<span class="input-group-text">Precio Unidad</span>
+					<input class="form-control" type="number" step="0.01" name="precio">
+				</div>
+				<div class="input-group mt-2">
+					<span class="input-group-text">Stock</span>
+					<input class="form-control" type="number" name="stock">
+				</div>
+				<button type="submit" class="btn btn-primary mt-2">Alta</button>
+			</form>
+	</div>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.edix.proyecto.beans.Direccion;
+import com.edix.proyecto.beans.Tarjeta;
 import com.edix.proyecto.beans.Usuario;
 
 public interface UsuarioService {
@@ -14,4 +15,5 @@ public interface UsuarioService {
 	boolean registrarUsuario(Usuario usuario);
 	boolean actualizarUsuario(Usuario usuario);
 	boolean anadirDireccion(Usuario usuario, Direccion direccion);
+    boolean anadirTarjeta(Usuario usuario, Tarjeta tarjeta);
 }

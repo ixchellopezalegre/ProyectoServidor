@@ -60,6 +60,7 @@ public class ProductoServiceImpl implements ProductoService {
 		boolean resultado = false;
 		Producto p1 = buscarUno(producto.getIdProducto());
 		try{
+			
 			p1.setNombre(producto.getNombre());
 			p1.setPrecio(producto.getPrecio());
 			p1.setStock(producto.getStock());
@@ -71,6 +72,26 @@ public class ProductoServiceImpl implements ProductoService {
 			e.printStackTrace();
 		}
 		return resultado;
+	}
+
+	@Override
+	public List<Producto> ordenarAlfabeticamenteAsc() {
+		return pRepo.findAllByOrderByNombreAsc();
+	}
+
+	@Override
+	public List<Producto> ordenarAlfabeticamenteDesc() {
+		return pRepo.findAllByOrderByNombreDesc();
+	}
+
+	@Override
+	public List<Producto> ordenarPorPrecioAsc() {
+		return pRepo.findAllByOrderByPrecioAsc();
+	}
+
+	@Override
+	public List<Producto> ordenarPorPrecioDesc() {
+		return pRepo.findAllByOrderByPrecioDesc();
 	}
 
 }
