@@ -24,10 +24,6 @@ public class DireccionRestController {
         return dServ.buscarTodas();
     }
     
-    @GetMapping("/buscar/{localidad}")
-    public List<Direccion> buscarPorLocalidad(@PathVariable String localidad){
-    	return dServ.buscarPorProvincia(localidad);
-    }
     
     
 }

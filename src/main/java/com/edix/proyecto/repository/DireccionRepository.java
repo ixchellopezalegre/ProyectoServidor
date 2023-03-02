@@ -11,10 +11,7 @@ import com.edix.proyecto.beans.Direccion;
 
 public interface DireccionRepository extends JpaRepository<Direccion, Integer>{
 	
-	@Query(value = "SELECT d.localidad, ucd.id_usuario " +
-	        "FROM direcciones d " +
-	        "JOIN usuarios_con_direcciones ucd ON d.id_direccion = ucd.id_direccion " +
-	        "WHERE d.localidad = ?1", nativeQuery = true)
+	@Query("SELECT u FROM Usuario u JOIN u.direcciones d WHERE d.localidad = ?1")
 	List<Direccion> buscarPorLocalidad(String localidad);
 
 

@@ -49,4 +49,10 @@ public class UsuarioDTOServiceImpl implements UsuarioDTOService {
     	ddto.setLocalidad(direccion.getLocalidad());
         return ddto;
     }
+
+	@Override
+	public List<Object[]> buscarPorProvincia(String localidad) {
+		// TODO Auto-generated method stub
+		return uRepo.buscarPorLocalidad(localidad);
+	}
 }

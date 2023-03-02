@@ -61,6 +61,7 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 						,"/rest/producto/tipo/{tipo}"
 						,"/rest/provincias/todas"
 						,"/rest/provincias/buscar/{localidad}"
+						,"/rest/usuarios/buscar/{localidad}"
 						,"/producto/buscar").permitAll()
 				//URLS que permitimos de acceso público. los ** son comodines para informar 
 				//que puede haber mas información a partir de esa URL
