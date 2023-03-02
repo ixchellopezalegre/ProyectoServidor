@@ -51,6 +51,7 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 				.antMatchers("/"
 						,"/logout"
 						,"/registro"
+						,"/images/**"
 						,"/producto/todos"
 						,"/producto/verUno/{idProducto}"
 						,"/producto/orden/alfabetico/asc"
