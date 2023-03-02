@@ -71,8 +71,11 @@ public class CarritoServiceImpl implements CarritoService{
 
 	@Override
 	public void guardarCarrito(Map<Producto, Integer> carrito, Usuario usuario) {
-		if (carrito != null) {
-			Pedido pedido = new Pedido();
+		if (carrito != null) {					
+			Pedido pedido = pedRepo.buscarPedidoCarritoPorCliente(usuario.getIdUsuario());
+			
+			if (pedido == null) pedido = new Pedido();
+			
 			Date fechaActual = new Date();
 			String estadoCarrito = "CARRITO";
 			
@@ -87,11 +90,17 @@ public class CarritoServiceImpl implements CarritoService{
 			//ESTADO
 			pedido.setEstado(estadoCarrito);
 			
+			List<ProductosEnPedido> productos = pedido.getProductosEnPedidos();
+			
+			if (productos!=null && !productos.isEmpty())
+			pepRepo.deleteAllInBatch(productos);
+			
 			//Guardamos el pedido en BBDD y guardamos el objeto Pedido que devuelve
 			Pedido pedidoGuardado = pedRepo.save(pedido);
-			
+						
 			//Guardamos en el objeto productosEnPedido los datos que necesitamos
 			for (Map.Entry<Producto, Integer> entry : carrito.entrySet()) {
+								
 				ProductosEnPedido productosEnPedido = new ProductosEnPedido();
 				BigDecimal cantidad = new BigDecimal(entry.getValue());
 				BigDecimal precio = entry.getKey().getPrecio();

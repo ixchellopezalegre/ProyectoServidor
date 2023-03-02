@@ -48,7 +48,7 @@ public class CarritoController {
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		caService.sumarProductoEnCarrito(carrito, idProducto);
 		
-		return "Carrito";
+		return "redirect:/carrito";
 	}
 	
 	/**
@@ -61,18 +61,16 @@ public class CarritoController {
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		caService.restarProductoEnCarrito(carrito, idProducto);
 		
-		return "Carrito";
+		return "redirect:/carrito";
 	}
 	
 	@GetMapping("/guardar")
 	public String guardarCarrito(Model model, HttpSession misesion) {
 		
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
-		
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
 		
 		caService.guardarCarrito(carrito, user);
-		
 		misesion.removeAttribute("carrito");
 		
 		return "redirect:/carrito";

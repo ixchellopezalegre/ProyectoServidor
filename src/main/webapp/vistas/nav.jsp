@@ -13,7 +13,7 @@
 
 	<nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
-    		<a class="navbar-brand" href="/"><img src="images/Siliconsolutions.png" alt="logo" height="80"/></a>
+    		<a class="navbar-brand" href="/"><img src="${pageContext.request.contextPath}/images/Siliconsolutions.png" alt="logo" height="80"/></a>
   			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     		  <span class="navbar-toggler-icon"></span>
     		</button>
@@ -56,7 +56,7 @@
           				</ul>
         			</li>
         			<li class="nav-item">
-      				    <a class="nav-link" href="/carrito"><img src="images/carritoCompra.png" alt="img_carrito" height="30"/></a>
+      				    <a class="nav-link" href="/carrito"><img src="${pageContext.request.contextPath}/images/carritoCompra.png" alt="img_carrito" height="30"/></a>
         			</li>
         			</sec:authorize>
       			</ul>
