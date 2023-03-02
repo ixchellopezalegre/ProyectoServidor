@@ -16,6 +16,7 @@ public class UsuarioRestController {
 
 	@Autowired
 	UsuarioDTOService uServ;
+
 	
     @GetMapping("/todos")
     public List<UsuarioDTO> verTodos() {

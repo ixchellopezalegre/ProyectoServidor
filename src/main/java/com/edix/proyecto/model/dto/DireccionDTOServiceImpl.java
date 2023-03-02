@@ -25,6 +25,19 @@ public class DireccionDTOServiceImpl implements DireccionDTOService {
         return dirsDTO;
 	}
 
+	@Override
+	public int contarClientesPorLocalidad(String localidad) {
+	int contador = 0;
+		List<Direccion> direcciones = dRepo.findAll();
+		for (Direccion direccion : direcciones){
+			if (direccion.getLocalidad().equalsIgnoreCase(localidad)){
+				contador++;
+			}
+		}
+		return contador;
+	}
+
+
     private DireccionDTO convertirDireccionDTO(Direccion direccion){
 
     	DireccionDTO ddto = new DireccionDTO();

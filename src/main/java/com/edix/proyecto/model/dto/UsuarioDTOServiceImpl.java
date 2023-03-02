@@ -26,6 +26,16 @@ public class UsuarioDTOServiceImpl implements UsuarioDTOService {
         System.out.println("Usuarios: " + usuariosDTO);
         return usuariosDTO;
 	}
+
+    public List<UsuarioDTO> buscarPorProvincia(String provincia) {
+        List<Usuario> usuarios = uRepo.
+        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        for (Usuario usuario : usuarios){
+            usuariosDTO.add(convertirUsuarioDTO(usuario));
+        }
+        System.out.println("Usuarios: " + usuariosDTO);
+        return usuariosDTO;
+    }
 	
     private UsuarioDTO convertirUsuarioDTO(Usuario usuario){
 
