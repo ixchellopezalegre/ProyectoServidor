@@ -18,7 +18,7 @@ public class ProductosEnPedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="NUMERO_ORDEN")
-	private Integer numeroOrden;
+	private int numeroOrden;
 
 	private int cantidad;
 
