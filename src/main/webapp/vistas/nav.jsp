@@ -52,7 +52,7 @@
             				
             				</sec:authorize>
             				<li><hr class="dropdown-divider"></li>
-            				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+            				<li><a class="dropdown-item" href="/user/logout">Cerrar sesión</a></li>
           				</ul>
         			</li>
         			<li class="nav-item">
