@@ -15,7 +15,7 @@
 	
 	<div class ="container mt-3">
 		<form action ="/buscarUnPedido" method ="post">
-			<label for = "busqueda">Introduce ID de Usuario</label>
+			<label for = "idUsuario">Introduce ID de Usuario</label>
 			<input type ="text" name ="idUsuario">
 			<input type ="submit" value="Buscar">
 		</form>
@@ -46,5 +46,8 @@
 		<h3>${mensaje }</h3>
 		
 	</div>
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

@@ -36,8 +36,10 @@
 		</table>
 		<a href="/pedido" class="btn btn-success btn-sm mt-3">Ver todos los pedidos </a>
 	</div>
-		
-	
 
+
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

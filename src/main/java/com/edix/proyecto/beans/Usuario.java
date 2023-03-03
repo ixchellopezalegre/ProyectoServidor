@@ -135,6 +135,17 @@ public class Usuario implements Serializable {
 		this.direcciones = direcciones;
 	}
 
+	public void addDireccion(Direccion direccion) {
+		if(direcciones == null)
+			direcciones = new ArrayList<>();
+		direcciones.add(direccion);
+	}
+	public void removeDireccion(Direccion direccion) {
+		if(direcciones == null)
+			direcciones = new ArrayList<>();
+		direcciones.remove(direccion);
+	}
+
 	public List<Rol> getRoles() {
 		return this.roles;
 	}
@@ -155,6 +166,18 @@ public class Usuario implements Serializable {
 
 	public void setTarjetas(List<Tarjeta> tarjetas) {
 		this.tarjetas = tarjetas;
+	}
+
+	public void addTarjeta(Tarjeta tarjeta) {
+		if(tarjetas == null)
+			tarjetas = new ArrayList<>();
+		tarjetas.add(tarjeta);
+	}
+
+	public void removeTarjeta(Tarjeta tarjeta) {
+		if(tarjetas == null)
+			tarjetas = new ArrayList<>();
+		tarjetas.remove(tarjeta);
 	}
 
 	@Override
