@@ -19,7 +19,7 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.edix.proyecto.restcontroller"))
+                .apis(RequestHandlerSelectors.basePackage("com.edix.proyecto"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfoBuilder().title("API Ecommerce").description("Api para obtener datos de direcciones, productos y usuarios").build());
