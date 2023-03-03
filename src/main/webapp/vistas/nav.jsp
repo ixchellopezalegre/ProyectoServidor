@@ -13,7 +13,7 @@
 
 	<nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd;">
   		<div class="container-fluid">
-    		<a class="navbar-brand" href="/">Silicon Solutions</a>
+    		<a class="navbar-brand" href="/"><img src="${pageContext.request.contextPath}/images/Siliconsolutions.png" alt="logo" height="80"/></a>
   			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     		  <span class="navbar-toggler-icon"></span>
     		</button>
@@ -39,19 +39,24 @@
         			</li>
         			</sec:authorize>
         			
-        			<!-- Si ha iniciado sesión, mostraremos los datos personales del usuario, sus pedidos y la posibilidad de cerrar sesión -->
+        			<!-- Si ha iniciado sesión, mostraremos los datos personales del usuario, sus pedidos, carrito y la posibilidad de cerrar sesión -->
         			<sec:authorize access ="isAuthenticated()">
       			  	<li class="nav-item dropdown">
          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>
+          				
           				<ul class="dropdown-menu">
           			
           					<li><a class="dropdown-item" href="/user/datos">Mis datos</a></li>
             				<sec:authorize access="hasAuthority('ROL_CLIENTE')">
             				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+            				
             				</sec:authorize>
             				<li><hr class="dropdown-divider"></li>
             				<li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           				</ul>
+        			</li>
+        			<li class="nav-item">
+      				    <a class="nav-link" href="/carrito"><img src="${pageContext.request.contextPath}/images/carritoCompra.png" alt="img_carrito" height="30"/></a>
         			</li>
         			</sec:authorize>
       			</ul>
