@@ -13,6 +13,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	
 	@Query("Select p FROM Pedido p where p.usuario.idUsuario =?1")
 	 List<Pedido> buscarPedidoPorCliente(int idUsuario);
+	
+	@Query("Select p FROM Pedido p where p.usuario.idUsuario =?1 and  p.estado = 'CARRITO'")
+	 Pedido buscarPedidoCarritoPorCliente(int idUsuario);
 
 	@Query("Select p FROM Pedido p where p.estado = 'CARRITO'")
 	 List<Pedido> buscarPendientes();

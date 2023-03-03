@@ -37,6 +37,7 @@
 			<th>Descripcion</th>
 			<th>Precio</th>
 			<th>Opciones<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
+			<th></th>
 		</tr>
 		<c:forEach var="ele" items="${listaProductos }" >
 		<tr>
@@ -53,6 +54,7 @@
 			<sec:authorize access="hasAuthority('ROL_ADMIN')">
 				<a href="/producto/eliminar/${ele.idProducto}" class="btn btn-danger btn-sm">Eliminar</a>
 			</sec:authorize>
+			<td><a href="/carrito/añadirUno/${ele.idProducto}" class="btn btn-primary btn-sm">Añadir al carrito</a>
 		</tr>
 	</c:forEach>
 	</table>
