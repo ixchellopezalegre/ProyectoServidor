@@ -40,6 +40,8 @@
 	</div>
 	
 	<h1>${mensaje }</h1>
-
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

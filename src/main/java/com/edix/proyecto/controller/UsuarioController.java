@@ -32,7 +32,6 @@ public class UsuarioController {
 	
 	@GetMapping("/gestion")
 	public String gentionAdministrador() {
-		
 		return "gestionAdmin";
 	}
 	

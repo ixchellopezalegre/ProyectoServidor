@@ -11,7 +11,7 @@
 	<jsp:include page="nav.jsp"></jsp:include>
 	
 	<div class ="container">
-		<h3 class ="text-primary">Formulario de Alta de Producto</h1>
+		<h3 class ="text-primary">Formulario de Alta de Producto</h3>
 		
 			<form action="/producto/alta" method="post">
 				<div class="input-group mt-2">
@@ -33,5 +33,8 @@
 				<button type="submit" class="btn btn-primary mt-2">Alta</button>
 			</form>
 	</div>
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

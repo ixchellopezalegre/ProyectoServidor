@@ -37,6 +37,11 @@
 			</tr>
 		</c:forEach>
 		</table>
+
+		<a href="/user/datos" class="btn btn-secondary">Volver</a>
 	</div>
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

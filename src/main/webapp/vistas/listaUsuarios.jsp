@@ -40,7 +40,8 @@
 		</c:forEach>
 		</table>
 	</div>
-	
-	<h1>${user.direcciones[2].getLocalidad() }</h1>
+	<footer class="bg-primary-gradient">
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>
