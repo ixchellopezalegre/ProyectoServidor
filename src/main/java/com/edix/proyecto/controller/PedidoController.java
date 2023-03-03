@@ -57,7 +57,7 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/detallePedido/{id}")
-	public String productosEnPedidos(Model model,@PathVariable("id") int idPedido) {
+	public String productosEnPedidos(Model model,@PathVariable int idPedido) {
 		
 		model.addAttribute("p", pep.buscarPorPedido(idPedido));
 		return "detallePedido";
