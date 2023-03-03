@@ -30,6 +30,7 @@
 			<tr class="table-info">
 				<th>ID Pedido</th>
 				<th>ID Usuario</th>
+				<th>ID Producto</th>
 				<th>Fecha de pedido</th>
 				<th>Calle de entrega</th>
 				<th>Localidad</th>
@@ -40,6 +41,7 @@
 			<tr>
 				<td>${pedido.idPedido }</td>
 				<td>${pedido.usuario.idUsuario }</td>
+				<td>${pedido.productosEnPedidos[0].producto.idProducto }</td>
 				<td>${pedido.fecha }</td>
 				<td>${pedido.direccion.calle }</td>
 				<td>${pedido.direccion.localidad }</td>

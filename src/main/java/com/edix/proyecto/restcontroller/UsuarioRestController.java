@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.model.dto.UsuarioDTO;
 import com.edix.proyecto.model.dto.UsuarioDTOService;
 
@@ -23,4 +24,12 @@ public class UsuarioRestController {
     public List<UsuarioDTO> buscarPorProvincia(@PathVariable String provincia) {
         return uServ.buscarPorProvincia(provincia);
     }
+    
+    @GetMapping("/buscar/{localidad}")
+    public List<Object[]> buscarPorLocalidad(@PathVariable String localidad){
+    	return uServ.buscarPorProvincia(localidad);
+    }
+    
+    
+    
 }
