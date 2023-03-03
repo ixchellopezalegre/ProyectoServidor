@@ -20,7 +20,7 @@
 <div class ="container mt-1 text-center">
     <h3>¿Quieres seguir comprando?</h3>
     <a href="/producto/todos" class ="btn btn-primary btn-sm mt-5">Ver productos</a>
-    <a href="/" class ="btn btn-primary btn-sm mt-5"">Volver a pagina principal</a>
+    <a href="/" class ="btn btn-primary btn-sm mt-5">Volver a pagina principal</a>
 </div>
 <footer class ="mt-5">
 </footer>
