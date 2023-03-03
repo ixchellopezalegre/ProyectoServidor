@@ -41,6 +41,7 @@ public class Usuario implements Serializable {
 	//uni-directional many-to-many association to Direccion
 	
 
+	@ManyToMany
 	@JoinTable(
 		name="usuarios_con_direcciones"
 		, joinColumns={
@@ -53,7 +54,8 @@ public class Usuario implements Serializable {
 	private List<Direccion> direcciones;
 
 	//uni-directional many-to-many association to Rol
-	
+
+	@ManyToMany
 	@JoinTable(
 		name="usuarios_con_roles"
 		, joinColumns={
