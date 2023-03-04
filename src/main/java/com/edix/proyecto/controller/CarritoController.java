@@ -1,29 +1,23 @@
 package com.edix.proyecto.controller;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.edix.proyecto.beans.Direccion;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.edix.proyecto.beans.Pedido;
-import com.edix.proyecto.service.PedidoService;
-import com.edix.proyecto.service.UsuarioServiceImpl;
+import com.edix.proyecto.beans.ProductosEnPedido;
+import com.edix.proyecto.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.beans.Usuario;
-import com.edix.proyecto.service.CarritoService;
 import com.edix.proyecto.utils.CarritoUtils;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -31,13 +25,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CarritoController {
 	
 	@Autowired 
-	CarritoService caService;
+	CarritoService caServ;
 
 	@Autowired
-	UsuarioServiceImpl uService;
+	ProductoEnPedidoService pepServ;
 
 	@Autowired
-	PedidoService pService;
+	UsuarioServiceImpl uServ;
+
+	@Autowired
+	DireccionServiceImpl dServ;
+
+	@Autowired
+	TarjetaServiceImpl tServ;
+
+	@Autowired
+	PedidoService pServ;
 
 	@Autowired
 	CarritoUtils caUtil;
@@ -61,7 +64,7 @@ public class CarritoController {
 	public String añadirUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
 				
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
-		caService.sumarProductoEnCarrito(carrito, idProducto);
+		caServ.sumarProductoEnCarrito(carrito, idProducto);
 		
 		return "redirect:/carrito";
 	}
@@ -74,7 +77,7 @@ public class CarritoController {
 	public String eliminarUno(Model model,@PathVariable int idProducto,HttpSession misesion) {
 		
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
-		caService.restarProductoEnCarrito(carrito, idProducto);
+		caServ.restarProductoEnCarrito(carrito, idProducto);
 		
 		return "redirect:/carrito";
 	}
@@ -85,7 +88,7 @@ public class CarritoController {
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
 		
-		caService.guardarCarrito(carrito, user);
+		caServ.guardarCarrito(carrito, user);
 		
 		return "redirect:/carrito";
 	}
@@ -96,15 +99,39 @@ public class CarritoController {
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
 
 		model.addAttribute("carrito", carrito);
-		model.addAttribute("user", uService.buscarUsuario(user.getIdUsuario()));
+		model.addAttribute("user", uServ.buscarUsuario(user.getIdUsuario()));
 
 		return "procesarCompra";
 	}
 
-	@GetMapping("/pagar")
-	public String pagarCarrito(Pedido pedido,Model model, HttpSession misesion) {
+	@PostMapping("/pagar")
+	public String pagarCarrito(@RequestParam int idDireccion,
+							   @RequestParam int idTarjeta,
+							   Pedido pedido, Model model, HttpSession misesion) {
 
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
+		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);
+		pedido.setFecha(new Date());
+		pedido.setUsuario(user);
+		pedido.setDireccione(dServ.buscarDireccion(idDireccion));
+		pedido.setTarjeta(tServ.buscarTarjeta(idTarjeta));
+
+		for (Map.Entry<Producto, Integer> entry : carrito.entrySet()) {
+			ProductosEnPedido pep = new ProductosEnPedido();
+			pep.setCantidad(entry.getValue());
+			pep.setProducto(entry.getKey());
+			pep.setPedido(pedido);
+			System.out.println(pep.getCantidad() + " " + pep.getProducto().getNombre() + " " + pep.getPedido().getIdPedido());
+			pepServ.guardarProductosEnPedido(pep);
+			if(pepServ.guardarProductosEnPedido(pep)) {
+				System.out.println("Guardado");
+			}else {
+				System.out.println("No guardado");
+			}
+			pedido.addProductosEnPedido(pep);
+		}
+		pedido.setEstado("Completado");
+		pServ.hacerPedido(pedido);
 
 		return "paginaCompra";
 	}

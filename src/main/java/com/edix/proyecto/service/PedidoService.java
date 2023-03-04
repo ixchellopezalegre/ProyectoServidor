@@ -3,6 +3,7 @@ package com.edix.proyecto.service;
 import java.util.Date;
 import java.util.List;
 import com.edix.proyecto.beans.Pedido;
+import com.edix.proyecto.beans.ProductosEnPedido;
 
 public interface PedidoService {
 	
@@ -16,4 +17,6 @@ public interface PedidoService {
 	List<Pedido> buscarCompletados();
 
 	List<Pedido> buscarHoy();
+
+	boolean hacerPedido(Pedido p);
 }

@@ -3,6 +3,7 @@ package com.edix.proyecto.controller;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import com.edix.proyecto.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,9 @@ import com.edix.proyecto.service.UsuarioServiceImpl;
 public class UsuarioController {
 
 	@Autowired UsuarioServiceImpl uServ;
+
+	@Autowired
+	PedidoService pServ;
 	
 	@Autowired RolServiceImpl rolServ;
 
@@ -66,6 +70,14 @@ public class UsuarioController {
 
 		model.addAttribute("usuario", uServ.buscarPorEmail(auth.getName()));
 		return "datosUsuario";
+	}
+
+	@GetMapping("/misPedidos")
+	public String mostrarPedidos(Model model, Authentication auth) {
+		Usuario usuario = uServ.buscarPorEmail(auth.getName());
+
+		model.addAttribute("listaPedidos", pServ.buscarPorCliente(usuario.getIdUsuario()) );
+		return "misPedidos";
 	}
 	
 }

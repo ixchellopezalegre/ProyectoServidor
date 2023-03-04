@@ -48,7 +48,7 @@
           			
           					<li><a class="dropdown-item" href="/user/datos">Mis datos</a></li>
             				<sec:authorize access="hasAuthority('ROL_CLIENTE')">
-            				<li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+            				<li><a class="dropdown-item" href="/user/misPedidos">Mis pedidos</a></li>
             				
             				</sec:authorize>
             				<li><hr class="dropdown-divider"></li>

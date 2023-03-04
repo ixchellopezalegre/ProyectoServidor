@@ -1,7 +1,8 @@
 package com.edix.proyecto.service;
 
-import java.util.Date;
 import java.util.List;
+
+import com.edix.proyecto.beans.ProductosEnPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +45,14 @@ public class PedidoServiceImpl implements PedidoService {
 		return pRepo.buscarHoy();
 	}
 
+
+	@Override
+	public boolean hacerPedido(Pedido p) {
+		try {
+			pRepo.save(p);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
 }

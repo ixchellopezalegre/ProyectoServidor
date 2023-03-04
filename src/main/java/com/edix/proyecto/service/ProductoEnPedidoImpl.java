@@ -8,14 +8,15 @@ import com.edix.proyecto.repository.ProductoEnPedidoRepository;
 
 @Service
 public class ProductoEnPedidoImpl implements ProductoEnPedidoService{
-	
-	
+
 	@Autowired 
-	ProductoEnPedidoRepository pep;
+	ProductoEnPedidoRepository pRep;
 
 	@Override
 	public ProductosEnPedido buscarPorPedido(int numeroOrden) {
-		return pep.buscarUno(numeroOrden);
+		return pRep.buscarUno(numeroOrden);
 	}
+
+
 
 }

@@ -17,11 +17,22 @@ public class UsuarioDTOServiceImpl implements UsuarioDTOService {
     @Autowired
     private UsuarioRepository  uRepo;
 
-    public List<UsuarioDTO> buscarPorProvincia(String provincia) {
+    public List<UsuarioDTO> findByProvincia(String provincia) {
         List<Usuario> usuarios = uRepo.findByDirecciones(provincia);
         List<UsuarioDTO> usuariosDTO = new ArrayList<>();
         for (Usuario usuario : usuarios){
             usuariosDTO.add(convertirUsuarioDTO(usuario, provincia));
+        }
+        System.out.println("Usuarios: " + usuariosDTO);
+        return usuariosDTO;
+    }
+
+    @Override
+    public List<UsuarioDTO> buscarTodos() {
+        List<Usuario> usuarios = uRepo.findAll();
+        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        for (Usuario usuario : usuarios){
+            usuariosDTO.add(convertirUsuarioDTO(usuario, null));
         }
         System.out.println("Usuarios: " + usuariosDTO);
         return usuariosDTO;

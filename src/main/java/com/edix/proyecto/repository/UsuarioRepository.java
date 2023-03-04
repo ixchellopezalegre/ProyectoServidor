@@ -15,5 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
             + "(SELECT u2.idUsuario FROM Usuario u2 JOIN u2.direcciones d WHERE d.localidad = ?1)")
     List<Object[]> buscarPorLocalidad(String localidad);
 
+    @Query("SELECT u FROM Usuario u JOIN u.direcciones d WHERE d.localidad = ?1")
+    List<Usuario> findByDirecciones(String localidad);
+
     
 }

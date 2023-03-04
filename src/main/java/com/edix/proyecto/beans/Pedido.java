@@ -2,6 +2,7 @@ package com.edix.proyecto.beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +106,8 @@ public class Pedido implements Serializable {
 	}
 
 	public ProductosEnPedido addProductosEnPedido(ProductosEnPedido productosEnPedido) {
+		if (getProductosEnPedidos() == null)
+			setProductosEnPedidos(new ArrayList<>());
 		getProductosEnPedidos().add(productosEnPedido);
 		productosEnPedido.setPedido(this);
 

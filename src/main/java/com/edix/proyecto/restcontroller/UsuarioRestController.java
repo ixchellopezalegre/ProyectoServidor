@@ -20,9 +20,9 @@ public class UsuarioRestController {
 	@Autowired
 	UsuarioDTOService uServ;
 
-    @GetMapping("/provincia/{provincia}")
+    @GetMapping("/find/{provincia}")
     public List<UsuarioDTO> buscarPorProvincia(@PathVariable String provincia) {
-        return uServ.buscarPorProvincia(provincia);
+        return uServ.findByProvincia(provincia);
     }
     
     @GetMapping("/buscar/{localidad}")

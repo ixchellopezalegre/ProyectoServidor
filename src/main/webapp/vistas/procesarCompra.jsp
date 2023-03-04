@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Comprar tu pedido</title>
 </head>
 <body>
 
@@ -14,7 +14,6 @@
 <div class ="container mt-5 " >
     <h3 class ="text-primary">Factura</h3>
     <hr>
-
     <table class ="table table-striped table-sm">
         <tr>
             <th>Producto</th>
@@ -36,50 +35,34 @@
                 <td colspan ="4" style="text-align: right"><strong>TOTAL: ${total}</strong></td>
             </tr>
     </table>
-
-    <div class ="container-fluid " style="max-width: 50%">
-        <h2 class="text-primary mt-2">¿ A donde te lo mandamos ${user.nombre} ?</h2>
-        <h4><label class="form-label mt-2">Dirección</label></h4>
-                <select class="form-select mb-2" aria-label="Default select example">
-                    <option selected>Selecciona tu calle</option>
-                    <c:forEach items="${user.direcciones}" var="d">
-                        <option value="0">${d.calle}</option>
-                    </c:forEach>
-                </select>
-                <select class="form-select mb-2" aria-label="Default select example" >
-                    <option selected>Selecciona tu número</option>
-                    <c:forEach items="${user.direcciones}" var="d">
-                        <option value="0">${d.numero}</option>
-                    </c:forEach>
-                </select>
-                <select class="form-select mb-2" aria-label="Default select example" >
-                    <option selected>Selecciona localidad</option>
-                    <c:forEach items="${user.direcciones}" var="d">
-                        <option value="0">${d.localidad}</option>
-                    </c:forEach>
-                </select>
-        <h4><label class="form-label mt-2">Método de pago</label></h4>
-                <select class="form-select mb-2" aria-label="Default select example">
-                    <option selected>Titular</option>
-                    <c:forEach items="${user.tarjetas}" var="t">
-                        <option value="0">${t.titular}</option>
-                    </c:forEach>
-                </select>
-                <select class="form-select mb-2" aria-label="Default select example" >
-                    <option selected>Numero de tarjeta</option>
-                    <c:forEach items="${user.tarjetas}" var="t">
-                        <option value="0">${t.numeroTarjeta}</option>
-                    </c:forEach>
-                </select>
-                <select class="form-select mb-2" aria-label="Default select example" >
-                    <option selected>CCV</option>
-                    <c:forEach items="${user.tarjetas}" var="t">
-                        <option value="0">${t.ccv}</option>
-                    </c:forEach>
-                </select>
-
-                <a href="/carrito/pagar" class ="btn btn-primary">Pagar</a>
-    </div>
+    <form action="/carrito/pagar" method="post">
+        <div class ="container-fluid " style="max-width: 60%">
+            <h2 class="text-primary mt-2">¿ A donde te lo mandamos ${user.nombre} ?</h2>
+            <h4><label class="form-label mt-2">Dirección</label></h4>
+                    <select class="form-select mb-2" aria-label="Default select example">
+                        <option selected>Dirección</option>
+                        <c:forEach items="${user.direcciones}" var="d">
+                            <option value="${d.idDireccion}">${d.calle} ${d.numero} ${d.piso} ${d.puerta} ${d.localidad}</option>
+                            <input type="hidden" name="idDireccion" value="${d.idDireccion}">
+                        </c:forEach>
+                    </select>
+            <a href="/direccion/nueva" class ="btn btn-secondary">Añadir dirección nueva</a>
+            <h4><label class="form-label mt-2">Método de pago</label></h4>
+                    <select class="form-select mb-2" aria-label="Default select example">
+                        <option selected>Tarjetas</option>
+                        <c:forEach items="${user.tarjetas}" var="t">
+                            <option value="${t.idTarjeta}">Número ${t.numeroTarjeta} Titular ${t.titular}</option>
+                            <input type="hidden" name="idTarjeta" value="${t.idTarjeta}">
+                        </c:forEach>
+                    </select>
+            <a href="/tarjeta/nueva" class ="btn btn-secondary">Añadir tarjeta nueva</a>
+            <br><hr>
+            <button type="submit" class ="btn btn-primary">Pagar</button>
+        </div>
+    </form>
 </div>
+    <footer class="bg-primary-gradient">
+        <jsp:include page="footer.jsp"></jsp:include>
+    </footer>
 </body>
 </html>

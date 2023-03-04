@@ -61,6 +61,7 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 						,"/rest/producto/buscar/{id}"
 						,"/rest/producto/tipo/{tipo}"
 						,"/rest/provincias/todas"
+						,"/rest/provincias/find/{provincia}"
 						,"/rest/provincias/buscar/{localidad}"
 						,"/rest/usuarios/buscar/{localidad}"
 						,"/producto/buscar").permitAll()
