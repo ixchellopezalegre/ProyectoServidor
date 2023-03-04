@@ -119,6 +119,8 @@ public class CarritoController {
 			pedido.setTarjeta(tar);
 			pRepo.save(pedido);
 			caService.eliminarCarrito(user.getIdUsuario());
+			
+			misesion.removeAttribute("carrito");
 		}else {
 			model.addAttribute("error", "No se ha podido realizar el pago");
 			return "redirect:/procesarCompra";

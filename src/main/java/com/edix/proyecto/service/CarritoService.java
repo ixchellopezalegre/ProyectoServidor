@@ -1,7 +1,5 @@
 package com.edix.proyecto.service;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 import com.edix.proyecto.beans.Producto;

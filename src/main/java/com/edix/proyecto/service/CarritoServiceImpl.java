@@ -93,6 +93,7 @@ public class CarritoServiceImpl implements CarritoService {
 			if (productos != null && !productos.isEmpty())
 				pepRepo.deleteAllInBatch(productos);
 
+			
 			//Guardamos el pedido en BBDD y guardamos el objeto Pedido que devuelve
 			Pedido pedidoGuardado = pedRepo.save(pedido);
 
