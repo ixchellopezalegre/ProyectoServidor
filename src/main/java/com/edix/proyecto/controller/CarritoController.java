@@ -6,22 +6,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.edix.proyecto.beans.Direccion;
-import com.edix.proyecto.beans.Pedido;
-import com.edix.proyecto.service.PedidoService;
-import com.edix.proyecto.service.UsuarioServiceImpl;
+import com.edix.proyecto.beans.*;
+import com.edix.proyecto.repository.PedidoRepository;
+import com.edix.proyecto.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import com.edix.proyecto.beans.Producto;
-import com.edix.proyecto.beans.Usuario;
-import com.edix.proyecto.service.CarritoService;
 import com.edix.proyecto.utils.CarritoUtils;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,7 +30,16 @@ public class CarritoController {
 	UsuarioServiceImpl uService;
 
 	@Autowired
+	PedidoRepository pRepo;
+
+	@Autowired
 	PedidoService pService;
+
+	@Autowired
+	TarjetaServiceImpl tService;
+
+	@Autowired
+	DireccionServiceImpl dService;
 
 	@Autowired
 	CarritoUtils caUtil;
@@ -101,11 +103,27 @@ public class CarritoController {
 		return "procesarCompra";
 	}
 
-	@GetMapping("/pagar")
-	public String pagarCarrito(Pedido pedido,Model model, HttpSession misesion) {
+	@PostMapping("/pagar")
+	public String pagarCarrito(Model model, HttpSession misesion, @RequestParam("idDireccion") int idDireccion
+																, @RequestParam("idTarjeta") int idTarjeta){
 
 		Usuario user = (Usuario) misesion.getAttribute("sesion");
+		Pedido pedido = pRepo.buscarPedidoCarritoPorCliente(user.getIdUsuario());
 
+		Direccion dir = dService.buscarDireccion(idDireccion);
+		Tarjeta tar = tService.buscarTarjeta(idTarjeta);
+
+		if(pedido.getEstado().equals("CARRITO")) {
+			pedido.setEstado("COMPLETADO");
+			pedido.setDireccione(dir);
+			pedido.setTarjeta(tar);
+			pRepo.save(pedido);
+			caService.eliminarCarrito(user.getIdUsuario());
+		}else {
+			model.addAttribute("error", "No se ha podido realizar el pago");
+			return "redirect:/procesarCompra";
+		}
 		return "paginaCompra";
 	}
+
 }

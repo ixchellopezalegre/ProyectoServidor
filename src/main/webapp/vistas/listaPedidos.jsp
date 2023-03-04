@@ -46,7 +46,12 @@
 				<td>${pedido.direccion.calle }</td>
 				<td>${pedido.direccion.localidad }</td>
 				<td>${pedido.direccion.codigoPostal }</td>
-				<td>${pedido.estado }</td>
+				<c:if test="${pedido.estado == 'COMPLETADO'}">
+					<td style="background-color: #d4edda;">${pedido.estado }</td>
+				</c:if>
+				<c:if test="${pedido.estado != 'COMPLETADO'}">
+					<td>${pedido.estado }</td>
+				</c:if>
 			</tr>
 			</c:forEach>
 			<c:if test="${listaPedidos.size() == 0}">

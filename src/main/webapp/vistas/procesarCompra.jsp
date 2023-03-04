@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,14 +37,14 @@
                 <td colspan ="4" style="text-align: right"><strong>TOTAL: ${total}</strong></td>
             </tr>
     </table>
-
-    <div class ="container-fluid " style="max-width: 50%">
-        <h2 class="text-primary mt-2">¿ A donde te lo mandamos ${user.nombre} ?</h2>
-        <h4><label class="form-label mt-2">Dirección</label></h4>
-                <select class="form-select mb-2" aria-label="Default select example">
+    <form action="/carrito/pagar" method="POST">
+        <div class ="container-fluid " style="max-width: 50%">
+            <h2 class="text-primary mt-2">¿ A donde te lo mandamos ${user.nombre} ?</h2>
+            <h4><label class="form-label mt-2">Dirección</label></h4>
+                <select class="form-select mb-2" aria-label="Default select example" name="idDireccion">
                     <option selected>Selecciona tu calle</option>
                     <c:forEach items="${user.direcciones}" var="d">
-                        <option value="0">${d.calle}</option>
+                        <option value=${d.idDireccion}  >${d.calle}</option>
                     </c:forEach>
                 </select>
                 <select class="form-select mb-2" aria-label="Default select example" >
@@ -58,11 +59,11 @@
                         <option value="0">${d.localidad}</option>
                     </c:forEach>
                 </select>
-        <h4><label class="form-label mt-2">Método de pago</label></h4>
-                <select class="form-select mb-2" aria-label="Default select example">
+            <h4><label class="form-label mt-2">Método de pago</label></h4>
+                <select class="form-select mb-2" aria-label="Default select example" name="idTarjeta">
                     <option selected>Titular</option>
                     <c:forEach items="${user.tarjetas}" var="t">
-                        <option value="0">${t.titular}</option>
+                        <option value=${t.idTarjeta}>${t.titular}</option>
                     </c:forEach>
                 </select>
                 <select class="form-select mb-2" aria-label="Default select example" >
@@ -77,9 +78,10 @@
                         <option value="0">${t.ccv}</option>
                     </c:forEach>
                 </select>
-
-                <a href="/carrito/pagar" class ="btn btn-primary">Pagar</a>
-    </div>
+                <input type ="submit" class ="btn btn-primary" value ="Pagar">
+        </div>
+    </form>
+    <h2>${error}</h2>
 </div>
 </body>
 </html>
