@@ -1,8 +1,6 @@
 package com.edix.proyecto.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.edix.proyecto.beans.Direccion;
 import com.edix.proyecto.beans.Tarjeta;
 import com.edix.proyecto.beans.Usuario;

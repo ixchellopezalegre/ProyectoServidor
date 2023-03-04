@@ -18,5 +18,8 @@
 		<p>Localidad:${direccion.localidad }</p>
 		<p>Código Postal: ${direccion.codigoPostal }</p>
 	</c:forEach>
+
+
+
 </body>
 </html>

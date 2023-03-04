@@ -4,9 +4,7 @@ import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.service.CarritoService;
 import com.edix.proyecto.service.RolService;
-import com.edix.proyecto.service.RolServiceImpl;
 import com.edix.proyecto.service.UsuarioService;
-import com.edix.proyecto.service.UsuarioServiceImpl;
 import com.edix.proyecto.utils.CarritoUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;

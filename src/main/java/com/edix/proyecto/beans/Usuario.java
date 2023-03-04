@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,8 @@ public class Usuario implements Serializable {
 	private String password;
 
 	//uni-directional many-to-many association to Direccion
+	
+
 	@ManyToMany
 	@JoinTable(
 		name="usuarios_con_direcciones"
@@ -51,6 +54,7 @@ public class Usuario implements Serializable {
 	private List<Direccion> direcciones;
 
 	//uni-directional many-to-many association to Rol
+
 	@ManyToMany
 	@JoinTable(
 		name="usuarios_con_roles"

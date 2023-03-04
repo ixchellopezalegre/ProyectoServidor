@@ -30,6 +30,7 @@
 			<tr class="table-info">
 				<th>ID Pedido</th>
 				<th>ID Usuario</th>
+				<th>ID Producto</th>
 				<th>Fecha de pedido</th>
 				<th>Calle de entrega</th>
 				<th>Localidad</th>
@@ -40,11 +41,17 @@
 			<tr>
 				<td>${pedido.idPedido }</td>
 				<td>${pedido.usuario.idUsuario }</td>
+				<td>${pedido.productosEnPedidos[0].producto.idProducto }</td>
 				<td>${pedido.fecha }</td>
 				<td>${pedido.direccion.calle }</td>
 				<td>${pedido.direccion.localidad }</td>
 				<td>${pedido.direccion.codigoPostal }</td>
-				<td>${pedido.estado }</td>
+				<c:if test="${pedido.estado == 'COMPLETADO'}">
+					<td style="background-color: #d4edda;">${pedido.estado }</td>
+				</c:if>
+				<c:if test="${pedido.estado != 'COMPLETADO'}">
+					<td>${pedido.estado }</td>
+				</c:if>
 			</tr>
 			</c:forEach>
 			<c:if test="${listaPedidos.size() == 0}">

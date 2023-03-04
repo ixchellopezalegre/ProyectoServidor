@@ -31,4 +31,6 @@ public class DireccionDTOServiceImpl implements DireccionDTOService {
     	ddto.setLocalidad(direccion.getLocalidad());
         return ddto;
     }
+
+	
 }
