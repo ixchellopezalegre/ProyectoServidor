@@ -11,11 +11,11 @@
 
 	<jsp:include page="nav.jsp"></jsp:include>
 	
-	<h3>Busqueda de pedidos por usuario</h3>
+	<h3>Busqueda de pedidos por Cliente</h3>
 	
 	<div class ="container mt-3">
 		<form action ="/buscarUnPedido" method ="post">
-			<label for = "busqueda">Introduce ID de Usuario</label>
+			<label for = "busqueda">Introduce ID de Cliente</label>
 			<input type ="text" name ="idUsuario">
 			<input type ="submit" value="Buscar">
 		</form>

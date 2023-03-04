@@ -30,28 +30,29 @@
 			<tr class="table-info">
 				<th>ID Pedido</th>
 				<th>ID Usuario</th>
-				<th>ID Producto</th>
 				<th>Fecha de pedido</th>
 				<th>Calle de entrega</th>
 				<th>Localidad</th>
 				<th>Codigo postal</th>
 				<th>Estado del pedido</th>
+				<th>Detalle</th>
 			</tr>
-			<c:forEach var="pedido" items="${ listaPedidos }" >
+			<c:forEach var="pedido" items="${listaPedidos}" >
 			<tr>
 				<td>${pedido.idPedido }</td>
 				<td>${pedido.usuario.idUsuario }</td>
-				<td>${pedido.productosEnPedidos[0].producto.idProducto }</td>
 				<td>${pedido.fecha }</td>
 				<td>${pedido.direccion.calle }</td>
 				<td>${pedido.direccion.localidad }</td>
 				<td>${pedido.direccion.codigoPostal }</td>
 				<c:if test="${pedido.estado == 'COMPLETADO'}">
 					<td style="background-color: #d4edda;">${pedido.estado }</td>
+					<td><a href="/pedido/detallePedido/${pedido.idPedido}" class="btn btn-primary" >Detalle pedido</a></td>
 				</c:if>
 				<c:if test="${pedido.estado != 'COMPLETADO'}">
 					<td>${pedido.estado }</td>
 				</c:if>
+				
 			</tr>
 			</c:forEach>
 			<c:if test="${listaPedidos.size() == 0}">

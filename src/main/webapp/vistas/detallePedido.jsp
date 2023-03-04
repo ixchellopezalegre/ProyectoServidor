@@ -5,36 +5,67 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Detalle del pedido</title>
 </head>
 <body>
 
 	<jsp:include page="nav.jsp"></jsp:include>
+	
+	
 	<div class ="container">
-		<table class="table table-striped table-sm mt-5" >
+	<h1 class="text-primary">Detalle del pedido ${pedido.idPedido}</h1>
+	
+	<br>
+	
+		<!--  Tabla de Productos del Pedido -->
+		<table class ="table table-striped table-hover" >
 			<tr class="table-info">
-				<th>Número de orden</th>
-				<th>ID de pedido</th>
-				<th>ID producto</th>
-				<th>ID de usuario</th>
-				<th>Nombre de usuario</th>
-				<th>Producto</th>
-				<th>Cantidad</th>
-				<th>Precio</th>
+				<th>ID Pedido</th>
+				<th>ID Usuario</th>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Fecha de pedido</th>
+				<th>Calle de entrega</th>
+				<th>Localidad</th>
+				<th>Codigo postal</th>
 			</tr>
 			<tr>
-				<td>${p.numeroOrden }</td>
-				<td>${p.pedido.idPedido }</td>
-				<td>${p.producto.idProducto }</td>
-				<td>${p.pedido.usuario.idUsuario }</td>
-				<td>${p.pedido.usuario.nombre }</td>
-				<td>${p.producto.nombre }</td>
-				<td>${p.cantidad }</td>
-				<td>${p.precioTotal }</td>
+				<td>${pedido.idPedido }</td>
+				<td>${pedido.usuario.idUsuario }</td>
+				<td>${pedido.usuario.nombre }</td>
+				<td>${pedido.usuario.apellidos }</td>
+				<td>${pedido.fecha }</td>
+				<td>${pedido.direccion.calle }</td>
+				<td>${pedido.direccion.localidad }</td>
+				<td>${pedido.direccion.codigoPostal }</td>
 			</tr>
-			
 		</table>
-		<a href="/pedido" class="btn btn-success btn-sm mt-3">Ver todos los pedidos </a>
+		
+		<!--  Tabla de Productos del Pedido -->
+		<h2>Productos</h2>
+		<table class ="table table-striped table-sm">
+	        <tr>
+	        	<th>id Producto</th>
+	            <th>Producto</th>
+	            <th>Precio</th>
+	            <th>Cantidad</th>
+	            <th>Subtotal</th>
+	        </tr>
+	            <c:forEach items="${listaProductos}" var="p">
+	                <c:set var="subtotal" value="${p.precioTotal}"/>
+	                <tr>
+	                	<td>${p.producto.idProducto}</td>
+	                    <td>${p.producto.descripcion}</td>
+	                    <td>${p.producto.precio}</td>
+	                    <td>${p.cantidad}</td>
+	                    <td>${p.precioTotal}</td>
+	                </tr>
+	                <c:set var="total" value="${total + subtotal}"/>
+	            </c:forEach>
+	            <tr>
+	                <td colspan ="5" style="text-align: right"><strong>TOTAL: ${total}</strong></td>
+	            </tr>
+	    </table>
 	</div>
 		
 	

@@ -13,4 +13,7 @@ public interface ProductoEnPedidoRepository extends JpaRepository<ProductosEnPed
 
 	@Query(value = "SELECT PEP.* FROM proyecto_servidor.PEDIDOS PED JOIN proyecto_servidor.productos_en_pedidos PEP ON PED.ID_PEDIDO = PEP.ID_PEDIDO WHERE PED.ID_USUARIO = ?1 AND PED.ESTADO = 'CARRITO'", nativeQuery = true)
 	List<ProductosEnPedido>	ProductosEnPedidoPorUsuario(Integer idUsuario);
+
+	@Query(value = "SELECT * FROM proyecto_servidor.productos_en_pedidos WHERE ID_PEDIDO = ?1", nativeQuery = true)
+	List<ProductosEnPedido> findAllById(int idPedido);
 }
