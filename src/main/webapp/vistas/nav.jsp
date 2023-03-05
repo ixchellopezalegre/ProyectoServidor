@@ -29,7 +29,7 @@
         			<!-- Solo mostramos estas secciones si tienes rol de Administrador -->
         			<sec:authorize access="hasAuthority('ROL_ADMIN')">
         			<li class="nav-item">
-      				    <a class="nav-link" href="/user/todos">Usuarios</a>
+      				    <a class="nav-link" href="/user/todos">Clientes</a>
         			</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/pedido/todos">Pedidos</a>

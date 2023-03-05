@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.edix.proyecto.beans.Direccion;
-import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.beans.Tarjeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

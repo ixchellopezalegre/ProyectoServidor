@@ -5,7 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.beans.Producto;
+import com.edix.proyecto.beans.ProductosEnPedido;
+import com.edix.proyecto.repository.ProductoEnPedidoRepository;
 import com.edix.proyecto.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	ProductoRepository pRepo;
+	
+	@Autowired
+	ProductoEnPedidoRepository pepRepo;
 
 	@Override
 	public List<Producto> buscarTodos() {
@@ -92,6 +98,31 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> ordenarPorPrecioDesc() {
 		return pRepo.findAllByOrderByPrecioDesc();
+	}
+
+	/**
+	 * Reduce el stock de los productos del pedido, segun las cantidades de Productos en Pedido 
+	 * del pedido que se pasa por parámetro
+	 * @returns true si ha ido bien, false si no ha ido bien
+	 */
+	@Override
+	public boolean reducirStock(Pedido pedido) {
+		List<ProductosEnPedido> listaPep = pepRepo.buscarTodosPorIdPedido(pedido.getIdPedido());
+		
+		for (ProductosEnPedido pep : listaPep) {
+			Producto producto = pep.getProducto();
+			int cantidad = pep.getCantidad();
+			
+			int stock = pRepo.verStock(pep.getProducto().getIdProducto());
+			if (stock > 0) { 
+				producto.setStock(stock - cantidad);
+				pRepo.save(producto);
+			}else
+				return false;
+		}
+		
+		return true;
+		
 	}
 
 }

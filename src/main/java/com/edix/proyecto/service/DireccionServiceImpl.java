@@ -1,7 +1,6 @@
 package com.edix.proyecto.service;
 
 import com.edix.proyecto.beans.Direccion;
-import com.edix.proyecto.beans.Producto;
 import com.edix.proyecto.beans.Usuario;
 import com.edix.proyecto.repository.DireccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

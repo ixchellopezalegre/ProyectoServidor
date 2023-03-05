@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Pedido;
+import com.edix.proyecto.beans.ProductosEnPedido;
+import com.edix.proyecto.service.PedidoService;
 import com.edix.proyecto.service.PedidoServiceImpl;
 import com.edix.proyecto.service.ProductoEnPedidoImpl;
-
+import com.edix.proyecto.service.UsuarioService;
 
 import java.util.List;
 
@@ -21,10 +23,10 @@ import java.util.List;
 public class PedidoController {
 
 	@Autowired
-	PedidoServiceImpl pSer;
+	PedidoService pSer;
 
 	@Autowired
-	UsuarioServiceImpl uSer;
+	UsuarioService uSer;
 
 	@Autowired
 	ProductoEnPedidoImpl pep;
@@ -59,12 +61,14 @@ public class PedidoController {
 		return "listaPedidos";
 	}
 	
-	@GetMapping("/detallePedido/{id}")
+	@GetMapping("/detallePedido/{idPedido}")
 	public String productosEnPedidos(Model model,@PathVariable int idPedido) {
-		
-		model.addAttribute("p", pep.buscarPorPedido(idPedido));
+		List<ProductosEnPedido> listaProductos =  pep.buscarTodosPorPedido(idPedido);
+		model.addAttribute("listaProductos", listaProductos);
+		model.addAttribute("pedido", pSer.buscarPorPedido(idPedido));
 		return "detallePedido";
 	}
+	
 
 	@GetMapping("/pendientes")
 	public String pedidosPendientes(Model model) {

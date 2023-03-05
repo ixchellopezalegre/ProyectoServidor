@@ -1,8 +1,6 @@
 package com.edix.proyecto.service;
 
 import com.edix.proyecto.beans.Direccion;
-import com.edix.proyecto.beans.Usuario;
-
 import java.util.List;
 
 public interface DireccionService {
