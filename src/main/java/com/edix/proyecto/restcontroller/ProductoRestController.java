@@ -18,24 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/producto")
 public class ProductoRestController {
 	
-    @Autowired
-    ProductoDTOServiceImpl pServ;
-    
+    @Autowired ProductoDTOServiceImpl pServ;
 
+    //Buscamos un producto por su id.
     @GetMapping("/buscar/{id}")
     public ProductoDTO buscarPorId(@PathVariable int id) {
         return pServ.buscarPorId(id);
     }
-    
+
+    //Buscamos un producto por su descripción.
     @GetMapping("/tipo/{tipo}")
     public List<Producto> buscarTipo(@PathVariable("tipo") String descripcion){
-    	
     	List<Producto> lista = pServ.bucarTipo(descripcion);
     	return lista;
     }
-    
-  
-    
-    
-    
 }

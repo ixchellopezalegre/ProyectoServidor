@@ -7,7 +7,6 @@ public class DireccionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String localidad;
-	
 
 	public DireccionDTO() {
 		super();

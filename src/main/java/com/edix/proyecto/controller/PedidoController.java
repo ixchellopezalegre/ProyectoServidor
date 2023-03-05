@@ -18,16 +18,15 @@ import java.util.List;
 @RequestMapping("/pedido")
 public class PedidoController {
 
-	@Autowired
-	PedidoService pSer;
+	@Autowired PedidoService pSer;
+	@Autowired UsuarioService uSer;
+	@Autowired ProductoEnPedidoService pep;
 
-	@Autowired
-	UsuarioService uSer;
-
-	@Autowired
-	ProductoEnPedidoService pep;
-
-
+	/**
+	 * Muestra todos los pedidos
+	 * @param model
+	 * @return lista de pedidos completa JSP.
+	 */
 	@GetMapping("/todos")
 	public String mostrarListaPedidos(Model model) {
 		model.addAttribute("pedidosDe", "Todos los pedidos");
@@ -40,6 +39,12 @@ public class PedidoController {
 		return "forward:/pedido/" + idUsuario;
 	}
 
+	/**
+	 * Busqueda de pedidos dependiendo del id de usuario busquemos.
+	 * @param model
+	 * @param idUsuario id del usuario que queremos buscar.
+	 * @return JSP con el pedido encontrado del usuario seleccionado.
+	 */
 	@GetMapping("/{idUsuario}")
 	public String buscarPedidosPorCliente(Model model, @PathVariable int idUsuario) {
 		List<Pedido> listaPedidos = pSer.buscarPorCliente(idUsuario);
@@ -54,9 +59,10 @@ public class PedidoController {
 		
 		if(listaPedidos.size() != 0) {
 			System.out.println("Este cliente tiene pedidos");
-		}else
+		}else {
 			model.addAttribute("pedidosDe", user.getNombre() + " no tiene pedidos");
 			System.out.println("Este cliente NO tiene pedidos");
+		}
 		return "listaPedidos";
 	}
 	
@@ -67,8 +73,13 @@ public class PedidoController {
 		model.addAttribute("pedido", pSer.buscarPorPedido(idPedido));
 		return "detallePedido";
 	}
-	
 
+
+	/**
+	 * Muestra los pedidos pendientes que tenemos en la base de datos.
+	 * @param model
+	 * @return Lista de pedidos general JSP
+	 */
 	@GetMapping("/pendientes")
 	public String pedidosPendientes(Model model) {
 		model.addAttribute("pedidosDe", "Todos los pedidos pendientes");
@@ -76,6 +87,11 @@ public class PedidoController {
 		return "listaPedidos";
 	}
 
+	/**
+	 * Muestra los pedidos completados que tenemos en la base de datos.
+	 * @param model
+	 * @return lista de pedidos general JSP
+	 */
 	@GetMapping("/completados")
 	public String pedidosCompletados(Model model) {
 		model.addAttribute("pedidosDe", "Todos los pedidos completados");
@@ -83,11 +99,15 @@ public class PedidoController {
 		return "listaPedidos";
 	}
 
+	/**
+	 * Muestra los pedidos de hoy que tenemos en la base de datos.
+	 * @param model
+	 * @return lista de pedidos general JSP
+	 */
 	@GetMapping("/hoy")
 	public String pedidosHoy(Model model) {
 		model.addAttribute("pedidosDe", "Todos los pedidos de hoy");
 		model.addAttribute("listaPedidos", pSer.buscarHoy());
 		return "listaPedidos";
 	}
-
 }

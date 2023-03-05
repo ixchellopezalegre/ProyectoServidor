@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 public class SwaggerConfig {
 
-
+    // Configuracion de Swagger. Sirve para documentar la API.
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)

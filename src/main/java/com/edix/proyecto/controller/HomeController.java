@@ -26,26 +26,29 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 	
 	@Autowired UsuarioService uRepo;
-	
 	@Autowired RolService rolSer;
-	
 	@Autowired CarritoService caService;
-	
 	@Autowired CarritoUtils caUtil;
-	
-
 	private	PasswordEncoder pwcript;
 
+	// Inyectamos el componente PasswordEncoder
 	public HomeController(PasswordEncoder pwcript) {
 		this.pwcript = pwcript;
 	}
-	
 
+	//Mapeo de la página principal
 	@GetMapping("/")
 	public String mostarHome() {
 		return "index";
 	}
-	
+
+	/**
+	 * //Mapeo de la página de login
+	 * @param Authentication aut
+	 * @param model, con el que se le pasa el carrito al usuario
+	 * @param misesion para asignarlo al usuario que está logueado
+	 * @return
+	 */
 	@GetMapping("/inicio")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
 		Usuario usuario = uRepo.buscarPorEmail(aut.getName());
@@ -57,14 +60,13 @@ public class HomeController {
 		for (GrantedAuthority ele: aut.getAuthorities())
 			System.out.println("Roles : " + ele.getAuthority());
 		
-		//Cargar carrito
+		//Cargar carrito que tenemos en sesión
 		caUtil.comprobaroCrearCarrito(misesion, model);
 		Map<Producto, Integer> carrito = new HashMap<>();
 		carrito = caService.recuperarCarrito(usuario.getIdUsuario());
 		
 		misesion.setAttribute("carrito",carrito);
 		model.addAttribute("carrito", carrito);
-		
 
 		return "redirect:/";
 	}
@@ -73,7 +75,13 @@ public class HomeController {
 	public String mostarRegistro() {
 		return "registro";
 	}
-	
+
+	/**
+	 * Método para registrar un usuario nuevo.
+	 * @param model
+	 * @param Atributos del usuario para construir un nuevo objeto "usuario"
+	 * @return	redirige a la página de login una vez se ha registrado el usuario
+	 */
 	@PostMapping("/registro")
 	public String registrarUsuario(Model model, @RequestParam("nombre") String nombre ,
 												@RequestParam("apellidos")String apellidos,
@@ -88,12 +96,9 @@ public class HomeController {
 	    usuario.setFechaNacimiento(new Timestamp(fechaNacimiento.getTime())); /*Convertir fecha a TIMESTAMP*/
 	   	// Encriptamos la contraseña
 	    usuario.setPassword(pwcript.encode(password));
-	    
-	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
-    	usuario.addRol(rolSer.buscarRol(1));
-	   
+
+		//Comprobamos si el registro de usuario ha sido correcto
 	    if(uRepo.registrarUsuario(usuario)) {
-	    	
 	    		usuario.setIdUsuario(usuario.getIdUsuario());
 	        return "redirect:/login";
 	    } else {
@@ -102,6 +107,9 @@ public class HomeController {
 	    }
 	}
 
+	/**
+	 * Método para encriptar una contraseña, mostrándola por el navegador.
+	 */
 	@GetMapping("/encriptar/{pass}")
 	@ResponseBody
 	public String encriptar(@PathVariable("pass") String pass) {
@@ -109,7 +117,13 @@ public class HomeController {
 		newPassw = "El texto es: " + pwcript.encode(pass);
 		return newPassw;
 	}
-	
+
+	/**
+	 * Método para cerrar sesión
+	 * @param model
+	 * @param misesion para que alamacene la sesión del carrito y no perderla cuando iniciemos de nuevo sesión
+	 * @return nos redirige a la página de cerrar sesión
+	 */
 	@GetMapping("/user/logout")
 	public String logout(Model model, HttpSession misesion) {
 		Map<Producto, Integer> carrito = caUtil.comprobaroCrearCarrito(misesion, model);

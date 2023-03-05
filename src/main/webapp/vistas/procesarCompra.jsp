@@ -44,7 +44,7 @@
                 <select class="form-select mb-2" aria-label="Default select example" name="idDireccion">
                     <option selected>Selecciona tu calle</option>
                     <c:forEach items="${user.direcciones}" var="d">
-                        <option value=${d.idDireccion}  >${d.calle}</option>
+                        <option value=${d.idDireccion}>${d.calle}</option>
                     </c:forEach>
                 </select>
                 <select class="form-select mb-2" aria-label="Default select example" >

@@ -16,9 +16,9 @@ import com.edix.proyecto.model.dto.DireccionDTOService;
 @RequestMapping("/rest/provincias")
 public class DireccionRestController {
 
-    @Autowired
-    DireccionDTOService dServ;
+    @Autowired DireccionDTOService dServ;
 
+    //Listado de todas las provincias que tenemos en la base de datos
     @GetMapping("/todas")
     public List<DireccionDTO> verTodas() {
         return dServ.buscarTodas();

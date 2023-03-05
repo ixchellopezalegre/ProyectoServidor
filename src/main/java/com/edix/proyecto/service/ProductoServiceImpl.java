@@ -15,31 +15,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
-	@Autowired
-	ProductoRepository pRepo;
-	
-	@Autowired
-	ProductoEnPedidoRepository pepRepo;
+	@Autowired ProductoRepository pRepo;
+	@Autowired ProductoEnPedidoRepository pepRepo;
 
+	//Busqueda de todos los productos que hay en la base de datos
 	@Override
 	public List<Producto> buscarTodos() {
 		return pRepo.findAll();
 	}
 
+	//Busqueda de los productos que coincidan con el id del producto.
 	@Override
 	public Producto buscarUno(int idProducto) {
 		return pRepo.findById(idProducto).orElse(null);
 	}
 
+	//Busqueda de los productos que coincidan con el nombre del producto.
 	@Override
 	public Producto buscarPorNombre(String nombre) {
 		return pRepo.findByNombre(nombre);
 	}
 
+	//Listado de los productos que coincidan con el nombre o la descripcion del producto.
 	@Override
 	public List<Producto> buscarPorNombreODescripcion(String nombre) {
 		return pRepo.findByNombreOrDescripcionContainsIgnoreCase(nombre);
 	}
+
+	//Método para dar de alta un nuevo producto.
 	@Override
 	public boolean registrarProducto(Producto producto) {
 		Optional<Producto> productoExistente = pRepo.findById(producto.getIdProducto());
@@ -51,6 +54,7 @@ public class ProductoServiceImpl implements ProductoService {
 		return false;
 	}
 
+	//Método para dar de baja un producto.
 	@Override
 	public boolean borrarProducto(int idProducto) {
 		try {
@@ -61,6 +65,7 @@ public class ProductoServiceImpl implements ProductoService {
 		return true;
 	}
 
+	//Método para modificar un producto.
 	@Override
 	public boolean modificarProducto(Producto producto){
 		boolean resultado = false;
@@ -101,7 +106,7 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	/**
-	 * Reduce el stock de los productos del pedido, segun las cantidades de Productos en Pedido 
+	 * Reduce el stock de los productos del pedido, según las cantidades de Productos en Pedido
 	 * del pedido que se pasa por parámetro
 	 * @returns true si ha ido bien, false si no ha ido bien
 	 */

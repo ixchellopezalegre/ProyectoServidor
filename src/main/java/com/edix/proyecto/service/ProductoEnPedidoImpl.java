@@ -11,35 +11,17 @@ import com.edix.proyecto.repository.ProductoEnPedidoRepository;
 @Service
 public class ProductoEnPedidoImpl implements ProductoEnPedidoService{
 
-	@Autowired 
-	ProductoEnPedidoRepository pRep;
+	@Autowired ProductoEnPedidoRepository pRep;
 
+	//Buscar los por el idPedido
 	@Override
 	public ProductosEnPedido buscarPorPedido(int numeroOrden) {
 		return pRep.buscarUno(numeroOrden);
 	}
-	
+
+	//Listado de los productos que tenemos dentro de un pedido.
 	@Override
 	public List<ProductosEnPedido> buscarTodosPorPedido(int idPedido) {
 		return pRep.buscarTodosPorIdPedido(idPedido);
 	}
-	
-//	@Override
-//	public Map<Producto, Integer> recuperarProductosPorPedido(Integer idUsuario) {
-//		Map<Producto, Integer> carrito = new HashMap<>();
-//		List<ProductosEnPedido> productosEnPedidoLista = pep.;
-//
-//		for (ProductosEnPedido pep : productosEnPedidoLista) {
-//			Producto producto = pep.getProducto();
-//			Integer cantidad = pep.getCantidad();
-//
-//			carrito.put(producto, cantidad);
-//		}
-//
-//		return carrito;
-//
-//	}
-
-
-
 }

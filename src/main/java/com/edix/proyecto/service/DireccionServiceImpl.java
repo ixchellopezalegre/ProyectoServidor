@@ -12,10 +12,8 @@ import java.util.Optional;
 @Service
 public class DireccionServiceImpl implements DireccionService {
 
-    @Autowired
-    DireccionRepository dRepo;
-    @Autowired
-    UsuarioServiceImpl uServ;
+    @Autowired DireccionRepository dRepo;
+    @Autowired UsuarioServiceImpl uServ;
 
     @Override
     public List<Direccion> buscarTodas() {
@@ -26,6 +24,7 @@ public class DireccionServiceImpl implements DireccionService {
         return dRepo.findById(idDireccion).orElse(null);
     }
 
+    // Busca todas las direcciones de un usuario
     @Override
     public List<Direccion> buscarTodasSesion(int idUsuario) {
         List<Direccion> direcciones = uServ.buscarUsuario(idUsuario).getDirecciones();
@@ -34,15 +33,19 @@ public class DireccionServiceImpl implements DireccionService {
     }
 
 
+    // Registro de una  nueva direccion de un usuario
     @Override
     public int registrarDireccion(Direccion direccion) {
 
         try {
+            //Utilizamos un método de comparación de direcciones, que utilizamos al final de esta clase.
+            //Si la direccion existe, devolvemos mensaje informativo y el id de la direccion.
             if (compararDireccion(direccion) != -1) {
                 int idDireccion = compararDireccion(direccion);
                 System.out.println("OK: La direccion ya existe.");
                 return idDireccion;
             } else {
+                //Si la direccion no existe, se registra
                 dRepo.save(direccion);
                 dRepo.findAll().get(dRepo.findAll().size() - 1);
                 System.out.println("OK: Se ha registrado la direccion.");
@@ -56,6 +59,7 @@ public class DireccionServiceImpl implements DireccionService {
         }
     }
 
+    // Añade una direccion a la lista de direcciones de un usuario
     @Override
     public boolean actualizarDireccion(Direccion direccion) {
         boolean resultado = false;
@@ -78,6 +82,7 @@ public class DireccionServiceImpl implements DireccionService {
         return resultado;
     }
 
+    //Borrado de una direccion que ya tenemos en nuestra lista de direcciones.
     @Override
     public boolean borrarDireccion(int idDireccion, int idUsuario) {
         try {

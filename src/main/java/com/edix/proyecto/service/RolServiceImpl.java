@@ -11,7 +11,8 @@ public class RolServiceImpl implements RolService{
 
 	@Autowired
 	RolRepository roRepo;
-	
+
+	//Busqueda por id de ROL.
 	@Override
 	public Rol buscarRol(int idRol) {
 		return roRepo.findById(idRol).orElse(null);

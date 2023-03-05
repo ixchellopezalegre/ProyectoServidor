@@ -24,17 +24,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioController {
 
 	@Autowired UsuarioServiceImpl uServ;
-
-	@Autowired
-	PedidoService pServ;
-
+	@Autowired PedidoService pServ;
 	@Autowired RolServiceImpl rolServ;
 
-
-
+	//Listado de todos los usuarios de nuestra base de datos.
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
-
 		model.addAttribute("usuario", uServ.buscarTodos());
 		return "listaUsuarios";
 	}
@@ -44,6 +39,12 @@ public class UsuarioController {
 		return "gestionAdmin";
 	}
 
+	/**
+	 * Método que registra un usuario con rol de administrador.
+	 * @param ratt
+	 * @param Objeto usuario que se va a registrar.
+	 * @return listado de todos los usuarios registrados JSP.
+	 */
 	@PostMapping("/gestion")
 	public String resgistrarAdmin(RedirectAttributes ratt, Usuario usuario) {
 		if(uServ.registrarAdmin(usuario)) {
@@ -56,7 +57,6 @@ public class UsuarioController {
 
 	@GetMapping("/datos")
 	public String datosUsuario(Model model, Authentication auth) {
-
 		model.addAttribute("usuario", uServ.buscarPorEmail(auth.getName()));
 		return "datosUsuario";
 	}

@@ -16,14 +16,14 @@ import com.edix.proyecto.model.dto.UsuarioDTOService;
 @RequestMapping("/rest/usuarios")
 public class UsuarioRestController {
 
-	@Autowired
-	UsuarioDTOService uServ;
+	@Autowired UsuarioDTOService uServ;
 
+    //Recuperamos una lita de usuarios que pertenezcan a una misma provincia.
     @GetMapping("/find/{provincia}")
     public List<UsuarioDTO> buscarPorProvincia(@PathVariable String provincia) {
         return uServ.findByProvincia(provincia);
     }
-    
+    //Recuperamos una lista de usuarios que pertenezcan a una misma localidad.
     @GetMapping("/buscar/{localidad}")
     public List<Object[]> buscarPorLocalidad(@PathVariable String localidad){
     	return uServ.buscarPorProvincia(localidad);

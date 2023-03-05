@@ -12,10 +12,8 @@ import com.edix.proyecto.repository.DireccionRepository;
 @Service
 public class DireccionDTOServiceImpl implements DireccionDTOService {
 
-	@Autowired
-	DireccionRepository dRepo;
-	@Autowired
-	UsuarioDTOService uServ;
+	@Autowired DireccionRepository dRepo;
+	@Autowired UsuarioDTOService uServ;
 
 	@Override
 	public List<DireccionDTO> buscarTodas() {

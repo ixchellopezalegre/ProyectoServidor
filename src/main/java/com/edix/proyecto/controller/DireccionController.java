@@ -19,23 +19,34 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/direccion")
 public class DireccionController {
-    @Autowired
-    DireccionService dServ;
+    @Autowired DireccionService dServ;
+    @Autowired UsuarioService uServ;
 
-    @Autowired
-    UsuarioService uServ;
-
+    /***
+     * Busca todas las direcciones de un usuario
+     * @param Authentication aut, para recuperar el email del usuario
+     * @param model, para mandar la lista de direcciones encontradas al JSP
+     * @return Página JSP de lista de direcciones.
+     */
     @GetMapping("/todas")
     public String buscarTodas(Authentication aut, Model model) {
         int idUsuario = uServ.buscarPorEmail(aut.getName()).getIdUsuario();
         model.addAttribute("direcciones", dServ.buscarTodasSesion(idUsuario));
         return "listaDirecciones";
     }
+
     @GetMapping("/nueva")
     public String mostrarFormulario() {
         return "formDireccion";
     }
 
+    /**
+     *  Registra una dirección y la añade al usuario
+     * @param Objeto direccion, para construir un objeto con todos los datos de la dirección
+     * @param Authentication aut, para recuperar el email del usuario que tenemos en sesión
+     * @param RedirectAtributes ratt, para mandar mensajes de error o éxito
+     * @return Volvemos a URL de todas las direcciones registradas.
+     */
     @PostMapping("/nueva")
     public String registrarDireccion(Direccion direccion, Authentication aut, RedirectAttributes ratt) {
         Usuario usuario = uServ.buscarPorEmail(aut.getName());
@@ -66,8 +77,6 @@ public class DireccionController {
 
                 break;
         }
-
-
         return "redirect:/direccion/todas";
     }
 
@@ -77,6 +86,13 @@ public class DireccionController {
         return "formDireccionEditar";
     }
 
+    /**
+     * Actualiza una dirección
+     * @param PathVariable idDireccion, para recuperar el id de la dirección a actualizar
+     * @param Objeto direccion, para construir un objeto con todos los datos de la dirección
+     * @param RedirectAtributes ratt, para mandar mensajes de error o éxito a otra página JSP.
+     * @return Volvemos a la URL de todas las direcciones registradas.
+     */
     @PostMapping("/editar/{idDireccion}")
     public String actualizarDireccion(@PathVariable int idDireccion,
                                       Direccion direccion,
@@ -91,6 +107,13 @@ public class DireccionController {
         return "redirect:/direccion/todas";
     }
 
+    /**
+     * Elimina una dirección, dependiendo del usuario que este en sesión y de la dirección que seleccione
+     * @param PathVariable idDireccion, para recuperar el id de la dirección a eliminar
+     * @param aut para recuperar el email del usuario que tenemos en sesión
+     * @param ratt para mandar mensajes de error o éxito a otra página JSP.
+     * @return URL de la lista de todas las direcciones registradas.
+     */
     @GetMapping("/eliminar/{idDireccion}")
     public String eliminarDireccion(@PathVariable int idDireccion,
                                     Authentication aut,

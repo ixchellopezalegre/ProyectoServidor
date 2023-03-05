@@ -12,21 +12,22 @@ import java.util.Optional;
 @Service
 public class TarjetaServiceImpl implements TarjetaService{
 
-    @Autowired
-    TarjetaRepository tRepo;
-    @Autowired
-    UsuarioServiceImpl uServ;
+    @Autowired TarjetaRepository tRepo;
+    @Autowired UsuarioServiceImpl uServ;
 
+    //Busqueda de todas las tarjetas que tenemos en la base de datos.
     @Override
     public List<Tarjeta> buscarTodas() {
         return tRepo.findAll();
     }
 
+    //Busqueda de tarjeta por id de tarjeta.
     @Override
     public Tarjeta buscarTarjeta(int idTarjeta) {
         return tRepo.findById(idTarjeta).orElse(null);
     }
 
+    //Recuperar el listado de tarjetas del usuario que tenemos en sesión
     @Override
     public List<Tarjeta> buscarTodasSesion(int idUsuario) {
         List<Tarjeta> tarjetas = uServ.buscarUsuario(idUsuario).getTarjetas();
@@ -34,6 +35,7 @@ public class TarjetaServiceImpl implements TarjetaService{
         return tarjetas;
     }
 
+    //Metodo para registrar una nueva tarjeta
     @Override
     public int registrarTarjeta(Tarjeta tarjeta) {
         try {
@@ -54,6 +56,7 @@ public class TarjetaServiceImpl implements TarjetaService{
         }
     }
 
+    //Método de actualización de una tarjeta
     @Override
     public boolean actualizarTarjeta(Tarjeta tarjeta) {
         boolean resultado = false;
@@ -73,14 +76,18 @@ public class TarjetaServiceImpl implements TarjetaService{
         return resultado;
     }
 
+    //Borrado de una tarjeta
     @Override
     public boolean borrarTarjeta(int idTarjeta, int idUsuario) {
         try {
+            //Buscamois el usuario que tiene la tarjeta
             Usuario user = uServ.buscarUsuario(idUsuario);
+
             if (user.getTarjetas().remove(buscarTarjeta(idTarjeta))) {
                 uServ.actualizarUsuario(user);
                 System.out.println("Se ha borrado la tarjeta de la lista de tarjetas del usuario");
 
+                //Si la tarjeta solo está en la lista del usuario, la borramos del sistema
                 Optional<Tarjeta> tarjeta = tRepo.findById(idTarjeta);
                 if (tarjeta.isPresent()) {
                     if (tarjetaUnica(tarjeta.get())) {
