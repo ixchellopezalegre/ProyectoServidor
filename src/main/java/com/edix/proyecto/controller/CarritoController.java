@@ -123,7 +123,6 @@ public class CarritoController {
 			pedido.setDireccione(dir);
 			pedido.setTarjeta(tar);
 			pRepo.save(pedido);
-			caService.eliminarCarrito(user.getIdUsuario());
 			proService.reducirStock(pedido);
 			
 			misesion.removeAttribute("carrito");

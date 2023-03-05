@@ -28,6 +28,11 @@ public class UsuarioRestController {
     public List<Object[]> buscarPorLocalidad(@PathVariable String localidad){
     	return uServ.buscarPorProvincia(localidad);
     }
+
+    @GetMapping("/todos")
+    public List<UsuarioDTO> buscarTodos(){
+    	return uServ.buscarTodos();
+    }
     
     
     
