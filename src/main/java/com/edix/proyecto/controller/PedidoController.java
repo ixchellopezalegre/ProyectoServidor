@@ -3,7 +3,7 @@ package com.edix.proyecto.controller;
 
 
 import com.edix.proyecto.beans.Usuario;
-import com.edix.proyecto.service.UsuarioServiceImpl;
+import com.edix.proyecto.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.beans.ProductosEnPedido;
-import com.edix.proyecto.service.PedidoService;
-import com.edix.proyecto.service.PedidoServiceImpl;
-import com.edix.proyecto.service.ProductoEnPedidoImpl;
-import com.edix.proyecto.service.UsuarioService;
 
 import java.util.List;
 
@@ -29,7 +25,7 @@ public class PedidoController {
 	UsuarioService uSer;
 
 	@Autowired
-	ProductoEnPedidoImpl pep;
+	ProductoEnPedidoService pep;
 
 
 	@GetMapping("/todos")

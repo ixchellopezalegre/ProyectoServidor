@@ -3,7 +3,7 @@ package com.edix.proyecto.controller;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import com.edix.proyecto.service.PedidoService;
+import com.edix.proyecto.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -12,19 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Usuario;
-import com.edix.proyecto.service.RolServiceImpl;
-import com.edix.proyecto.service.UsuarioServiceImpl;
 
 @Controller
 @RequestMapping("/user")
 public class UsuarioController {
 
-	@Autowired UsuarioServiceImpl uServ;
+	@Autowired
+	UsuarioService uServ;
 
 	@Autowired
 	PedidoService pServ;
 	
-	@Autowired RolServiceImpl rolServ;
+	@Autowired
+	RolService rolServ;
 
 	
 	@GetMapping("/todos")

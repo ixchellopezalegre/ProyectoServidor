@@ -23,7 +23,7 @@ public class CarritoController {
 	CarritoService caService;
 
 	@Autowired
-	UsuarioServiceImpl uService;
+	UsuarioService uService;
 
 	@Autowired
 	PedidoRepository pRepo;
@@ -35,10 +35,10 @@ public class CarritoController {
 	ProductoService proService;
 
 	@Autowired
-	TarjetaServiceImpl tService;
+	TarjetaService tService;
 
 	@Autowired
-	DireccionServiceImpl dService;
+	DireccionService dService;
 
 	@Autowired
 	CarritoUtils caUtil;

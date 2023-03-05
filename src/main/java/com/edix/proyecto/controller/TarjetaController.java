@@ -3,7 +3,9 @@ package com.edix.proyecto.controller;
 
 import com.edix.proyecto.beans.Tarjeta;
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.TarjetaService;
 import com.edix.proyecto.service.TarjetaServiceImpl;
+import com.edix.proyecto.service.UsuarioService;
 import com.edix.proyecto.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,9 +24,9 @@ import java.util.Date;
 public class TarjetaController {
 
     @Autowired
-    TarjetaServiceImpl tServ;
+    TarjetaService tServ;
     @Autowired
-    UsuarioServiceImpl uServ;
+    UsuarioService uServ;
 
     @GetMapping("/todas")
     public String buscarTodas(Authentication aut, Model model) {

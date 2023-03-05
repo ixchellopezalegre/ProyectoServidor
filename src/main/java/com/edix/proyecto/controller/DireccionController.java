@@ -2,7 +2,9 @@ package com.edix.proyecto.controller;
 
 import com.edix.proyecto.beans.Direccion;
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.DireccionService;
 import com.edix.proyecto.service.DireccionServiceImpl;
+import com.edix.proyecto.service.UsuarioService;
 import com.edix.proyecto.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,10 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/direccion")
 public class DireccionController {
     @Autowired
-    DireccionServiceImpl dServ;
+    DireccionService dServ;
 
     @Autowired
-    UsuarioServiceImpl uServ;
+    UsuarioService uServ;
 
     @GetMapping("/todas")
     public String buscarTodas(Authentication aut, Model model) {

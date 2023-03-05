@@ -1,6 +1,7 @@
 package com.edix.proyecto.controller;
 
 import com.edix.proyecto.beans.Producto;
+import com.edix.proyecto.service.ProductoService;
 import com.edix.proyecto.service.ProductoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ProductoController {
 
     @Autowired
-    ProductoServiceImpl pServ;
+    ProductoService pServ;
 
     @GetMapping("/todos")
     public String buscarTodos(Model model) {
