@@ -36,7 +36,9 @@
 			<th>Nombre</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
+			<th>Stock<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
 			<th>Opciones<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
+
 			<th></th>
 		</tr>
 		<c:forEach var="ele" items="${listaProductos }" >
@@ -47,6 +49,7 @@
 			<td>${ele.nombre }</td>
 			<td>${ele.descripcion }</td>
 			<td>${ele.precio }</td>
+			<td><sec:authorize access="hasAuthority('ROL_ADMIN')">${ele.stock }</sec:authorize></td>
 			<td><a href="/producto/verUno/${ele.idProducto}" class="btn btn-success btn-sm">Ver detalle</a>
 			<sec:authorize access="hasAuthority('ROL_ADMIN')">
 				<a href="/producto/editar/${ele.idProducto}" class="btn btn-success btn-sm">Modificar</a>
