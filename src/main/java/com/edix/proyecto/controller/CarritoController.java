@@ -30,6 +30,9 @@ public class CarritoController {
 
 	@Autowired
 	PedidoService pService;
+	
+	@Autowired
+	ProductoService proService;
 
 	@Autowired
 	TarjetaServiceImpl tService;
@@ -115,6 +118,7 @@ public class CarritoController {
 			pedido.setTarjeta(tar);
 			pRepo.save(pedido);
 			caService.eliminarCarrito(user.getIdUsuario());
+			proService.reducirStock(pedido);
 			
 			misesion.removeAttribute("carrito");
 		}else {

@@ -21,4 +21,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 
     List<Producto> findAllByOrderByPrecioAsc();
     List<Producto> findAllByOrderByPrecioDesc();
+    
+    
+    @Query("SELECT p.stock FROM Producto p WHERE p.idProducto = ?1")
+    int verStock(int IdProducto);
+    
+    
 }

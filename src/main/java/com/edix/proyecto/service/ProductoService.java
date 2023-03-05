@@ -2,6 +2,7 @@ package com.edix.proyecto.service;
 
 import java.util.List;
 
+import com.edix.proyecto.beans.Pedido;
 import com.edix.proyecto.beans.Producto;
 
 public interface ProductoService {
@@ -19,5 +20,7 @@ public interface ProductoService {
 	List<Producto> ordenarPorPrecioAsc();
 
 	List<Producto> ordenarPorPrecioDesc();
+	
+	boolean reducirStock(Pedido pedido);
 
 }

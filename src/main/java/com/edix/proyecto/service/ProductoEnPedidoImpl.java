@@ -25,7 +25,7 @@ public class ProductoEnPedidoImpl implements ProductoEnPedidoService{
 	
 	@Override
 	public List<ProductosEnPedido> buscarTodosPorPedido(int idPedido) {
-		return pep.findAllById(idPedido);
+		return pep.buscarTodosPorIdPedido(idPedido);
 	}
 	
 //	@Override
