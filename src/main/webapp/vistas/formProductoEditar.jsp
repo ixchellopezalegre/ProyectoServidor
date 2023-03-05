@@ -18,7 +18,7 @@
 	<form action="/producto/editar" method="post">
 		<div class="input-group mt-2">
 			<span class="input-group-text">ID Producto</span>
-			<input class="form-control" type="text" name="idProducto" value="${producto.idProducto }">
+			<input readonly class="form-control" type="text" name="idProducto" value="${producto.idProducto }">
 		</div>
 			<div class="input-group mt-2">
 			<span class="input-group-text">Nombre</span>

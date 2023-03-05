@@ -10,7 +10,7 @@
 	
 	<jsp:include page="nav.jsp"></jsp:include>
 	
-		<div class= "container w-25 p-3">
+		<div class= "container w-50 p-3">
 		<h3> Alta de un nuevo administrador.</h3>
 	
 		<form class ="mt-3" action ="/user/gestion" method="post" >

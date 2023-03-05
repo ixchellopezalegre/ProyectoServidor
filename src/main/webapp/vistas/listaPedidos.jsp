@@ -47,17 +47,19 @@
 				<td>${pedido.direccion.codigoPostal }</td>
 				<c:if test="${pedido.estado == 'COMPLETADO'}">
 					<td style="background-color: #d4edda;">${pedido.estado }</td>
-					<td><a href="/pedido/detallePedido/${pedido.idPedido}" class="btn btn-primary" >Detalle pedido</a></td>
+					<td><a href="/pedido/detallePedido/${pedido.idPedido}" class="btn btn-info" >Detalle pedido</a></td>
 				</c:if>
-				<c:if test="${pedido.estado != 'COMPLETADO'}">
+				<c:if test="${pedido.estado == 'CARRITO'}">
 					<td>${pedido.estado }</td>
+					<td></td>
 				</c:if>
 				
 			</tr>
 			</c:forEach>
-			<c:if test="${listaPedidos.size() == 0}">
+			<c:if test="${listaPedidos.size() == 0 || usuario == null}">
 				<tr>
 					<td colspan="7">No hay pedidos para mostrar</td>
+					<td></td>
 				</tr>
 			</c:if>
 		</table>

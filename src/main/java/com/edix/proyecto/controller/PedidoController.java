@@ -46,17 +46,20 @@ public class PedidoController {
 
 	@GetMapping("/{idUsuario}")
 	public String buscarPedidosPorCliente(Model model, @PathVariable int idUsuario) {
-		
 		List<Pedido> listaPedidos = pSer.buscarPorCliente(idUsuario);
 		Usuario user = uSer.buscarUsuario(idUsuario);
-		
+		model.addAttribute("usuario", user);
+		if(user == null) {
+			model.addAttribute("pedidosDe", "No existe el usuario con id " + idUsuario);
+			return "listaPedidos";
+		}
 		model.addAttribute("pedidosDe","Pedidos del usuario " + user.getNombre());
 		model.addAttribute("listaPedidos",listaPedidos);
 		
 		if(listaPedidos.size() != 0) {
 			System.out.println("Este cliente tiene pedidos");
 		}else
-			model.addAttribute("mensaje", user.getNombre() + " no tiene pedidos");
+			model.addAttribute("pedidosDe", user.getNombre() + " no tiene pedidos");
 			System.out.println("Este cliente NO tiene pedidos");
 		return "listaPedidos";
 	}

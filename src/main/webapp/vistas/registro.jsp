@@ -11,7 +11,7 @@
 	
 	<jsp:include page="nav.jsp"></jsp:include>
 	<sec:csrfInput/>
-	<div class = "container w-25 p-3 mt-3 mb-3">
+	<div class = "container w-50 p-3">
 	<h3 class ="mb-5"> ¡ Forma parte de Silicon Solutions !</h3>
 		<form action ="/registro" method="post" >
 			<input type=hidden name="${csrf.parameterName}? value="${csrf.token}"/>

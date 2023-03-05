@@ -19,12 +19,8 @@
 	
 	<div class="container">
 	<h1 class="text-primary">Productos del carrito</h1>
-	
+
 	</br>
-	
-	<a href="/carrito/guardar" class="btn btn-danger btn-sm">Guardar Carrito</a>
-	
-	</br></br>
 	
     <table class="table table-striped table-sm">
       <tr>
@@ -54,6 +50,9 @@
         </tr>
       </c:if>
     </table>
+        </br>
+
+        <a href="/carrito/guardar" class="btn btn-secondary btn-sm">Guardar Carrito</a>
         <a href ="/carrito/comprar" class="btn btn-success btn-sm">Hacer pedido</a>
     </div>
     </div>
