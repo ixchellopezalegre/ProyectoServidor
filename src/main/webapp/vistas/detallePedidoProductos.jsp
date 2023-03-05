@@ -83,5 +83,8 @@
     </form>
     <h2>${error}</h2>
 </div>
+<footer class="bg-primary-gradient">
+    <jsp:include page="footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>

@@ -22,7 +22,8 @@
     <a href="/producto/todos" class ="btn btn-primary btn-sm mt-5">Ver productos</a>
     <a href="/" class ="btn btn-primary btn-sm mt-5">Volver a pagina principal</a>
 </div>
-<footer class ="mt-5">
+<footer class="bg-primary-gradient">
+    <jsp:include page="footer.jsp"></jsp:include>
 </footer>
 </body>
 </html>
