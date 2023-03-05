@@ -31,8 +31,9 @@ public class Usuario implements Serializable {
 	@Column(unique=true)
 	private String email;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_NACIMIENTO")
-	private Timestamp fechaNacimiento;
+	private Date fechaNacimiento;
 
 	private String nombre;
 
@@ -112,7 +113,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento =  (Timestamp) fechaNacimiento;
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getNombre() {

@@ -1,70 +1,59 @@
 package com.edix.proyecto.controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import com.edix.proyecto.service.*;
+import com.edix.proyecto.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import com.edix.proyecto.beans.Usuario;
+import com.edix.proyecto.service.RolServiceImpl;
+import com.edix.proyecto.service.UsuarioServiceImpl;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/user")
 public class UsuarioController {
 
-	@Autowired
-	UsuarioService uServ;
+	@Autowired UsuarioServiceImpl uServ;
 
 	@Autowired
 	PedidoService pServ;
-	
-	@Autowired
-	RolService rolServ;
 
-	
+	@Autowired RolServiceImpl rolServ;
+
+
+
 	@GetMapping("/todos")
 	public String buscarTodos(Model model){
 
 		model.addAttribute("usuario", uServ.buscarTodos());
-		return "listaUsuarios";	
+		return "listaUsuarios";
 	}
-	
+
 	@GetMapping("/gestion")
 	public String gentionAdministrador() {
 		return "gestionAdmin";
 	}
-	
+
 	@PostMapping("/gestion")
-	public String registrarUsuario(Model model, @RequestParam("nombre") String nombre ,
-												@RequestParam("apellidos")String apellidos,
-												@RequestParam("email")String email, 
-												@RequestParam("fechaNacimiento") Date fechaNacimiento, 
-												@RequestParam("password") String password ){
-	    
-	    Usuario usuario = new Usuario();
-	    usuario.setNombre(nombre);
-	    usuario.setApellidos(apellidos);
-	    usuario.setEmail(email);
-	    usuario.setFechaNacimiento(new Timestamp(fechaNacimiento.getTime())); /*Convertir fecha a TIMESTAMP*/
-	    usuario.setPassword(password);
-	    
-	    /*Asignamos, que por defecto se le asigne el rol de cliente a los nuevos usuarios registrados*/
-    	usuario.addRol(rolServ.buscarRol(2));
-	   
-	    if(uServ.registrarUsuario(usuario)) {
-	    		usuario.setIdUsuario(usuario.getIdUsuario());
-	        return "redirect:/";
-	    } else {
-	        model.addAttribute("mensaje", "No hemos podido gestionar el alta");
-	        return "registro";
-	    }
+	public String resgistrarAdmin(RedirectAttributes ratt, Usuario usuario) {
+		if(uServ.registrarAdmin(usuario)) {
+			ratt.addFlashAttribute("mensaje", "Se ha registrado el usuario.");
+		}else {
+			ratt.addFlashAttribute("mensaje", "Error: No se ha registrado el usuario.");
+		}
+		return "redirect:/user/todos";
 	}
-	
+
 	@GetMapping("/datos")
 	public String datosUsuario(Model model, Authentication auth) {
 
@@ -79,5 +68,10 @@ public class UsuarioController {
 		model.addAttribute("listaPedidos", pServ.buscarPorCliente(usuario.getIdUsuario()) );
 		return "misPedidos";
 	}
-	
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	}
 }

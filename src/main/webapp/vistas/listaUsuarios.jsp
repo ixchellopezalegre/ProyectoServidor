@@ -12,6 +12,7 @@
 	<jsp:include page="nav.jsp"></jsp:include>
 	
 	<div class ="container mt-5 " >
+		<h4 class ="text-primary">${mensaje}</h4>
 	<h3 class ="text-primary">Listado de clientes registrados</h3><hr>
 		<table class ="table table-striped table-hover">
 			<tr class="table-info">

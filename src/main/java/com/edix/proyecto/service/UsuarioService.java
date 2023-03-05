@@ -10,8 +10,11 @@ public interface UsuarioService {
 	List<Usuario> buscarTodos();
 	Usuario buscarUsuario(int idUsuario);
 	Usuario buscarPorEmail(String email);
+	boolean registrarAdmin(Usuario usuario);
+
 	boolean registrarUsuario(Usuario usuario);
+
 	boolean actualizarUsuario(Usuario usuario);
 	boolean anadirDireccion(Usuario usuario, Direccion direccion);
-    boolean anadirTarjeta(Usuario usuario, Tarjeta tarjeta);
+	boolean anadirTarjeta(Usuario usuario, Tarjeta tarjeta);
 }
