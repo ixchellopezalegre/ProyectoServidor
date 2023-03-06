@@ -34,7 +34,7 @@
             <tr>
                 <td>
                     <c:forEach var="p" items="${pedido.productosEnPedidos}">
-                        <p>${p.nombre}</p>
+                        <p>${p.producto.nombre}</p>
                     </c:forEach>
                 </td>
 
