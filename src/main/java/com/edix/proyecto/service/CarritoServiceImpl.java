@@ -16,18 +16,10 @@ import com.edix.proyecto.repository.ProductoEnPedidoRepository;
 @Service
 public class CarritoServiceImpl implements CarritoService {
 
-	@Autowired
-	ProductoService prodServ;
-
-	@Autowired
-	PedidoService pedServ;
-
-	@Autowired
-	ProductoEnPedidoRepository pepRepo;
-
-	@Autowired
-	PedidoRepository pedRepo;
-
+	@Autowired ProductoService prodServ;
+	@Autowired PedidoService pedServ;
+	@Autowired ProductoEnPedidoRepository pepRepo;
+	@Autowired PedidoRepository pedRepo;
 
 	/**
 	 * Si el carrito ya contiene el producto y no supera las 10 uds,
@@ -50,7 +42,9 @@ public class CarritoServiceImpl implements CarritoService {
 		}
 
 	}
-
+	//Método que resta una unidad al producto con el Id pasado por parámetro.
+	//Si la cantidad de unidades es 0, elimina el producto del carrito
+	//Si la cantidad de unidades es mayor que 0, resta una unidad
 	@Override
 	public void restarProductoEnCarrito(Map<Producto, Integer> carrito, Integer idProducto) {
 		Producto producto = prodServ.buscarUno(idProducto);
@@ -66,6 +60,10 @@ public class CarritoServiceImpl implements CarritoService {
 		}
 	}
 
+
+	//Método que guarda el carrito en BBDD
+	//Si el carrito no está vacío, busca el pedido con estado "CARRITO" del usuario
+	//Si no encuentra el pedido, crea un nuevo pedido
 	@Override
 	public void guardarCarrito(Map<Producto, Integer> carrito, Usuario usuario) {
 		if (carrito != null) {
@@ -116,6 +114,7 @@ public class CarritoServiceImpl implements CarritoService {
 		}
 	}
 
+	//Método que recupera el carrito de BBDD
 	@Override
 	public Map<Producto, Integer> recuperarCarrito(Integer idUsuario) {
 		Map<Producto, Integer> carrito = new HashMap<>();
@@ -130,20 +129,6 @@ public class CarritoServiceImpl implements CarritoService {
 
 		return carrito;
 
-	}
-
-	@Override
-	public void eliminarCarrito(int idUsuario) {
-		Pedido pedido = pedRepo.buscarPedidoCarritoPorCliente(idUsuario);
-		if (pedido != null) {
-			List<ProductosEnPedido> productos = pedido.getProductosEnPedidos();
-			if (productos != null && !productos.isEmpty()) {
-				pepRepo.deleteAll(productos);
-				pedRepo.delete(pedido);
-			} else {
-				System.out.println("No hay carrito que eliminar");
-			}
-		}
 	}
 }
 

@@ -69,7 +69,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 		try {
 			usuario.addRol(rServ.buscarRol(1));
 			//Encriptamos la contraseña
-			usuario.setPassword(pwcript.encode(usuario.getPassword()));
 			uRepo.save(usuario);
 			System.out.println("OK: Se ha registrado el usuario.");
 			return true;

@@ -12,5 +12,4 @@ public interface ProductoEnPedidoService {
 
 	List<ProductosEnPedido> buscarTodosPorPedido(int numeroOrden);
 
-//	Map<Producto, Integer> recuperarProductosPorPedido(Integer idPedido);
 }

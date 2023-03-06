@@ -23,11 +23,10 @@ import java.util.Date;
 @RequestMapping("/tarjeta")
 public class TarjetaController {
 
-    @Autowired
-    TarjetaService tServ;
-    @Autowired
-    UsuarioService uServ;
+    @Autowired TarjetaService tServ;
+    @Autowired UsuarioService uServ;
 
+    // Busqueda de todoas las tarjetas de un usuario.
     @GetMapping("/todas")
     public String buscarTodas(Authentication aut, Model model) {
         int idUsuario = uServ.buscarPorEmail(aut.getName()).getIdUsuario();
@@ -38,6 +37,7 @@ public class TarjetaController {
     @GetMapping("/nueva")
     public String mostrarFormulario() { return "formTarjeta";    }
 
+    // Registro de una tarjeta y añadir al usuario que tenemos en sesión.
     @PostMapping("/nueva")
     public String registrarTarjeta (Tarjeta tarjeta,
                                     Authentication aut, RedirectAttributes ratt){
@@ -72,12 +72,14 @@ public class TarjetaController {
         return "redirect:/tarjeta/todas";
     }
 
+    // Busqueda de una tarjeta por su id.
     @GetMapping("/editar/{idTarjeta}")
     public String mostrarFormularioEditar(@PathVariable int idTarjeta, Model model) {
         model.addAttribute("tarjeta", tServ.buscarTarjeta(idTarjeta));
         return "formTarjetaEditar";
     }
 
+    // Actualizacion de una tarjeta.
     @PostMapping("/editar/{idTarjeta}")
     public String actualizarTarjeta(@PathVariable int idTarjeta, Tarjeta tarjeta, RedirectAttributes ratt) {
         tarjeta.setIdTarjeta(idTarjeta);
@@ -89,6 +91,7 @@ public class TarjetaController {
         return "redirect:/tarjeta/todas";
     }
 
+    // Eliminacion de una tarjeta.
     @GetMapping("/eliminar/{idTarjeta}")
     public String eliminarTarjeta(@PathVariable int idTarjeta,
                                   Authentication aut,
@@ -104,6 +107,7 @@ public class TarjetaController {
         return "redirect:/tarjeta/todas";
     }
 
+    // Formateo de la fecha.
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

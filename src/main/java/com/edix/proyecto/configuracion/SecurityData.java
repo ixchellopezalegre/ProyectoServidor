@@ -64,9 +64,10 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 						,"/rest/provincias/find/{provincia}"
 						,"/rest/provincias/buscar/{localidad}"
 						,"/rest/usuarios/buscar/{localidad}"
+						,"/rest/usuarios/todos"
 						,"/producto/buscar").permitAll()
-				//URLS que permitimos de acceso público. los ** son comodines para informar 
-				//que puede haber mas información a partir de esa URL
+				//URLS que permitimos de acceso público. Los ** son comodines para informar
+				//que puede haber más información a partir de esa URL
 				
 				.antMatchers("/encriptar/**").permitAll()
 				.anyRequest().authenticated() /*Cualquier otra petición necesita registro*/
@@ -75,9 +76,6 @@ public class SecurityData extends WebSecurityConfigurerAdapter {
 						.defaultSuccessUrl("/inicio", true)
 						//Si el Login es Correcto, nos lleva a /inicio que procesa el login manualmente
 				.permitAll();
-			/*AUTENTICACION SOBRE ROLES*/
-			/*.antMatchers("URL").hasAnyAuthority("ROL QUE PERMITIMOS A ESA URL")*/
-			/*Esto se combina con los JSP con las directivas <c:>*/
 	}
 
 	/*
