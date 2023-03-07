@@ -36,8 +36,8 @@
 			<th>Nombre</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
-			<th>Stock<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
-			<th>Opciones<sec:authorize access="hasAuthority('ROL_ADMIN')"></sec:authorize></th>
+			<th><sec:authorize access="hasAuthority('ROL_ADMIN')">Stock</sec:authorize></th>
+			<th><sec:authorize access="hasAuthority('ROL_ADMIN')">Opciones</sec:authorize></th>
 
 			<th></th>
 		</tr>
